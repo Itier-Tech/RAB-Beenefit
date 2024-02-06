@@ -7,20 +7,40 @@
             <form wire:submit.prevent="register">
                 <div class="form-group mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" wire:model="email" class="form-control" placeholder="Enter your email">
+                    <input type="email" id="email" wire:model="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter your email" wire:model.defer="email">
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="form-group mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name" wire:model="name" class="form-control" placeholder="Enter your name">
+                    <input type="text" id="name" wire:model="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter your name" wire:model.defer="name">
+                    @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
                 </div>
                 <div class="form-group mb-3">
                     <label for="phone" class="form-label">Phone Number</label>
-                    <input type="tel" id="phone" wire:model="phone" class="form-control" placeholder="Enter your phone number">
+                    <input type="tel" id="phone" wire:model="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter your phone number" wire:model.defer="phone">
+                    @error('phone')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
                 </div>
                 <div class="form-group mb-4">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" wire:model="password" class="form-control" placeholder="Enter your password">
+                    <input type="password" id="password" wire:model="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter your password" wire:model.defer="password">
                     <div class="form-text">*Minimal 8 karakter</div>
+                    @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
                 </div>
                 <button type="submit" class="d-flex btn btn-warning w-10rem" style="background-color: #FFD700; border: none;">Daftar</button>
             </form>

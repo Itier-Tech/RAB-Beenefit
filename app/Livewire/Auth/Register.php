@@ -3,6 +3,8 @@
 namespace App\Livewire\Auth;
 
 use Livewire\Component;
+use App\Models\User;
+
 
 class Register extends Component
 {
@@ -11,9 +13,27 @@ class Register extends Component
     public $password;
     public $phone;
 
+    public function rules()
+    {
+        return [
+            'email' => ['required', 'email', 'unique:users'],
+            'name' => ['required'],
+            'password' => ['required', 'confirmed'],
+            'phone' => ['required'],
+        ];
+    }
     public function register()
     {
+        $this->validate();
 
+        $user = User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+            'phone' => $this->phone,
+        ]);
+        Auth::login($user, true);
+        return redirect()->to('/home');
     }
 
     public function render()
