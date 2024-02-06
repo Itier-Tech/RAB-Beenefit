@@ -24,8 +24,6 @@ Route::get('/home', function () {
 
 Auth::routes(['login' => false, 'register' => false]);
 
-route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function() {
     Route::get('/register', Register::class) -> name('register');
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
