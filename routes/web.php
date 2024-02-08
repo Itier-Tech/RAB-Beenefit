@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Project;
 use App\Models\User;
+use App\Livewire\ProjectView;
 use Illuminate\Http\Request;
 
 /*
@@ -35,9 +36,7 @@ Route::get('/user', function() {
 /**
  * Display All Projects for the user
  */
-Route::get('/project/{user_id}', function ($user_id) {
-    //
-});
+Route::get('/project/{user_id}', ProjectView::class);
 
 /**
  * Display all RAB for the project
