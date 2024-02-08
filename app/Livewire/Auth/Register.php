@@ -4,7 +4,8 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Register extends Component
 {
@@ -22,6 +23,7 @@ class Register extends Component
             'phone' => ['required'],
         ];
     }
+
     public function register()
     {
         $this->validate();
@@ -32,8 +34,10 @@ class Register extends Component
             'password' => bcrypt($this->password),
             'phone' => $this->phone,
         ]);
+
         // Auth::login($user, true);
-        return redirect()->to('/home');
+        return redirect()->to('/otp-verification');
+        // session(['user_id' => $user->id]);
     }
 
     public function render()

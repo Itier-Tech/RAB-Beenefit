@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\Register;
+use App\Livewire\OtpVerification;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Auth::routes(['login' => false, 'register' => false]);
 Route::middleware('guest')->group(function() {
     Route::get('/register', Register::class) -> name('register');
 });
+
+Route::get('/verification', OtpVerification::class)->name('otp-verification');
