@@ -1,8 +1,8 @@
-<div style="background-image: url('{{ url('images/bg_register.png') }}'); height: 100vh; background-size: cover; display: flex; justify-content: center; align-items: center;">
+<div style="background-image: url('{{ asset('images/bg_register.png') }}'); height: 100vh; width: 100%; background-size: cover; display: flex; justify-content: center; align-items: center;">
     <div class="card shadow-lg" style="max-width: 90%; width: 100%; max-height: 90%; height: 100%; background-color: white; border-radius: 2rem; display: flex; justify-content: center; align-items: center;">
         <div class="card-body p-16" style="display: flex-row; justify-content: center; align-items: center; padding:16">
             <div class="py-4">
-                <img src="{{ url('images/logo_beenefit.png') }}" alt="Beenefit Logo" class="img-fluid" style="width: 100px; margin-bottom: 10px;">
+                <img src="{{ asset('images/logo_beenefit.png') }}" alt="Beenefit Logo" class="img-fluid" style="width: 100px; margin-bottom: 10px;">
             </div>
             <form wire:submit.prevent="register">
                 <div class="form-group mb-3">
