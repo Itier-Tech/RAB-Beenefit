@@ -8,16 +8,13 @@ use App\Models\Rab;
 
 class ProjectView extends Component
 {
-    public $project;
-    public $allRab;
-    public function getProjectDetails()
+    public function seeRab() 
     {
-        $this->project = Project::where('user_id', 2)->get();
+        return redirect('/');
     }
 
     public function render()
     {
-        $this->getProjectDetails();
-        return view('livewire.project-view');
+        return view('livewire.project-view')->with(['project' => Project::where('user_id', 30)->get()]);
     }
 }

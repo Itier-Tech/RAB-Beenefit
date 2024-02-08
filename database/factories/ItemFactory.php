@@ -17,7 +17,13 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'item_name' => fake()->word(),
+            'buy_price' => fake()->randomNumber(6, false),
+            'sell_price' => fake()->randomNumber(6, false),
+            'category' => fake()->word(),
+            'unit' => fake()->randomElement(['kg', 'g', 'pcs', 'm', 'cm']),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
