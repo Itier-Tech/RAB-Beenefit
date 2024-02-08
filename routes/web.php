@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Project;
 use App\Models\User;
 use App\Livewire\ProjectView;
+use App\Livewire\ProjectCreate;
 use Illuminate\Http\Request;
 
 /*
@@ -25,9 +26,7 @@ Route::get('/home', function () {
     return view('homepage');
 });
  
-Route::get('/project', function() {
-    return view('createProject');
-});
+Route::get('/project', ProjectCreate::class);
 
 Route::get('/user', function() {
     $user = User::all();
@@ -50,20 +49,6 @@ Route::get('/rab/{project_id}', function ($project_id) {
  */
 Route::get('/rab/{rab_id}', function ($rab_id) {
     //
-});
- 
-/**
- * Add A New Project
- */
-Route::post('/project', function (Request $request) {
-    $newProject = new Project;
-    $newProject->user_id = 1;
-    $newProject->client_name = $request->client_name;
-    $newProject->project_address = $request->project_address;
-    $newProject->project_name = $request->project_name;
-    $newProject->budget = $request->budget;
-    $newProject->save();
-    return redirect('/');
 });
 
 /**

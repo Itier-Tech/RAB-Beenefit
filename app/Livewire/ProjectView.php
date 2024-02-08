@@ -15,6 +15,6 @@ class ProjectView extends Component
 
     public function render()
     {
-        return view('livewire.project-view')->with(['project' => Project::where('user_id', 30)->get()]);
+        return view('livewire.project-view')->with(['project' => Project::where('user_id', 38)->get()])->extends('components.layouts.app')->section('content');
     }
 }
