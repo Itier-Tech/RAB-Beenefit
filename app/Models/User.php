@@ -2,14 +2,26 @@
 
 namespace App\Models;
 
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected static function newFactory(): Factory
+    use HasFactory;
+    protected $primaryKey = 'user_id';
+    public $fillable = [
+            'full_name',
+            'phone',
+            'email',
+            'password',
+            'company_name',
+            'company_address',
+            'company_phone',
+            'company_logo_path',
+    ];
+
+    public function project() : HasMany
     {
-        return UserFactory::new();
+        return $this->hasMany(Project::class);
     }
 }

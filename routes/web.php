@@ -25,8 +25,7 @@ Route::get('/home', function () {
 });
  
 Route::get('/project', function() {
-    $project = Project::Find();
-    return $project;
+    return view('createProject');
 });
 
 Route::get('/user', function() {
@@ -58,8 +57,14 @@ Route::get('/rab/{rab_id}', function ($rab_id) {
  * Add A New Project
  */
 Route::post('/project', function (Request $request) {
-    $newProject = new Project();
-
+    $newProject = new Project;
+    $newProject->user_id = 1;
+    $newProject->client_name = $request->client_name;
+    $newProject->project_address = $request->project_address;
+    $newProject->project_name = $request->project_name;
+    $newProject->budget = $request->budget;
+    $newProject->save();
+    return redirect('/');
 });
 
 /**
