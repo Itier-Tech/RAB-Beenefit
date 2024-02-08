@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Auth\Register;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::get('/home', function () {
     return view('homepage');
 });
 
-Route::get('/login', function () {
-    return view('login');
+Auth::routes(['login' => false, 'register' => false]);
+
+Route::middleware('guest')->group(function() {
+    Route::get('/register', Register::class) -> name('register');
 });
