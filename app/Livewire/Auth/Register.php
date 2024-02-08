@@ -18,7 +18,7 @@ class Register extends Component
         return [
             'email' => ['required', 'email', 'unique:users'],
             'name' => ['required'],
-            'password' => ['required', 'confirmed'],
+            'password' => ['required'],
             'phone' => ['required'],
         ];
     }
@@ -27,12 +27,12 @@ class Register extends Component
         $this->validate();
 
         $user = User::create([
-            'name' => $this->name,
+            'full_name' => $this->name,
             'email' => $this->email,
             'password' => bcrypt($this->password),
             'phone' => $this->phone,
         ]);
-        Auth::login($user, true);
+        // Auth::login($user, true);
         return redirect()->to('/home');
     }
 
