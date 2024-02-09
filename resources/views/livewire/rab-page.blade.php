@@ -12,7 +12,7 @@
         </tr>
         @if (count($rabList) > 0)
             @foreach ($rabList as $rab)
-                <tr wire:key="{{ $rab->rab_id }}" style="text-align: right">
+                <tr wire:key="{{ $rab->rab_id }}" style="text-align: center">
                     <td>{{ $count++ }}</td>
                     <td>{{ $rab->created_at }}</td>
                     <td>{{ $rab->total_price }}</td>
