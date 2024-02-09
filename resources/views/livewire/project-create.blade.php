@@ -1,33 +1,58 @@
 <div>
-    <h1>Proyek Baru</h1>
-    <p>Ayo masukkan detail informasi mengenai proyek barumu! nama proyek, nama client, alamat, budget, nama mandor</p>
-    <form wire:submit="create" style="width:80%; margin: auto; border-radius: 20px;">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="form-group">
-            <label for="project_name" class="col-sm-3 control-label">Nama Proyek</label>
-            <div class="col-sm-6">
-                <input type="text" wire:model="project_name" id="project_name" class="form-control">
-            </div>
-            <label for="client_name" class="col-sm-3 control-label">Nama Client</label>
-            <div class="col-sm-6">
-                <input type="text" wire:model="client_name" id="client_name" class="form-control">
-            </div>
-            <label for="project_address" class="col-sm-3 control-label">Alamat</label>
-            <div class="col-sm-6">
-                <input type="text" wire:model="project_address" id="project_address" class="form-control">
-            </div>
-            <label for="budget" class="col-sm-3 control-label">Budget</label>
-            <div class="col-sm-6">
-                <input type="text" wire:model="budget" id="budget" class="form-control">
-            </div>
-        </div>
+    <style>
+        .rounded {
+            border-radius: 5px;
+        }
 
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-6">
-                <button type="submit" class="btn btn-default">
-                    <i class="fa fa-plus"></i> Add Project
-                </button>
+        .submit-btn {
+            background-color: yellow;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+    </style>
+    <h1>Proyek Baru</h1>
+    <p>Ayo masukkan detail informasi mengenai proyek barumu! Nama proyek, nama client, alamat, budget.</p>
+    <form wire:submit.prevent="create" style="display: flex; flex-direction: column; gap: 1rem;">
+        <!-- Row for Project Name -->
+        <div class="flex-row-responsive" style="display: flex; justify-content: space-between; gap: 1rem;">
+            <!-- Email input -->
+            <div class="form-group" style="flex: 1;">
+                <label for="project_name" class="form-label">Project name</label><br>
+                <input type="project_name" id="project_name" wire:model="project_name" style="border-color: #228B22" class="form-control" placeholder="Enter your project name" >
+                <!-- Error message for project_name -->
             </div>
         </div>
+        <!-- Row for Client Name -->
+        <div class="flex-row-responsive" style="display: flex; justify-content: space-between; gap: 1rem;">
+            <!-- Client name input -->
+            <div class="form-group" style="flex: 1;">
+                <label for="client_name" class="form-label">Client name</label><br>
+                <input type="tel" id="client_name" wire:model="client_name" style="border-color: #228B22" class="form-control" placeholder="Enter client name">
+                <!-- Error message for client_name -->
+            </div>
+        </div>
+        <!-- Row for Project Address -->
+        <div class="flex-row-responsive" style="display: flex; justify-content: space-between; gap: 1rem;">
+            <!-- Project address input -->
+            <div class="form-group" style="flex: 1;">
+                <label for="project_address" class="form-label">Project Address</label><br>
+                <input type="tel" id="project_address" wire:model="project_address" style="border-color: #228B22" class="form-control" placeholder="Enter project address">
+                <!-- Error message for project_address -->
+            </div>
+        </div>
+        <!-- Row for Budget -->
+        <div class="flex-row-responsive" style="display: flex; justify-content: space-between; gap: 1rem;">
+            <!-- Budget input -->
+            <div class="form-group" style="flex: 1;">
+                <label for="budget" class="form-label">Budget</label><br>
+                <input type="tel" id="budget" wire:model="budget" style="border-color: #228B22" class="form-control" placeholder="Enter project budget">
+                <!-- Error message for budget -->
+            </div>
+        </div>
+        <!-- Submit button -->
+        <div class="text-center" style="margin-top: 1rem;">
+            <button type="submit" class="btn btn-warning" style="background-color: #FFD700; border: none; padding: 0.5rem; width: 60%;">Simpan</button>
+    </div>
     </form>
 </div>

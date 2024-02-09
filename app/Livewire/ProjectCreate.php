@@ -8,8 +8,18 @@ use App\Models\Project;
 class ProjectCreate extends Component
 {
     public $project_name, $client_name, $project_address, $budget;
+
+    public function rules() {
+        return [
+            'project_name' => ['required'],
+            'client_name' => ['required'],
+            'project_address' => ['required'],
+            'budget' => ['required'],
+        ];
+    }
     public function create()
     {
+        $this->validate();
         $user_id = 38;
         Project::create([
             'user_id' => $user_id, // Set the user_id explicitly

@@ -8,7 +8,10 @@
             width: 50%;
         }
     </style>
-    <button wire:click="createProject" style="background-color:yellow; padding:20px; border:none;">Buat RAB baru</button>
+    @if(count($project) > 0)
+        <button wire:click="createProject" style="background-color:yellow; padding:20px; border:none; margin: 20px">Buat RAB baru</button>
+        <h1>Proyek Berlangsung</h1>
+    @endif
     <ul style="decoration: none;">
         @foreach ($project as $p)
             <li>
@@ -23,9 +26,10 @@
         @endforeach
     </ul>
     @if(count($project) === 0)
-        <div style="text-align:center;">
-            <p>Ayo mulai RAB proyek baru</p>
-            <button wire:click="createProject" style="background-color:yellow; padding:20px; border:none;">Buat RAB baru</button>
+        <div style="text-align:center; margin: auto;">
+            <img src="{{ asset('favicon.ico') }}"></img>
+            <p>Ayo mulai RAB proyek baru !</p>
+            <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
         </div>
     @else
         {{ $project->links() }}
