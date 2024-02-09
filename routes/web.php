@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Project;
 use App\Models\User;
 use App\Livewire\ProjectView;
 use App\Livewire\ProjectCreate;
+use App\Livewire\RabPage;
 use Illuminate\Http\Request;
 
 /*
@@ -40,9 +40,7 @@ Route::get('/project/{user_id}', ProjectView::class);
 /**
  * Display all RAB for the project
  */
-Route::get('/rab/{project_id}', function ($project_id) {
-    //
-});
+Route::get('/rab/{project_id}', RabPage::class);
 
 /**
  * Display rab with the inputted id
