@@ -25,17 +25,14 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('homepage');
 });
- 
-Route::get('/project', ProjectCreate::class);
+
+Route::get('/project', ProjectView::class);
+Route::get('/projectCreate', ProjectCreate::class);
 
 Route::get('/user', function() {
     $user = User::all();
     return $user;
 });
-/**
- * Display All Projects for the user
- */
-Route::get('/project/{user_id}', ProjectView::class);
 
 /**
  * Display all RAB for the project

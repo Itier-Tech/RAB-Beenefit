@@ -4,17 +4,19 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Project;
-use App\Models\Rab;
+use Livewire\WithPagination;
 
 class ProjectView extends Component
 {
-    public function seeRab() 
+    use WithPagination;
+
+    public function seeRab($project_id) 
     {
-        return redirect('/');
+        return redirect('/rab'. '/'. $project_id);
     }
 
     public function render()
     {
-        return view('livewire.project-view')->with(['project' => Project::where('user_id', 38)->get()])->extends('components.layouts.app')->section('content');
+        return view('livewire.project-view')->with(['project' => Project::where('user_id', 38)->paginate(3)])->extends('components.layouts.app')->section('content');
     }
 }
