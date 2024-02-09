@@ -2,7 +2,7 @@
     <h1>RAB Nama Proyek</h1>
     <button style="background-color:yellow">Buat RAB Baru +</button>
     <a href="#" style="float:right">More details</a>
-    <table style="width: 100%; margin: 10px 0;">
+    <table style="width: 80%; margin: 10px auto;">
         <tr style="background-color : yellow; padding:20px;">
             <th>No</th>
             <th>Tanggal</th>

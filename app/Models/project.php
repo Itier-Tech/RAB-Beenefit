@@ -17,11 +17,11 @@ class Project extends Model
             'budget',
     ];
 
-    public function user() : BelongsTo {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function rab() : HasMany
+    public function rab()
     {
         return $this->hasMany(Rab::class);
     }

@@ -1,4 +1,4 @@
-<div style="background-color: black;">
+<div style="background-color: grey;">
     <style>
         .project-list {
             background-color : white;
@@ -8,6 +8,7 @@
             width: 50%;
         }
     </style>
+    <button wire:click="createProject" style="background-color:yellow; padding:20px; border:none;">Buat RAB baru</button>
     <ul style="decoration: none;">
         @foreach ($project as $p)
             <li>
@@ -21,5 +22,12 @@
             </li>
         @endforeach
     </ul>
-    {{ $project->links() }}
+    @if(count($project) === 0)
+        <div style="text-align:center;">
+            <p>Ayo mulai RAB proyek baru</p>
+            <button wire:click="createProject" style="background-color:yellow; padding:20px; border:none;">Buat RAB baru</button>
+        </div>
+    @else
+        {{ $project->links() }}
+    @endif
 </div>

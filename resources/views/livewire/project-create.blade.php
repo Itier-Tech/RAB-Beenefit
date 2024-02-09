@@ -1,5 +1,7 @@
 <div>
-    <form wire:submit="create">
+    <h1>Proyek Baru</h1>
+    <p>Ayo masukkan detail informasi mengenai proyek barumu! nama proyek, nama client, alamat, budget, nama mandor</p>
+    <form wire:submit="create" style="width:80%; margin: auto; border-radius: 20px;">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group">
             <label for="project_name" class="col-sm-3 control-label">Nama Proyek</label>

@@ -15,8 +15,13 @@ class ProjectView extends Component
         return redirect('/rab'. '/'. $project_id);
     }
 
+    public function createProject()
+    {
+        return redirect('/projectCreate');
+    }
+
     public function render()
     {
-        return view('livewire.project-view')->with(['project' => Project::where('user_id', 38)->paginate(3)])->extends('components.layouts.app')->section('content');
+        return view('livewire.project-view')->with(['project' => Project::where('user_id', 100)->paginate(3)])->extends('components.layouts.app')->section('content');
     }
 }

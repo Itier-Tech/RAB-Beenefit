@@ -20,7 +20,7 @@ class User extends Model
             'company_logo_path',
     ];
 
-    public function project() : HasMany
+    public function project()
     {
         return $this->hasMany(Project::class);
     }
