@@ -26,6 +26,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
             display: block;
             background: none;
             border: none;
+            font-size: 15px;
         }
         button:hover {
             cursor: pointer;

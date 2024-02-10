@@ -6,7 +6,6 @@
             border-collapse: collapse;
         }
         tr {
-            margin: 40px;
             border: 0px 1px solid black;
             text-align: center; 
         }
@@ -14,6 +13,9 @@
             background-color: #FFD700;
             padding: 10px;
             border: none;
+        }
+        th, td {
+            padding: 10px;
         }
     </style>
     <h1>RAB {{ $project_name }}</h1>
@@ -41,11 +43,11 @@
                 </tr>
             @endforeach
         </table>
-        {{ $rabList->links('project-pagination-links') }}
     @else
         <div style="text-align:center; margin: auto">
             <h1>Belum ada RAB, buat RAB kamu di sini</h1>
             <button>Buat RAB</button>
         </div>
     @endif
+    {{ $rabList->links('project-pagination-links') }}
 </div>

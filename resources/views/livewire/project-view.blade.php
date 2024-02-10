@@ -10,7 +10,7 @@
     </style>
     @if(count($project) > 0)
         <button wire:click="createProject" style="background-color: #FFD700; padding: 10px; border:none; margin: 20px">Buat RAB baru</button>
-        <h1>RAB Berlangsung ({{ count($project) }} proyek)</h1>
+        <h1>RAB Berlangsung ({{ $project->total() }} proyek)</h1>
         <ul style="list-style-type: none;">
             @foreach ($project as $p)
                 <li>
@@ -20,18 +20,16 @@
                         <p style="font-size:18px;">{{ $p->client_name }} : Rp. {{ $p->budget }}</p>
                         <p>{{ $p->project_address }}</p>
                         <div style="text-align:right;">
-                            <button wire:click="seeRab({{ $p->project_id }}, {{ $p->project_name }})" style="background-color:green; color:white; padding: 10px; border:none;">Lihat Selengkapnya</button>
+                            <button wire:click="seeRab({{ $p->project_id }}, '{{ $p->project_name }}')" style="background-color:green; color:white; padding: 10px; border:none;">Lihat Selengkapnya</button>
                         </div>
                     </div>
                 </li>
             @endforeach
         </ul>
-        {{ $project->links('project-pagination-links') }}
     @else
-        <div style="text-align:center; margin: auto;">
-            <img src="{{ asset('favicon.ico') }}"></img>
-            <p>Ayo mulai RAB proyek baru !</p>
-            <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
-        </div>
+        <img src="{{ asset('favicon.ico') }}"></img>
+        <p>Ayo mulai RAB proyek baru !</p>
+        <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
     @endif
+    {{ $project->links('project-pagination-links') }}
 </div>
