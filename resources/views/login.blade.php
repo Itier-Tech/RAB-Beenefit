@@ -102,9 +102,15 @@
                 <div style="font-family: Inter; font-weight: 800; font-size: 28px; margin-bottom: 20px;">
                     Masuk
                 </div>
-                <form>
+                <form action="/login" method="post">
+                    @csrf
                     <label for="email" style="font-family: Inter; font-size: 12px; font-weight: 800;">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    @error('email')
+                        <div class="invalid-feedback" style="font-family: Inter; font-size: 12px; font-weight: 800; color: red;">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input class="@error('email') is-invalid @enderror" type="email" id="email" name="email" placeholder="Email" required value="{{ old('email') }}">
 
                     <label for="password" style="font-family: Inter; font-size: 12px; font-weight: 800;">Password</label>
                     <input type="password" id="password" name="password" placeholder="Password" required style="margin-bottom: 10px;">
