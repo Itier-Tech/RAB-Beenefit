@@ -1,4 +1,4 @@
-<div>
+<div style="width: 100%; margin:auto; text-align: center;">
     <style>
         .rounded {
             border-radius: 5px;
