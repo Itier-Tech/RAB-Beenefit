@@ -30,7 +30,7 @@ class ProjectCreate extends Component
         ]);
         
         $this->reset('project_name', 'client_name', 'project_address', 'budget');
-        return redirect('/home');
+        return redirect('/project');
     }
 
     public function render()

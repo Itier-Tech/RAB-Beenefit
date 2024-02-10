@@ -37,7 +37,7 @@ Route::get('/user', function() {
 /**
  * Display all RAB for the project
  */
-Route::get('/rab/{project_id}', RabPage::class);
+Route::get('/rab/{project_id}/{project_name}', RabPage::class);
 
 /**
  * Display rab with the inputted id

@@ -10,9 +10,9 @@ class ProjectView extends Component
 {
     use WithPagination;
 
-    public function seeRab($project_id) 
+    public function seeRab($project_id, $project_name) 
     {
-        return redirect('/rab'. '/'. $project_id);
+        return redirect('/rab'. '/'. $project_id . '/' . $project_name);
     }
 
     public function createProject()
@@ -22,6 +22,6 @@ class ProjectView extends Component
 
     public function render()
     {
-        return view('livewire.project-view')->with(['project' => Project::where('user_id', 100)->paginate(3)])->extends('components.layouts.app')->section('content');
+        return view('livewire.project-view')->with(['project' => Project::where('user_id', 38)->paginate(3)])->extends('components.layouts.app')->section('content');
     }
 }
