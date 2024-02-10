@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\Register;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,10 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('homepage');
 });
+
+Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('logout', [LoginController::class, 'logout']);
 
 Auth::routes(['login' => false, 'register' => false]);
 
