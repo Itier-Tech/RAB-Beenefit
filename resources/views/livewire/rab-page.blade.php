@@ -41,7 +41,7 @@
                 </tr>
             @endforeach
         </table>
-        {{ $rabList->links() }}
+        {{ $rabList->links('project-pagination-links') }}
     @else
         <div style="text-align:center; margin: auto">
             <h1>Belum ada RAB, buat RAB kamu di sini</h1>

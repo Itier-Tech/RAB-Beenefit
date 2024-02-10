@@ -26,7 +26,7 @@
                 </li>
             @endforeach
         </ul>
-        {{ $project->links() }}
+        {{ $project->links('project-pagination-links') }}
     @else
         <div style="text-align:center; margin: auto;">
             <img src="{{ asset('favicon.ico') }}"></img>
