@@ -9,7 +9,7 @@
         }
     </style>
     @if(count($project) > 0)
-        <button wire:click="createProject" style="background-color: #FFD700; padding: 10px; border:none; margin: 20px">Buat RAB baru</button>
+        <button wire:click="createProject" style="background-color: #FFD700; padding: 10px; border:none; margin: 20px">Buat Proyek Baru</button>
         <h1>RAB Berlangsung ({{ $project->total() }} proyek)</h1>
         <ul style="list-style-type: none;">
             @foreach ($project as $p)
