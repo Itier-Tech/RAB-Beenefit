@@ -33,9 +33,11 @@
             @endforeach
         </ul>
     @else
-        <img src="{{ asset('favicon.ico') }}"></img>
-        <p>Ayo mulai RAB proyek baru !</p>
-        <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
+        <div style="margin: 20px auto;text-align: center;">
+            <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
+            <p>Ayo mulai RAB proyek baru !</p>
+            <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
+        </div>
     @endif
     {{ $project->links('project-pagination-links') }}
 </div>
