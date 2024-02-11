@@ -25,6 +25,12 @@ class RabPage extends Component
         $count *= $page * $this->page_length;
     }
 
+    public function deleteRab($rab_id) 
+    {
+        Rab::where('rab_id', $rab_id)->delete();
+        return redirect(request()->header('Referer'));
+    }
+
     public function render()
     {
         return view('livewire.rab-page', ['rabList' => Rab::where('project_id', $this->project_id)->paginate($this->page_length),

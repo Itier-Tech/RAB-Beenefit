@@ -38,7 +38,7 @@
                     <td>{{ $rab->total_price }}</td>
                     <td>
                         <button style="background-color:orange; border-radius:25px; padding: 5px;">Lihat Detail</button>
-                        <button style="background-color:red; border-radius:25px; padding: 5px;">Delete</button>
+                        <button wire:click="deleteRab({{ $rab->rab_id }})" style="background-color:red; border-radius:25px; padding: 5px;">Delete</button>
                     </td>
                 </tr>
             @endforeach
