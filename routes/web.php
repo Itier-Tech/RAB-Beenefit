@@ -23,6 +23,10 @@ Route::get('/home', function () {
     return view('homepage');
 });
 
+Route::get('/addrab', function () {
+    return view('addrab');
+});
+
 Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('logout', [LoginController::class, 'logout']);
