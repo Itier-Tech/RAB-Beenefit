@@ -30,7 +30,7 @@ Route::get('/home', function () {
 });
 
 Route::get('/project/{projectId}', function ($projectId) {
-    return view('addrab');
+    return view('addrab', ['projectId' => $projectId]);
 });
 
 Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
@@ -66,9 +66,7 @@ Route::get('/rab/{rab_id}', function ($rab_id) {
 /**
  * Add A New RAB for the project
  */
-Route::post('/rab/{project_id}', function (Request $request, $project_id) {
-    //
-});
+Route::post('/rab/{project_id}', [RabController::class, 'create'] );
 
 /**
  * Add A New item for the RAB for the project
@@ -76,7 +74,7 @@ Route::post('/rab/{project_id}', function (Request $request, $project_id) {
 Route::post('/rab_item', function (Request $request) {
     //
 });
- 
+
 /**
  * Delete An Existing Project
  */

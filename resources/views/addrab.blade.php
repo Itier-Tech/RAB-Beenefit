@@ -45,9 +45,9 @@
             var rabContainer = document.querySelector(".rab-container");
 
             if (sidebar.classList.contains("open")) {
-                rabContainer.style.marginLeft = "250px"; // Geser konten ke kanan saat sidebar dibuka
+                rabContainer.style.marginLeft = "250px";
             } else {
-                rabContainer.style.marginLeft = "0"; // Kembalikan ke posisi semula saat sidebar ditutup
+                rabContainer.style.marginLeft = "0";
             }
         }
     </script>
@@ -82,9 +82,12 @@
         </div>
         <div class="m-1">Belum ada RAB. Buat RAB kamu disini!</div>
         <div class="m-3">
-            <button type="submit" class="btn btn-primary custom-btn">
-                Buat RAB
-            </button>
+            <form action="/rab/{{ $projectId }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary custom-btn">
+                    Buat RAB
+                </button>
+            </form>
         </div>
     </div>
 

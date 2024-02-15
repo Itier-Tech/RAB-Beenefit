@@ -123,7 +123,7 @@
                     <input type="submit" value="Login">
 
                 </form>
-                <div style="font-family: Inter; font-size: 12px; font-weight: 200; justify-content: center">Belum punya akun? <span style="color: #228B22; cursor: pointer;" onmouseover="this.style.textDecoration='underline'">Buat Akun</span></div>
+                <a href="/register" style="font-family: Inter; font-size: 12px; font-weight: 200; justify-content: center">Belum punya akun? <span style="color: #228B22; cursor: pointer;" onmouseover="this.style.textDecoration='underline'">Buat Akun</span></a>
 
             </div>
         </div>
