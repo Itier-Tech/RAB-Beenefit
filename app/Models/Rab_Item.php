@@ -14,8 +14,8 @@ class Rab_item extends Model
             'item_discount',
             'item_count',
     ];
-
-    public function rab()
+    
+    public function rab() 
     {
         return $this->belongsTo(Rab::class);
     }

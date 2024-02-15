@@ -15,8 +15,8 @@ class Rab extends Model
             'rab_discount',
             'total_price',
     ];
-
-    public function project()
+    
+    public function project() 
     {
         return $this->belongsTo(Project::class);
     }

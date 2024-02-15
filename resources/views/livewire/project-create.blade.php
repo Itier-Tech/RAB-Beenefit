@@ -1,19 +1,21 @@
 <div style="width: 100%; margin:auto; text-align: center;">
     <style>
-        .rounded {
-            border-radius: 5px;
+        @media (max-width: 768px) {
+            .flex-row-responsive {
+                flex-direction: column;
+            }
         }
-
-        .submit-btn {
-            background-color: yellow;
-            border-radius: 5px;
-            border: none;
-            padding: 10px;
+        .form-control {
+            width: 60%;
+            margin: 0 auto;
+        }
+        .form-control:focus {
+            border-color: #28a745 !important;
         }
     </style>
     <h1>Proyek Baru</h1>
     <p>Ayo masukkan detail informasi mengenai proyek barumu! Nama proyek, nama client, alamat, budget.</p>
-    <form wire:submit.prevent="create" style="display: flex; flex-direction: column; gap: 1rem;">
+    <form wire:submit.prevent="create" style="display: flex; flex-direction: column; gap: 1rem; width: 80%; margin: 0 auto;">
         <!-- Row for Project Name -->
         <div class="flex-row-responsive" style="display: flex; justify-content: space-between; gap: 1rem;">
             <!-- Email input -->
