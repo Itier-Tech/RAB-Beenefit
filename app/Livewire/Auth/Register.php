@@ -34,11 +34,10 @@ class Register extends Component
 
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        error_log('Austin');
-
         $user = User::create($validatedData);
+        session(['user_id' => $user->user_id]);
         // Auth::login($user, true);
-        return redirect()->to('/home');
+        return redirect()->to('/otp-verification');
     }
 
     public function render()

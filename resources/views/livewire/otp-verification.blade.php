@@ -1,33 +1,3 @@
-<script>
-    Livewire.on('updatedOtp', otp => {
-        const otpBoxes = document.querySelectorAll('#otpBoxContainer div');
-        otp.split('').forEach((num, index) => {
-            otpBoxes[index].textContent = num;
-        });
-        for (let i = otp.length; i < otpBoxes.length; i++) {
-            otpBoxes[i].textContent = '•';
-        }
-    });
-</script>
-
-<script>
-    window.addEventListener('startResendTimer', () => {
-        const resendLink = document.getElementById('resendLink');
-        let timer = 60;
-        const interval = setInterval(() => {
-            if (timer === 0) {
-                clearInterval(interval);
-                resendLink.textContent = 'Kirim Ulang';
-                resendLink.removeAttribute('disabled');
-            } else {
-                timer--;
-                resendLink.textContent = 'Kirim Ulang (' + timer + ')';
-                resendLink.setAttribute('disabled', 'disabled');
-            }
-        }, 1000);
-    });
-</script>
-
 <div style="background-image: url('{{ asset('images/bg_register.png') }}'); height: 100vh; width: 100%; background-size: cover; display: flex; justify-content: center; align-items: center;">
     <div class="card shadow-lg" style="width: 80%; background-color: white; border-radius: 2rem; padding: 2rem; box-sizing: border-box;">
         <div class="text-center" style="margin-bottom: 2rem;">
@@ -39,31 +9,47 @@
                 </p>
             </div>
         </div>
-        <form wire:submit.prevent="verifyOtp" style="display: flex; flex-direction: column; gap: 1rem;">
-            <!-- Row for OTP -->
-            {{-- <div style="display: flex; justify-content: center; gap: 1rem;">
-                <input type="text" wire:model="otp1" maxlength="1" style="font-size: 2rem; border-color: #228B22; width: 4rem; text-align: center;" class="form-control">
-                <input type="text" wire:model="otp2" maxlength="1" style="font-size: 2rem; border-color: #228B22; width: 4rem; text-align: center;" class="form-control">
-                <input type="text" wire:model="otp3" maxlength="1" style="font-size: 2rem; border-color: #228B22; width: 4rem; text-align: center;" class="form-control">
-                <input type="text" wire:model="otp4" maxlength="1" style="font-size: 2rem; border-color: #228B22; width: 4rem; text-align: center;" class="form-control">
-            </div> --}}
-            <input type="text" wire:model="otp" maxlength="4" autofocus />
-            <div wire:ignore.self id="otpBoxContainer">
-                <div>•</div>
-                <div>•</div>
-                <div>•</div>
-                <div>•</div>
+        <form wire:submit.prevent="verifyOtp">
+            <div>
+                @foreach ($otp as $digit)
+                <input type="text" wire:model="otp.{{ $loop->index }}" maxlength="1" autofocus>
+                @endforeach
             </div>
-            <!-- Submit button -->
-            <div class="text-center" style="margin-top: 1.5rem;">
-                <button type="submit" class="btn" style="background-color: #FFD700; border: none; padding: 0.75rem 2rem; font-size: 1.2rem; color: black; font-weight: bold;">Verifikasi</button>
-            </div>
+            <button type="submit">Verifikasi</button>
         </form>
-        <div class="text-center" style="margin-top: 2rem;">
+        <div>
             <p>Belum menerima kode?
-                {{-- <a wire:click="resendOtp" class="text-decoration-none" style="color: #228B22; font-weight: bold; cursor: pointer;">Kirim Ulang (1:00)</a> --}}
-                <a wire:click="resendOtp" id="resendLink">Kirim Ulang</a>
+                <span wire:click="resendOtp">Kirim Ulang</span>
+                <span id="timer">(1:00)</span>
             </p>
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        window.livewire.on('resetTimer', data => {
+            let duration = data.duration;
+            let display = document.getElementById('timer');
+            startTimer(duration, display);
+        });
+
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = '(' + minutes + ":" + seconds + ')';
+                if (--timer < 0) {
+                    timer = duration;
+                    clearInterval(interval);
+                    window.livewire.emit('resendOtp');
+                }
+            }, 1000);
+        }
+    });
+</script>
+@endpush

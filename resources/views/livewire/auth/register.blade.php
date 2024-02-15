@@ -61,7 +61,7 @@
         </form>
         <div class="text-center" style="margin-top: 2rem;">
             <p>Sudah punya akun?
-                <a href="{{ route('login') }}" class="text-decoration-none font-weight-bold" style="color: #228B22;">Masuk</a>
+                <a href="{{ route('otp-verification') }}" class="text-decoration-none font-weight-bold" style="color: #228B22;">Masuk</a>
             </p>
         </div>
     </div>
