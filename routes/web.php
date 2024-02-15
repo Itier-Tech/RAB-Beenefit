@@ -6,6 +6,8 @@ use App\Livewire\ProjectView;
 use App\Livewire\ProjectCreate;
 use App\Livewire\RabPage;
 use Illuminate\Http\Request;
+use App\Livewire\Auth\Register;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,16 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('homepage');
+});
+
+Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('logout', [LoginController::class, 'logout']);
+
+Auth::routes(['login' => false, 'register' => false]);
+
+Route::middleware('guest')->group(function() {
+    Route::get('/register', Register::class) -> name('register');
 });
 
 Route::get('/project', ProjectView::class);
