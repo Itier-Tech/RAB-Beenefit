@@ -34,7 +34,7 @@ Route::get('/addrab', function () {
 
 Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 Auth::routes(['login' => false, 'register' => false]);
 
