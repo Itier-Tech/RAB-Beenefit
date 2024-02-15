@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->primary(['rab_id', 'item_id']);
 
-            $table->foreign('rab_id')->references('rab_id')->on('rab')->onDelete('cascade');
+            $table->foreign('rab_id')->references('rab_id')->on('rabs')->onDelete('cascade');
             $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
         });
     }
