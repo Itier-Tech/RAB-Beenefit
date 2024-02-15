@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/navbar.css', 'resources/css/addrab.css'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
 </head>
 <body>
@@ -22,14 +22,6 @@
         <main class="d-flex w-100 h-100">
             @yield('content')
         </main>
-
-        @if(session()->has('loginError'))
-            <div class="aler alert-danger alert-dismissible fade show" role="alert">
-                {{ session('loginError') }}
-                <button> type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                </button>
-            </div>
-        @endif
     </div>
     @livewireScripts
 </body>

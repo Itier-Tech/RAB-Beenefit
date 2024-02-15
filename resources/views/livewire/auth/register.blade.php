@@ -1,15 +1,14 @@
-<style>
-    @media (max-width: 768px) {
-      .flex-row-responsive {
-        flex-direction: column;
-      }
-    }
-    .form-control:focus {
-      border-color: #28a745 !important;
-    }
-  </style>
-
 <div style="background-image: url('{{ asset('images/bg_register.png') }}'); height: 100vh; width: 100%; background-size: cover; display: flex; justify-content: center; align-items: center;">
+    <style>
+        @media (max-width: 768px) {
+        .flex-row-responsive {
+            flex-direction: column;
+        }
+        }
+        .form-control:focus {
+        border-color: #28a745 !important;
+        }
+    </style>
     <div class="card shadow-lg" style="width: 80%; background-color: white; border-radius: 2rem; padding: 2rem; box-sizing: border-box;">
         <div class="text-center" style="margin-bottom: 2rem;">
             <img src="{{ asset('images/logo_beenefit.png') }}" alt="Beenefit Logo" style="width: 120px; margin-bottom: 1rem;" >
