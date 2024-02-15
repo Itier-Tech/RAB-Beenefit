@@ -8,6 +8,7 @@ use App\Livewire\RabPage;
 use Illuminate\Http\Request;
 use App\Livewire\Auth\Register;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\RabController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::get('/home', function () {
     return view('homepage');
 });
 
-Route::get('/addrab', function () {
+Route::get('/project/{projectId}', function ($projectId) {
     return view('addrab');
 });
 
