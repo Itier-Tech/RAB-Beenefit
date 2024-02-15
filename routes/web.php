@@ -29,7 +29,7 @@ Route::get('/home', function () {
     return view('homepage');
 });
 
-Route::get('/project/{projectId}', function ($projectId) {
+Route::get('/addrab', function ($projectId) {
     return view('addrab');
 });
 
