@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\Register;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\RabController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +24,13 @@ Route::get('/home', function () {
     return view('homepage');
 });
 
-Route::get('/addrab', function () {
+Route::get('/project/{projectId}', function ($projectId) {
     return view('addrab');
 });
 
 Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 Auth::routes(['login' => false, 'register' => false]);
 
