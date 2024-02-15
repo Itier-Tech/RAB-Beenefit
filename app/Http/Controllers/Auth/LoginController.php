@@ -50,16 +50,15 @@ class LoginController extends Controller
         ]);
 
         $password = $request->input('password');
-        $hashedPassword = Hash::make($password);
-        $credentials['password'] = $hashedPassword;
+        $credentials['password'] = $password;
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/project');
         }
 
-        // dd('eror');
+        dd('eror');
         return back()->with('loginError', 'Login failed!');
     }
 

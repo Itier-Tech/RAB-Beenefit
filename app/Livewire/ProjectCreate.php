@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectCreate extends Component
 {
@@ -20,7 +21,7 @@ class ProjectCreate extends Component
     public function create()
     {
         $this->validate();
-        $user_id = 38;
+        $user_id = Auth::user()->user_id;
         Project::create([
             'user_id' => $user_id, // Set the user_id explicitly
             'project_name' => $this->project_name,
