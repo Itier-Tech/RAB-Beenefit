@@ -46,20 +46,34 @@
             <div class="project-list" style="width:20%; margin-right: 5%; align-self:flex-start;">
                 <h4 style="color:green;">Filter</h4>
                 <p style="color:green; margin-bottom:0;">Status pekerjaan</p>
-                <form>
-                    <input type="checkbox" style="margin-right:5px;" name="inp"><label>Input</label></br>
-                    <input type="checkbox" style="margin-right:5px;" name="fin"><label>Finalisasi</label></br>
-                    <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:5px;">Hapus</button>
+                <form wire:submit.prevent="filter">
+                    <input type="radio" style="margin-right:5px;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
+                    <input type="radio" style="margin-right:5px;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
+                    <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:5px;" wire:click="resetSelection">Hapus</button>
                     <button type="submit" style="background-color:#FFD700; border-radius:5px; font-weight:bold;">Terapkan</button>
                 </form>
             </div>
         </div>
     @else
-        <div style="margin: 20px auto;text-align: center; flex-grow:1;">
-            <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
-            <p>Ayo mulai RAB proyek baru !</p>
-            <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
-        </div>
+        @if($status_select == 2)
+            <div style="margin: 20px auto;text-align: center; flex-grow:1;">
+                <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
+                <p>Ayo mulai RAB proyek baru !</p>
+                <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
+            </div>
+        @elseif($status_select == 1)
+            <div style="margin: 20px auto;text-align: center; flex-grow:1;">
+                <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
+                <p>Belum ada proyek dalam tahap finalisasi</p>
+                <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
+            </div>
+        @else
+            <div style="margin: 20px auto;text-align: center; flex-grow:1;">
+                <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
+                <p>Semua proyek sedang dalam tahap finalisasi</p>
+                <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
+            </div>
+        @endif
     @endif
     <div style="width: 60%; margin:auto;">
         {{ $project->links('project-pagination-links') }}
