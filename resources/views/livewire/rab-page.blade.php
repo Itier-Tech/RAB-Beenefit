@@ -1,4 +1,4 @@
-<div style="width:80%; margin: auto; background-color:#E9E9E9;">
+<div style="width:100%; margin: auto;">
     <style>
         table {
             width: 100%; 
@@ -52,5 +52,7 @@
             <button style="margin: 20px 0;">Buat RAB</button>
         </div>
     @endif
-    {{ $rabList->links('project-pagination-links') }}
+    <div style="width: 60%; margin:auto;">
+        {{ $rabList->links('project-pagination-links') }}
+    </div>
 </div>
