@@ -38,19 +38,7 @@ class ProjectView extends Component
     public function render()
     {
         if ($this->status_select != 2) {
-            // Retrieve all projects for the user
-            $allProjects = Project::where('user_id', Auth::user()->user_id)->latest()->get();
-
-            // Filter the projects based on the status
-            $filteredProjects = $allProjects->filter(function ($project) {
-                return $project->status() == $this->status_select;
-            });
-
-            // Paginate the filtered projects
-            $currentPage = LengthAwarePaginator::resolveCurrentPage();
-            $perPage = 3; // Number of items per page
-            $currentPageItems = $filteredProjects->slice(($currentPage - 1) * $perPage, $perPage)->all();
-            $this->viewedProjects = new LengthAwarePaginator($currentPageItems, count($filteredProjects), $perPage, $currentPage);
+            $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->where('status', $this->status_select)->latest()->paginate(3);;
         } else {
             $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->latest()->paginate(3);
         }

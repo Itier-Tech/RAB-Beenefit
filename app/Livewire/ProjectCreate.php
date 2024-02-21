@@ -27,6 +27,7 @@ class ProjectCreate extends Component
             'project_name' => $this->project_name,
             'client_name' => $this->client_name,
             'project_address' => $this->project_address,
+            'status' => 0,
             'budget' => $this->budget
         ]);
         

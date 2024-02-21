@@ -26,7 +26,7 @@
                         <div wire:key="{{$p->project_id}}" class="project-list">
                             <div>
                                 <h3 style="display:inline-block; margin-right:10px; color: green;">{{ $p->project_name }}</h3>
-                                <div style="display:inline-block; background-color:#ADD8E6; color:green; padding: 0px 5px; border-radius:5px;">{{ $p->status() === 0 ? "Input" : "Finalisasi" }}</div>
+                                <div style="float:right; display:inline-block; background-color:#ADD8E6; color:green; padding: 0px 5px; border-radius:5px;">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</div>
                             </div>
                             <img src="{{ asset('clock icon.png') }}" style="color: grey; width:15px; height:15px; display:inline;" />
 
