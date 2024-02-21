@@ -23,6 +23,7 @@ class ProjectFactory extends Factory
             'project_address' => fake()->address(),
             'project_name' => fake()->word(),
             'budget' => fake()->randomNumber(8, false),
+            'status' => fake()->randomElement([0,1]),
             'created_at' => now(),
             'updated_at' => now(),
         ];

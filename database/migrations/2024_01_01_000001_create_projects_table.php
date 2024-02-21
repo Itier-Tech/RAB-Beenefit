@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('project_address');
             $table->string('project_name');
             $table->integer('budget');
+            $table->integer('status');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

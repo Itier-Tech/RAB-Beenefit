@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rab extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'rab_id';
     public $fillable = [
             'project_id',
             'status',
