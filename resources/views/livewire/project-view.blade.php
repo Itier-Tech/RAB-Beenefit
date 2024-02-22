@@ -26,7 +26,7 @@
                         <div wire:key="{{$p->project_id}}" class="project-list">
                             <div>
                                 <h3 style="display:inline-block; margin-right:10px; color: green;">{{ $p->project_name }}</h3>
-                                <div style="float:right; display:inline-block; background-color:#ADD8E6; color:green; padding: 0px 5px; border-radius:5px;">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</div>
+                                <button wire:click="changeProjectStatus({{ $p }})">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
                             </div>
                             <img src="{{ asset('clock icon.png') }}" style="color: grey; width:15px; height:15px; display:inline;" />
 
@@ -46,7 +46,7 @@
             <div class="project-list" style="width:20%; margin-right: 5%; align-self:flex-start;">
                 <h4 style="color:green;">Filter</h4>
                 <p style="color:green; margin-bottom:0;">Status pekerjaan</p>
-                <form wire:submit.prevent="filter">
+                <form wire:submit.prevent="$refresh">
                     <input type="radio" style="margin-right:5px;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
                     <input type="radio" style="margin-right:5px;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
                     <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:5px;" wire:click="resetSelection">Hapus</button>

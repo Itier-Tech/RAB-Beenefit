@@ -25,14 +25,15 @@ class ProjectView extends Component
         return redirect('/projectCreate');
     }
 
-    public function filter()
-    {
-        $this->render();
-    }
-
     public function resetSelection()
     {
         $this->status_select = 2;
+    }
+
+    public function changeProjectStatus(Project $p)
+    {
+        $p->status = $p->status === 1 ? 0:1;
+        $p->save();
     }
 
     public function render()
