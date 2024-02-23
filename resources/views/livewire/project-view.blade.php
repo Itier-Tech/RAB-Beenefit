@@ -30,7 +30,7 @@
                             </div>
                             <img src="{{ asset('clock icon.png') }}" style="color: grey; width:15px; height:15px; display:inline;" />
 
-                            <p style="color: grey; display: inline-block; margin:5px 0;">{{ $p->created_at }}</p>
+                            <p style="color: grey; display: inline-block; margin:5px 0;">{{ $p->created_at->diffInDays(now()) }} hari yang lalu</p>
                             <p style="font-size:16px; margin-bottom:5px;">{{ $p->client_name }} : Rp. {{ number_format($p->budget , 0, ',', '.') }}</p>
 
                             <img src="{{ asset('gps icon.png') }}" style="color: grey; width:16px; height:20px; float:left; margin-right:5px; margin-top: 0px;" />
