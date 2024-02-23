@@ -26,7 +26,7 @@
                         <div wire:key="{{$p->project_id}}" class="project-list">
                             <div>
                                 <h3 style="display:inline-block; margin-right:10px; color: green;">{{ $p->project_name }}</h3>
-                                <button wire:click="changeProjectStatus({{ $p }})">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
+                                <button wire:click="changeProjectStatus({{ $p }})" style="background-color:{{ $p->status === 0 ? "#FFA07A" : "#ADD8E6"}}">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
                             </div>
                             <img src="{{ asset('clock icon.png') }}" style="color: grey; width:15px; height:15px; display:inline;" />
 
@@ -50,7 +50,7 @@
                     <input type="radio" style="margin-right:5px;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
                     <input type="radio" style="margin-right:5px;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
                     <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:5px;" wire:click="resetSelection">Hapus</button>
-                    <button type="submit" style="background-color:#FFD700; border-radius:5px; font-weight:bold;">Terapkan</button>
+                    <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
                 </form>
             </div>
         </div>
@@ -84,7 +84,7 @@
                         <input type="radio" style="margin-right:5px;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
                         <input type="radio" style="margin-right:5px;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
                         <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:5px;" wire:click="resetSelection">Hapus</button>
-                        <button type="submit" style="background-color:#FFD700; border-radius:5px; font-weight:bold;">Terapkan</button>
+                        <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
                     </form>
                 </div>
             @endif
