@@ -8,32 +8,36 @@ use App\Models\User;
 
 class Register extends Component
 {
+    public $full_name;
     public $email;
-    public $name;
     public $password;
     public $phone;
 
-    public function rules()
-    {
-        return [
-            'email' => ['required', 'email', 'unique:users'],
-            'name' => ['required'],
-            'password' => ['required'],
-            'phone' => ['required'],
-        ];
-    }
+    // public function rules()
+    // {
+    //     return [
+    //         'email' => ['required', 'email', 'unique:users'],
+    //         'name' => ['required'],
+    //         'password' => ['required'],
+    //         'phone' => ['required'],
+    //     ];
+    // }
+
     public function register()
     {
-        $this->validate();
-
-        $user = User::create([
-            'full_name' => $this->name,
-            'email' => $this->email,
-            'password' => bcrypt($this->password),
-            'phone' => $this->phone,
+        $validatedData = $this->validate([
+            'full_name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'phone' => 'required|string',
         ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        $user = User::create($validatedData);
+        session(['user_id' => $user->user_id]);
         // Auth::login($user, true);
-        return redirect()->to('/home');
+        return redirect()->to('/otp-verification');
     }
 
     public function render()
