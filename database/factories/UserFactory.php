@@ -28,6 +28,7 @@ class UserFactory extends Factory
             'company_logo_path' => fake()->imageUrl(),
             'bank_dest' => fake()->company(),
             'account_number' => fake()->phoneNumber(),
+            'account_name' => fake()->name(),
             'profpic' => fake()->imageUrl(),
             'created_at' => now(),
             'updated_at' => now(),

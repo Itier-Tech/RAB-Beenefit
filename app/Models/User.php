@@ -28,6 +28,7 @@ class User extends Authenticatable
         'company_logo_path',
         'bank_dest',
         'account_number',
+        'account_name',
         'profpic',
     ];
 
