@@ -7,6 +7,7 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Rab;
 
 class ProjectView extends Component
 {
@@ -15,9 +16,14 @@ class ProjectView extends Component
     public $status_select = 2;
     private $viewedProjects;
 
-    public function seeRab($project_id, $project_name) 
+    public function seeRab($project_id, $project_name)
     {
-        return redirect('/rab'. '/'. $project_id . '/' . $project_name);
+        // Kalau rab tidak kosong
+        if (count(Rab::where('project_id', $project_id)->get()) > 0) {
+            return redirect('/rab'. '/'. $project_id);
+        } else {
+            return redirect('/project' . '/' . $project_id);
+        }
     }
 
     public function createProject()

@@ -8,7 +8,8 @@ use App\Livewire\RabPage;
 use Illuminate\Http\Request;
 use App\Livewire\Auth\Register;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\RabController;
+use App\Livewire\AddRab;
+use App\Livewire\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,7 @@ Route::get('/profile', function () {
     return view('/profile');
 });
 
-Route::get('/project/{projectId}', function ($projectId) {
-    return view('addrab', ['projectId' => $projectId]);
-});
+Route::get('/project/{projectId}', AddRab::class);
 
 Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -55,10 +54,12 @@ Route::get('/user', function() {
     return $user;
 });
 
+Route::get('/userUpdate', Profile::class);
+
 /**
  * Display all RAB for the project
  */
-Route::get('/rab/{project_id}/{project_name}', RabPage::class);
+Route::get('/rab/{project_id}', RabPage::class);
 
 /**
  * Display rab with the inputted id

@@ -19,13 +19,12 @@
             <!-- User Profile -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" >
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown">
                         <img src="/images/profpic-icon.png" alt="Profile Picture" class="rounded-circle profile-picture">
-                        <span style="margin-left: 6px; font-weight: 700; cursor: default;">Nama User</span>
+                        <span style="margin-left: 6px; font-weight: 700; cursor: default;">{{ Auth::user()->full_name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="/userUpdate">Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </div>

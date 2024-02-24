@@ -1,30 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/navbar.css', 'resources/css/sidebar.css', 'resources/css/addrab.css'])
-    @livewireStyles
-    <title>Profile</title>
-</head>
-<body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdownToggle = document.getElementById("navbarDropdown");
-            var dropdownMenu = document.querySelector(".dropdown-menu");
-
-            dropdownToggle.addEventListener("click", function() {
-                dropdownMenu.classList.toggle("show");
-            });
-
-            window.addEventListener("click", function(event) {
-                if (!dropdownToggle.contains(event.target)) {
-                    dropdownMenu.classList.remove("show");
-                }
-            });
-        });
-
+<div>
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             var togglePasswordLama = document.getElementById('togglePasswordLama');
             var togglePasswordBaru = document.getElementById('togglePasswordBaru');
@@ -90,9 +65,6 @@
             transform: scale(1.05);
         }
     </style>
-    <x-navbar/>
-    <x-sidebar/>
-
     <div class="profile-container" style="padding: 5rem;display: flex; flex-direction: column;  align-items: center; justify-content: center; transition: margin-left 0.3s ease;">
         <div class="profile-img-container" style="position: relative; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editFotoProfilModal" >
             <img src="/images/profpic-icon.png" alt="Profile Picture"/>
@@ -102,13 +74,13 @@
         </div>
         <div class="p-4" style="font-weight: 800;display: flex; flex-direction: column;  align-items: center;">
             <div>
-                mandor1
+            {{ Auth::user()->full_name }}
             </div>
             <div>
-                mandor@gmail.com
+            {{ Auth::user()->email }}
             </div>
             <div>
-                +62812345678
+            {{ Auth::user()->phone }}
             </div>
         </div>
         <div style="display: flex;">
@@ -177,11 +149,11 @@
                             <form>
                                 <div class="mb-3">
                                     <label for="bankTujuan">Bank Tujuan</label>
-                                    <input type="text" class="form-control" id="bankTujuan" placeholder="Masukkan Bank Tujuan">
+                                    <input type="text" class="form-control" id="bankTujuan" placeholder="Masukkan Bank Tujuan" wire:model="bank_dest">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="nomorRekening">Nomor Rekening</label>
-                                    <input type="text" class="form-control" id="nomorRekening" placeholder="Masukkan Nomor Rekening">
+                                    <input type="text" class="form-control" id="nomorRekening" placeholder="Masukkan Nomor Rekening" wire:model="account_number">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="atasNama">Atas Nama</label>
@@ -213,17 +185,17 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama">
+                                                <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama" wire:model="full_name">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="email">Email</label>
-                                                <input type="email" class="form-control" id="email" placeholder="Masukkan Email">
+                                                <input type="email" class="form-control" id="email" placeholder="Masukkan Email" wire:model="email">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 mt-3">
                                                 <label for="nomorTelepon">Nomor Telepon</label>
-                                                <input type="tel" class="form-control" id="nomorTelepon" placeholder="Masukkan Nomor Telepon">
+                                                <input type="tel" class="form-control" id="nomorTelepon" placeholder="Masukkan Nomor Telepon" wire:model="phone">
                                             </div>
                                         </div>
                                     </div>
@@ -232,21 +204,21 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="namaPerusahaan">Nama Perusahaan</label>
-                                                <input type="text" class="form-control" id="namaPerusahaan" placeholder="Masukkan Nama Perusahaan">
+                                                <input type="text" class="form-control" id="namaPerusahaan" placeholder="Masukkan Nama Perusahaan" wire:model="company_name">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="nomorTeleponPerusahaan">Nomor Telepon Perusahaan</label>
-                                                <input type="tel" class="form-control" id="nomorTeleponPerusahaan" placeholder="Masukkan Nomor Telepon Perusahaan">
+                                                <input type="tel" class="form-control" id="nomorTeleponPerusahaan" placeholder="Masukkan Nomor Telepon Perusahaan" wire:model="company_phone">
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-6">
                                                 <label for="alamatPerusahaan">Alamat Perusahaan</label>
-                                                <input type="text" class="form-control" id="alamatPerusahaan" placeholder="Masukkan Alamat Perusahaan">
+                                                <input type="text" class="form-control" id="alamatPerusahaan" placeholder="Masukkan Alamat Perusahaan" wire:model="company_address">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="logoPerusahaan">Logo Perusahaan</label>
-                                                <input type="file" class="form-control" id="logoPerusahaan" accept="image/png, image/gif, image/jpeg, image.jpg">
+                                                <input type="file" class="form-control" id="logoPerusahaan" accept="image/png, image/gif, image/jpeg, image.jpg" wire:model="company_logo_path">
                                             </div>
                                         </div>
                                     </div>
@@ -304,5 +276,4 @@
 
         </div>
     </div>
-</body>
-</html>
+</div>

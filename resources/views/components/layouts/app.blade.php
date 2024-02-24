@@ -62,7 +62,7 @@
     <x-navbar />
     <x-sidebar/>
     <div >
-        <main class="d-flex w-100 h-100">
+        <main class="w-100 h-100">
             @yield('content')
         </main>
     </div>
