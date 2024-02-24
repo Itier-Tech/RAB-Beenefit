@@ -36,7 +36,12 @@ class RabPage extends Component
 
     public function addRab() 
     {
-        return redirect('/project' . '/' . $this->project_id);
+        $rab = new Rab();
+
+        $rab->project_id = $this->project_id;
+        $rab->status = 0;
+
+        $rab->save();
     }
 
     public function render()

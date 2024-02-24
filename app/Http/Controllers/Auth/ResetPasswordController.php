@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ResetPasswordController extends Controller
 {
@@ -25,51 +29,30 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/userUpdate';
 
     use Illuminate\Support\Facades\Password;
 
-    public function sendResetLinkEmail(Request $request)
+    public function resetPassword(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
-
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-
-        return $status === Password::RESET_LINK_SENT
-                    ? back()->with(['status' => __($status)])
-                    : back()->withErrors(['email' => __($status)]);
-    }
-
-    // Form reset password
-    public function showResetForm(Request $request, $token)
-    {
-        return view('auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
-    }
-
-    // Reset password
-    public function reset(Request $request)
-    {
+        // Validasi input
         $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+            'passwordLama' => 'required',
+            'passwordBaru' => 'required|min:8',
+            'retypePasswordBaru' => 'required|same:passwordBaru',
         ]);
 
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->save();
-            }
-        );
+        $user = Auth::user();
 
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withErrors(['email' => [__($status)]]);
+        // Periksa apakah password lama cocok
+        if (!Hash::check($request->passwordLama, $user->password)) {
+            return back()->with('error', 'Password lama tidak cocok.');
+        }
+
+        // Update password baru
+        $user->password = Hash::make($request->passwordBaru);
+        $user->save();
+
+        return back()->with('success', 'Password berhasil diubah.');
     }
 }

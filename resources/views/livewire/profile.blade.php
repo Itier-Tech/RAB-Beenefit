@@ -1,5 +1,5 @@
 <div>
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             var togglePasswordLama = document.getElementById('togglePasswordLama');
             var togglePasswordBaru = document.getElementById('togglePasswordBaru');
@@ -58,7 +58,6 @@
                 profileContainer.style.marginLeft = "0";
             }
         }
-
     </script>
     <style>
         button:hover {
@@ -67,7 +66,7 @@
     </style>
     <div class="profile-container" style="padding: 5rem;display: flex; flex-direction: column;  align-items: center; justify-content: center; transition: margin-left 0.3s ease;">
         <div class="profile-img-container" style="position: relative; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editFotoProfilModal" >
-            <img src="/images/profpic-icon.png" alt="Profile Picture"/>
+            <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" style="width: 250px"/>
             <div style="position: absolute; bottom: 0; right: 0; background-color= #FF700D;">
                 <i class="fas fa-plus-circle" style="font-size: 40px; color: black;"></i>
             </div>
@@ -104,37 +103,40 @@
             <div class="modal fade" id="editFotoProfilModal" tabindex="-1" aria-labelledby="editFotoProfilModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editFotoProfilModalLabel" style="font-weight: 800;">Ubah Foto Profil Anda</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" style="display: flex; align-items: center;">
-                            <div class="col-md-6">
-                                <div class="mb-3 col-md-6">
-                                    <label for="uploadFotoProfil" class="btn btn-primary text-left" style="width: 10rem; background-color: rgba(0,0,0,0); border: none; color: black; transition: transform 0.3s ease">
-                                        <img src="/images/charm_upload.png" style="height: 20px; width: 20px;">
-                                        Unggah Gambar
-                                        <input type="file" class="form-control d-none" id="uploadFotoProfil" accept="image/png, image/jpeg">
-                                    </label>
+                        <form enctype="multipart/form-data" method="POST" action="/profpicUpdate">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editFotoProfilModalLabel" style="font-weight: 800;">Ubah Foto Profil Anda</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" style="display: flex; align-items: center;">
+                                <div class="col-md-6">
+                                    <div class="mb-3 col-md-6">
+                                            <label for="newProfPic" class="btn btn-primary text-left" style="width: 10rem; background-color: rgba(0,0,0,0); border: none; color: black; transition: transform 0.3s ease">
+                                                <img src="/images/charm_upload.png" style="height: 20px; width: 20px;">
+                                                Unggah Gambar
+                                            </label>
+                                            <input type="file" class="form-control d-none" id="newProfPic" accept="image/png, image/jpeg, image/jpg" name="newProfPic">
+                                        </div>
+                                        <div class="mb-3 col-md-3">
+                                            <button type="button" class="btn btn-danger text-left" id="hapusFotoProfil" style="width: 10rem; background-color: rgba(0,0,0,0); border: none; color: black; transition: transform 0.3s ease">
+                                                <img src="/images/trash.png" style="height: 20px; width: 20px;">
+                                                Hapus Gambar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="justify-content: center;">
+                                        <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" style="max-width: 80%" id="imagePreview" />
+                                    </div>
                                 </div>
-                                <div class="mb-3 col-md-3">
-                                    <button type="button" class="btn btn-danger text-left" id="hapusFotoProfil" style="width: 10rem; background-color: rgba(0,0,0,0); border: none; color: black; transition: transform 0.3s ease">
-                                        <img src="/images/trash.png" style="height: 20px; width: 20px;">
-                                        Hapus Gambar
-                                    </button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
+                                    <button type="submit"  class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="justify-content: center;">
-                                <img src="/images/profpic-icon.png" alt="Profile Picture" />
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
-                            <button type="button" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
-                        </div>
+                        <form>
                     </div>
                 </div>
-            </div>
 
 
             <!-- Modal Edit Rekening -->
@@ -157,13 +159,17 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="atasNama">Atas Nama</label>
-                                    <input type="text" class="form-control" id="atasNama" placeholder="Masukkan Nama Pemilik Rekening">
+                                    <input type="text" class="form-control" id="atasNama" placeholder="Masukkan Nama Pemilik Rekening" wire:model="account_name"
+                                    @if(Auth::user()->account_name)
+                                        value="{{ Auth::user()->account_name }}"
+                                    @endif
+                                    >
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: ##FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
-                            <button type="button" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
+                            <button type="button" class="btn btn-primary" wire:click="update" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -173,62 +179,93 @@
             <div class="modal fade" id="editProfilModal" tabindex="-1" aria-labelledby="editProfilModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editProfilModalLabel" style="font-weight: 800;">Edit Profil</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row mb-3">
-                                    <div class="row-md-6">
-                                        <h6 style="font-weight: 600; font-size: 1.05rem;" class="text-center">Data Pribadi</h6>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="nama">Nama</label>
-                                                <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama" wire:model="full_name">
+                        <form enctype="multipart/form-data" method="POST" action="/profileUpdate">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editProfilModalLabel" style="font-weight: 800;">Edit Profil</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row mb-3">
+                                        <div class="row-md-6">
+                                            <h6 style="font-weight: 600; font-size: 1.05rem;" class="text-center">Data Pribadi</h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="full_name">Nama</label>
+                                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Masukkan Nama"
+                                                    @if(Auth::user()->full_name)
+                                                        value="{{ Auth::user()->full_name }}"
+                                                    @endif
+                                                    >
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email"
+                                                    @if(Auth::user()->email)
+                                                        value="{{ Auth::user()->email }}"
+                                                    @endif
+                                                    >
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="email">Email</label>
-                                                <input type="email" class="form-control" id="email" placeholder="Masukkan Email" wire:model="email">
+                                            <div class="row">
+                                                <div class="col-md-12 mt-3">
+                                                    <label for="phone">Nomor Telepon</label>
+                                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Masukkan Nomor Telepon"
+                                                    @if(Auth::user()->phone)
+                                                        value="{{ Auth::user()->phone }}"
+                                                    @endif
+                                                    >
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 mt-3">
-                                                <label for="nomorTelepon">Nomor Telepon</label>
-                                                <input type="tel" class="form-control" id="nomorTelepon" placeholder="Masukkan Nomor Telepon" wire:model="phone">
+                                        <div class="row-md-6 mt-5">
+                                            <h6 style="font-weight: 600; font-size: 1.05rem;" class="text-center">Data Perusahaan</h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="company_name">Nama Perusahaan</label>
+                                                    <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Masukkan Nama Perusahaan"
+                                                    @if(Auth::user()->company_name)
+                                                        value="{{ Auth::user()->company_name }}"
+                                                    @endif
+                                                    >
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="company_phone">Nomor Telepon Perusahaan</label>
+                                                    <input type="tel" class="form-control" id="company_phone" name="company_phone" placeholder="Masukkan Nomor Telepon Perusahaan"
+                                                    @if(Auth::user()->company_phone)
+                                                        value="{{ Auth::user()->company_phone }}"
+                                                    @endif
+                                                    >
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row-md-6 mt-5">
-                                        <h6 style="font-weight: 600; font-size: 1.05rem;" class="text-center">Data Perusahaan</h6>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="namaPerusahaan">Nama Perusahaan</label>
-                                                <input type="text" class="form-control" id="namaPerusahaan" placeholder="Masukkan Nama Perusahaan" wire:model="company_name">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="nomorTeleponPerusahaan">Nomor Telepon Perusahaan</label>
-                                                <input type="tel" class="form-control" id="nomorTeleponPerusahaan" placeholder="Masukkan Nomor Telepon Perusahaan" wire:model="company_phone">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="alamatPerusahaan">Alamat Perusahaan</label>
-                                                <input type="text" class="form-control" id="alamatPerusahaan" placeholder="Masukkan Alamat Perusahaan" wire:model="company_address">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="logoPerusahaan">Logo Perusahaan</label>
-                                                <input type="file" class="form-control" id="logoPerusahaan" accept="image/png, image/gif, image/jpeg, image.jpg" wire:model="company_logo_path">
+                                            <div class="row mt-3">
+                                                <div class="col-md-6">
+                                                    <label for="company_address">Alamat Perusahaan</label>
+                                                    <input type="text" class="form-control" id="company_address" name="company_address" placeholder="Masukkan Alamat Perusahaan"
+                                                    @if(Auth::user()->company_address)
+                                                        value="{{ Auth::user()->company_address }}"
+                                                    @endif
+                                                    >
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="company_logo_path">Logo Perusahaan</label>
+                                                    <input type="file" class="form-control" id="company_logo_path" name="company_logo_path" accept="image/png, image/gif, image/jpeg, image.jpg"
+                                                    @if(Auth::user()->company_logo_path)
+                                                        value="{{ Auth::user()->company_logo_path }}"
+                                                    @endif
+                                                    >
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
-                            <button type="button" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -242,33 +279,33 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form wire:submit.prevent="resetPassword">
                                 <div class="mb-3">
                                     <label for="passwordLama" class="form-label">Password Lama</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="passwordLama" placeholder="Masukkan Password Lama">
+                                        <input type="password" class="form-control" id="passwordLama" placeholder="Masukkan Password Lama" wire:model="passwordLama">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePasswordLama"><i class="bi bi-eye" id="eyeIconLama"></i></button>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="passwordBaru" class="form-label">Password Baru</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="passwordBaru" placeholder="Masukkan Password Baru">
+                                        <input type="password" class="form-control" id="passwordBaru" placeholder="Masukkan Password Baru" wire:model="passwordBaru">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePasswordBaru"><i class="bi bi-eye" id="eyeIconBaru"></i></button>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="retypePasswordBaru" class="form-label">Re-type Password Baru</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="retypePasswordBaru" placeholder="Masukkan Ulang Password Baru">
+                                        <input type="password" class="form-control" id="retypePasswordBaru" placeholder="Masukkan Ulang Password Baru" wire:model="retypePasswordBaru">
                                         <button class="btn btn-outline-secondary" type="button" id="toggleRetypePasswordBaru"><i class="bi bi-eye" id="eyeIconRetype"></i></button>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
+                                    <button type="submit" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
+                                </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
-                            <button type="button" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
                         </div>
                     </div>
                 </div>
