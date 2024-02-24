@@ -7,7 +7,6 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Models\Rab;
 
 class ProjectView extends Component
 {
@@ -18,12 +17,7 @@ class ProjectView extends Component
 
     public function seeRab($project_id, $project_name)
     {
-        // Kalau rab tidak kosong
-        if (count(Rab::where('project_id', $project_id)->get()) > 0) {
-            return redirect('/rab'. '/'. $project_id);
-        } else {
-            return redirect('/project' . '/' . $project_id);
-        }
+        return redirect('/rab'. '/'. $project_id);
     }
 
     public function createProject()
@@ -47,7 +41,7 @@ class ProjectView extends Component
         if ($this->status_select != 2) {
             $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->where('status', $this->status_select)->latest()->paginate(3);;
         } else {
-            $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->latest()->paginate(3);
+            $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->orderBy('status')->latest()->paginate(3);
         }
         return view('livewire.project-view')->with(['project' => $this->viewedProjects, 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
     }

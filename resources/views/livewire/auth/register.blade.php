@@ -21,13 +21,17 @@
                 <div class="form-group" style="flex: 1;">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" id="email" wire:model="email" style="border-color: #228B22" class="form-control" placeholder="Enter your email" >
-                    <!-- Error message for email -->
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <!-- Name input -->
                 <div class="form-group" style="flex: 1;">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name" wire:model="name" style="border-color: #228B22" class="form-control" placeholder="Enter your name">
-                    <!-- Error message for name -->
+                    <input type="text" id="name" wire:model="full_name" style="border-color: #228B22" class="form-control" placeholder="Enter your name">
+                    @error('full_name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <!-- Row for Phone and Password -->
@@ -36,26 +40,29 @@
                 <div class="form-group" style="flex: 1;">
                     <label for="phone" class="form-label">Phone Number</label>
                     <input type="tel" id="phone" wire:model="phone" style="border-color: #228B22" class="form-control" placeholder="08************">
-                    <!-- Error message for phone -->
+                    @error('phone')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <!-- Password input -->
                 <div class="form-group" style="flex: 1;">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" id="password" wire:model="password" style="border-color: #228B22" class="form-control" placeholder="Enter your password">
-                    <div class="form-text" style="font-weight:lighter; text-color:gray;  ">*Minimal 8 karakter</div>
-                    <!-- Error message for password -->
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <div class="form-text" style="font-weight:lighter; text-color:gray;  ">*Minimal 8 characters</div>
                 </div>
             </div>
             <!-- Submit button -->
             <div class="text-center" style="margin-top: 1rem;">
                 <button type="submit" class="btn btn-warning" style="background-color: #FFD700; border: none; padding: 0.5rem; width: 60%;">Daftar</button>
-        </div>
+            </div>
         </form>
         <div class="text-center" style="margin-top: 2rem;">
             <p>Sudah punya akun?
-                <a href="#" class="text-decoration-none font-weight-bold" style="color: #228B22;">Masuk</a>
+                <a href="{{ route('otp-verification') }}" class="text-decoration-none font-weight-bold" style="color: #228B22;">Masuk</a>
             </p>
         </div>
-
     </div>
 </div>

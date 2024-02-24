@@ -15,7 +15,7 @@ class ProjectCreate extends Component
             'project_name' => ['required'],
             'client_name' => ['required'],
             'project_address' => ['required'],
-            'budget' => ['required'],
+            'budget' => ['required', 'integer'],
         ];
     }
     public function create()
@@ -24,11 +24,11 @@ class ProjectCreate extends Component
         $user_id = Auth::user()->user_id;
         Project::create([
             'user_id' => $user_id, // Set the user_id explicitly
-            'project_name' => $this->project_name,
-            'client_name' => $this->client_name,
-            'project_address' => $this->project_address,
+            'project_name' => trim(strip_tags($this->project_name)),
+            'client_name' => trim(strip_tags($this->client_name)),
+            'project_address' => trim(strip_tags($this->project_address)),
             'status' => 0,
-            'budget' => $this->budget
+            'budget' => trim(strip_tags($this->budget))
         ]);
         
         $this->reset('project_name', 'client_name', 'project_address', 'budget');
