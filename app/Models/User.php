@@ -26,6 +26,9 @@ class User extends Authenticatable
         'company_address',
         'company_phone',
         'company_logo_path',
+        'bank_dest',
+        'account_number',
+        'profpic',
     ];
 
     protected $primaryKey = 'user_id';

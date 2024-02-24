@@ -29,6 +29,10 @@ Route::get('/home', function () {
     return view('homepage');
 });
 
+Route::get('/profile', function () {
+    return view('/profile');
+});
+
 Route::get('/project/{projectId}', function ($projectId) {
     return view('addrab', ['projectId' => $projectId]);
 });
