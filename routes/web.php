@@ -8,6 +8,8 @@ use App\Livewire\RabPage;
 use Illuminate\Http\Request;
 use App\Livewire\Auth\Register;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProfileController;
+
 use App\Livewire\AddRab;
 use App\Livewire\Profile;
 
@@ -55,6 +57,8 @@ Route::get('/user', function() {
 });
 
 Route::get('/userUpdate', Profile::class);
+Route::post('/profpicUpdate', [ProfileController::class, 'updateProfilePicture']);
+Route::post('/profileUpdate', [ProfileController::class, 'updateProfile']);
 
 /**
  * Display all RAB for the project
