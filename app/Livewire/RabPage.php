@@ -13,7 +13,7 @@ class RabPage extends Component
 
     public $project_id, $project_name;
     public $count = 1;
-    private $page_length = 2;
+    private $page_length = 5;
 
     public function mount ($project_id) {
         if (count(Rab::where('project_id', $project_id)->get()) === 0) {
@@ -25,7 +25,7 @@ class RabPage extends Component
 
     public function updatingPage($page)
     {
-        $count *= $page * $this->page_length;
+        $this->count = ($page-1) * $this->page_length + 1;
     }
 
     public function deleteRab($rab_id)
@@ -41,7 +41,7 @@ class RabPage extends Component
 
     public function render()
     {
-        return view('livewire.rab-page', ['rabList' => Rab::where('project_id', $this->project_id)->paginate($this->page_length),
+        return view('livewire.rab-page', ['rabList' => Rab::where('project_id', $this->project_id)->latest()->paginate($this->page_length),
                                         'project_name' => $this->project_name])
         ->extends('components.layouts.app')->section('content');
     }
