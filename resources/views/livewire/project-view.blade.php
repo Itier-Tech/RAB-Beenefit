@@ -17,7 +17,7 @@
         }
     </style>
     @if(count($project) > 0)
-        <h2 style="margin: 20px 0px 0px 0px;">RAB Berlangsung ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
+        <h2 style="margin: 20px 0px 0px 0px; font-weight:bold;">RAB Berlangsung ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
         <button wire:click="createProject" style="background-color: #FFD700; padding: 10px; border:none; margin: 10px 0px 0 0;">Buat Proyek Baru</button>
         <div style="display:flex; width:100%; margin:0;">
             <ul style="list-style-type: none; width:100%; padding-left:0; padding-right:0;">

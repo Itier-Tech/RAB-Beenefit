@@ -1,12 +1,12 @@
-<div style="width:100%; margin: auto;">
+<div style="width:80%; margin: auto;">
     <style>
         table {
             width: 100%; 
             margin: 10px auto; 
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 1em;
         }
         tr {
-            border: 0px 1px solid black;
             text-align: center; 
         }
         button {
@@ -15,15 +15,19 @@
             border: none;
         }
         th, td {
-            padding: 10px;
+            padding: 0.5em;
+        }
+        td {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
         }
         h1 {
             margin: 20px 0 0 20px;
         }
     </style>
-    <h1>RAB {{ $project_name }}</h1>
-    <button wire:click='addRab' style= "margin: 10px 0 0 20px;">Buat RAB Baru +</button>
-    <a href="#" style="float:right; margin: 0 20px 0 0;">More details</a>
+    <h2 style="margin: 20px 0px 0px 0px; font-weight:bold;">RAB {{ $project_name }}</h2>
+    <button wire:click='addRab' style="background-color: #FFD700; padding: 10px; border:none; margin: 10px 0px 0 0;">Buat RAB Baru +</button>
+    <a href="#" style="float:right; margin: 0;">More details</a>
     <table>
         <tr style="background-color:#FFD700;">
             <th>No</th>
@@ -33,7 +37,7 @@
             <th>Aksi</th>
         </tr>
         @foreach ($rabList as $rab)
-            <tr wire:key="{{ $rab->rab_id }}" style="border-top: 1pt solid black; border-bottom: 1pt solid black;">
+            <tr wire:key="{{ $rab->rab_id }}" style="">
                 <td>{{ $count++ }}</td>
                 <td>{{ $rab->created_at }} WIB</td>
                 <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
