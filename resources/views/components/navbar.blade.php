@@ -20,13 +20,19 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown">
-                        <img src="/images/profpic-icon.png" alt="Profile Picture" class="rounded-circle profile-picture">
+                        <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" class="rounded-circle profile-picture">
                         <span style="margin-left: 6px; font-weight: 700; cursor: default;">{{ Auth::user()->full_name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/userUpdate">Profile</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout">Logout</a>
+                        <!-- Logout Form -->
+                        <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
                     </div>
                 </li>
             </ul>

@@ -11,26 +11,64 @@ class ProfileController extends Controller
     /**
      * Update the authenticated user's profile.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function updateProfilePicture(Request $request)
     {
+        // dd($request);
         $request->validate([
-            'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:20',
-            'company_name' => 'nullable|string|max:255',
-            'company_address' => 'nullable|string|max:255',
-            'company_phone' => 'nullable|string|max:20',
-            'company_logo_path' => 'nullable|string|max:255',
-            'bank_dest' => 'nullable|string|max:255',
-            'account_number' => 'nullable|string|max:50',
-            'profpic' => 'nullable|string|max:255',
+            'newProfPic' => 'image',
         ]);
 
+        if ($request->hasFile('newProfPic')) {
+            $imageName = time() . '.' . $request->file('newProfPic')->extension();
+            $request->file('newProfPic')->storeAs('public', $imageName);
+
+            $user = Auth::user();
+            $user->update(['profpic' => $imageName]);
+
+            session()->flash('message', 'Profile picture updated successfully.');
+        } else {
+            session()->flash('message', 'No image selected.');
+        }
+
+        return redirect('/userUpdate');
+    }
+
+    public function updateProfile(Request $request)
+    {
         $user = Auth::user();
-        $user->update($request->all());
-        return response()->json(['message' => 'Profile updated successfully'], 200);
+
+        $request->validate([
+            'full_name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'company_name' => 'nullable',
+            'company_address' => 'nullable',
+            'company_phone' => 'nullable',
+            'company_logo_path' => 'nullable|image',
+        ]);
+
+        $userData = [
+            'full_name' => $request->input('full_name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'company_name' => $request->input('company_name'),
+            'company_address' => $request->input('company_address'),
+            'company_phone' => $request->input('company_phone'),
+        ];
+
+        if ($request->hasFile('company_logo_path')) {
+            $image = $request->file('company_logo_path');
+            $imageName = time() . '.' . $image->extension();
+
+            $image->storeAs('public', $imageName);
+            $userData['company_logo_path'] = $imageName;
+        }
+
+        $user->update($userData);
+        session()->flash('message', 'Profile updated successfully.');
+        return redirect('/userUpdate');
     }
 }

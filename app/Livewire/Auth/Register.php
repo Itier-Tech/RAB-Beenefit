@@ -27,6 +27,7 @@ class Register extends Component
         $user = User::create($validatedData);
         session(['user_id' => $user->user_id]);
         // Auth::login($user, true);
+
         // return redirect()->to('/otp-verification');
         return redirect("/otp-verification/");
     }
