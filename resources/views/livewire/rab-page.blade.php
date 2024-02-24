@@ -27,7 +27,7 @@
     </style>
     <h2 style="margin: 20px 0px 0px 0px; font-weight:bold;">RAB {{ $project_name }}</h2>
     <button wire:click='addRab' style="background-color: #FFD700; padding: 10px; border:none; margin: 10px 0px 0 0;">Buat RAB Baru +</button>
-    <a href="#" style="float:right; margin: 0;">More details</a>
+    <a href="#" style="float:right; margin: 0;">Lihat detail</a>
     <table>
         <tr style="background-color:#FFD700;">
             <th>No</th>
