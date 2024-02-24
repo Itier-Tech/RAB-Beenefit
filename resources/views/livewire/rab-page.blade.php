@@ -43,8 +43,8 @@
                 <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                 <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                 <td>
-                    <button style="background-color:orange; border-radius:25px; padding: 5px;">Lihat Detail</button>
-                    <button wire:click="deleteRab({{ $rab->rab_id }})" style="background-color:red; border-radius:25px; padding: 5px;">Hapus</button>
+                    <button style="background-color:#FFA07A; border-radius:25px; padding: 3px 10px; margin-right: 5px;">Lihat Detail</button>
+                    <button wire:click="deleteRab({{ $rab->rab_id }})" style="background:none; border-radius:25px;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
                 </td>
             </tr>
         @endforeach
