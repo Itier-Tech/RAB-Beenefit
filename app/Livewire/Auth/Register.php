@@ -13,22 +13,12 @@ class Register extends Component
     public $password;
     public $phone;
 
-    // public function rules()
-    // {
-    //     return [
-    //         'email' => ['required', 'email', 'unique:users'],
-    //         'name' => ['required'],
-    //         'password' => ['required'],
-    //         'phone' => ['required'],
-    //     ];
-    // }
-
     public function register()
     {
         $validatedData = $this->validate([
             'full_name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'email' => 'required|email|unique:users|string',
+            'password' => 'required|min:8|string',
             'phone' => 'required|string',
         ]);
 
@@ -37,7 +27,8 @@ class Register extends Component
         $user = User::create($validatedData);
         session(['user_id' => $user->user_id]);
         // Auth::login($user, true);
-        return redirect()->to('/otp-verification');
+        // return redirect()->to('/otp-verification');
+        return redirect("/otp-verification/");
     }
 
     public function render()

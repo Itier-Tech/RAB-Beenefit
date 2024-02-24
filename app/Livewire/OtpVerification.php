@@ -5,14 +5,16 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
-use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Cache;
+use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Mail;
 
 class OtpVerification extends Component
 {
     public $phone;
     public $otp = ['', '', '', ''];
     public $timer = null;
+    public $userEmail;
 
     protected $listeners = ['resendOtp' => 'resendOtp'];
 
@@ -26,15 +28,17 @@ class OtpVerification extends Component
         }
 
         $this->phone = $user->phone;
+        $this->userEmail = $user->email;
         $this->setOtp();
     }
 
     private function setOtp()
     {
         $otpCode = rand(1000, 9999);
-        Cache::put('otp_'.$this->phone, $otpCode, 300);
-        $this->sendOtp($otpCode);
+        Cache::put('otp_'.$this->phone, $otpCode, 300); // Store the OTP in cache for 5 minutes
+        Mail::to($this->userEmail)->send(new OtpMail($otpCode));
         $this->resetTimer();
+        return redirect("/");
     }
 
     public function verifyOtp()
@@ -45,8 +49,8 @@ class OtpVerification extends Component
 
         if ($inputOtp === $storedOtp) {
             // OTP valid
-            edirect::to('/register');
-            Cache::forget('otp_'.$this->phone); // Hapus OTP dari cache setelah berhasil diverifikasi
+            Redirect::to('/');
+            Cache::forget('otp_'.$this->phone);
         } else {
             // OTP tidak valid
             $this->addError('otp', 'The provided OTP is incorrect.');
@@ -57,29 +61,12 @@ class OtpVerification extends Component
 
     public function resendOtp()
     {
-        // Logic to resend the OTP
-        // $this->sendOtp();
-
-        // $this->resetTimer();
-        // $this->dispatchBrowserEvent('resetTimer', ['duration' => 60]);
         $this->setOtp();
-    }
-
-    private function sendOtp($otp)
-    {
-        // Kirim OTP ke nomor telepon
-        // Menggunakan Twilio SDK
-        $twilio = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
-        $twilio->messages->create($this->phone, [
-            'from' => env('TWILIO_FROM'),
-            'body' => "Your OTP is: {$otp}"
-        ]);
     }
 
     public function resetTimer()
     {
         $this->timer = 60;
-        $this->dispatchBrowserEvent('resetTimer', ['duration' => 60]);
     }
 
     public function render()

@@ -34,6 +34,10 @@ Route::get('/profile', function () {
     return view('/profile');
 });
 
+Route::get('/otp-verification', function() {
+    return view('livewire.otp-verification');
+}) -> name('otp-verification');
+
 Route::get('/project/{projectId}', AddRab::class);
 
 Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
@@ -89,5 +93,5 @@ Route::delete('/project/{project_id}', function ($project_id) {
 
 
 
-oute::post('/rab/{rab_id}/item/add', [RabItemController::class, 'addItem'])->name('rab.item.add');
+Route::post('/rab/{rab_id}/item/add', [RabItemController::class, 'addItem'])->name('rab.item.add');
 Route::post('/rab/{rab_id}/discount', [RabController::class, 'applyDiscount'])->name('rab.applyDiscount');
