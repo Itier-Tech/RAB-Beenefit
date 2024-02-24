@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 
 use App\Livewire\AddRab;
 use App\Livewire\Profile;
+use App\Livewire\RabFinal;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +96,7 @@ Route::delete('/project/{project_id}', function ($project_id) {
     //
 });
 
-
+Route::get('/rabDownload', RabFinal::class);
 
 Route::post('/rab/{rab_id}/item/add', [RabItemController::class, 'addItem'])->name('rab.item.add');
 Route::post('/rab/{rab_id}/discount', [RabController::class, 'applyDiscount'])->name('rab.applyDiscount');
