@@ -34,6 +34,11 @@ class RabPage extends Component
         return redirect(request()->header('Referer'));
     }
 
+    public function addRab() 
+    {
+        return redirect('/project' . '/' . $this->project_id);
+    }
+
     public function render()
     {
         return view('livewire.rab-page', ['rabList' => Rab::where('project_id', $this->project_id)->paginate($this->page_length),
