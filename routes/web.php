@@ -10,6 +10,7 @@ use App\Livewire\Auth\Register;
 use App\Http\Controllers\Auth\LoginController;
 use App\Livewire\AddRab;
 use App\Livewire\Profile;
+use App\Livewire\RabDetail;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,9 +69,7 @@ Route::get('/rab/{project_id}', RabPage::class);
 /**
  * Display rab with the inputted id
  */
-Route::get('/rab/{rab_id}', function ($rab_id) {
-    //
-});
+Route::get('/rabDetail/{rab_id}', RabDetail::class);
 
 /**
  * Add A New RAB for the project
