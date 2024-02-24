@@ -35,7 +35,7 @@
         @foreach ($rabList as $rab)
             <tr wire:key="{{ $rab->rab_id }}" style="border-top: 1pt solid black; border-bottom: 1pt solid black;">
                 <td>{{ $count++ }}</td>
-                <td>{{ $rab->created_at }}</td>
+                <td>{{ $rab->created_at }} WIB</td>
                 <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                 <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                 <td>
