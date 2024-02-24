@@ -25,7 +25,10 @@ class UserFactory extends Factory
             'company_name' => fake()->company(),
             'company_address' => fake()->address(),
             'company_phone' => fake()->phoneNumber(),
-            'company_logo_path' => fake()->imageUrl(), // You might need to adjust this based on your logic for storing images
+            'company_logo_path' => fake()->imageUrl(),
+            'bank_dest' => fake()->company(),
+            'account_number' => fake()->phoneNumber(),
+            'profpic' => fake()->imageUrl(),
             'created_at' => now(),
             'updated_at' => now(),
         ];

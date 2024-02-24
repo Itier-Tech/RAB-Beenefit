@@ -1,15 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/navbar.css', 'resources/css/sidebar.css', 'resources/css/addrab.css'])
-    @livewireStyles
-    <title>Tambah RAB</title>
+<div style="display: flex; flex-direction: column;">
+    <style>
+        .rab-container {
+            transition: margin-left 0.3s ease;
+        }
 
-</head>
-<body style="background-color: #E9E9E9; display: flex; flex-direction: column;">
+        .progres-section {
+            width: 65rem;
+            height: 150px;
+            background-color: white;
+            border-radius: 20px;
+            align-items: center!important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            font-weight: bold;
+        }
+
+        .rab-info {
+            display: flex;
+            justify-content: space-between;
+            width: 96%;
+        }
+        .rab-info .left {
+            text-align: left;
+        }
+        .rab-info .right {
+            text-align: right;
+        }
+
+        .progress-bar {
+            background-color: #228B22;
+        }
+
+        .custom-btn {
+            background-color: #FFD700;
+            border-color: #FFD700;
+            color: black;
+            width: 16rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .custom-btn:hover {
+            transform: scale(1.1);
+            background-color: #FFD700;
+            border-color: #FFD700;
+            color: black;
+        }
+
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var dropdownToggle = document.getElementById("navbarDropdown");
@@ -52,9 +92,6 @@
         }
     </script>
 
-    <x-navbar/>
-    <x-sidebar/>
-
     <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
         <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
             <div class="rab-info">
@@ -82,7 +119,7 @@
         </div>
         <div class="m-1">Belum ada RAB. Buat RAB kamu disini!</div>
         <div class="m-3">
-            <form action="/rab/{{ $projectId }}" method="POST">
+            <form wire:submit="create">
                 @csrf
                 <button type="submit" class="btn btn-primary custom-btn">
                     Buat RAB
@@ -90,6 +127,4 @@
             </form>
         </div>
     </div>
-
-</body>
-</html>
+</div>

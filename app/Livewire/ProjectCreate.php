@@ -24,10 +24,11 @@ class ProjectCreate extends Component
         $user_id = Auth::user()->user_id;
         Project::create([
             'user_id' => $user_id, // Set the user_id explicitly
-            'project_name' => $this->project_name,
-            'client_name' => $this->client_name,
-            'project_address' => $this->project_address,
-            'budget' => $this->budget
+            'project_name' => trim(strip_tags($this->project_name)),
+            'client_name' => trim(strip_tags($this->client_name)),
+            'project_address' => trim(strip_tags($this->project_address)),
+            'status' => 0,
+            'budget' => trim(strip_tags($this->budget))
         ]);
         
         $this->reset('project_name', 'client_name', 'project_address', 'budget');

@@ -1,4 +1,4 @@
-<div style="width: 100%; margin:auto; text-align: center;">
+<div style="width: 100%; margin:2% auto; text-align: center;">
     <style>
         @media (max-width: 768px) {
             .flex-row-responsive {
