@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('company_logo_path')->nullable();
             $table->string('bank_dest')->nullable();
             $table->string('account_number')->nullable();
+            $table->string('profpic')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
