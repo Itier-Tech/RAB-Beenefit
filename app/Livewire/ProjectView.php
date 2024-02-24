@@ -41,7 +41,7 @@ class ProjectView extends Component
         if ($this->status_select != 2) {
             $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->where('status', $this->status_select)->latest()->paginate(3);;
         } else {
-            $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->latest()->paginate(3);
+            $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->orderBy('status')->latest()->paginate(3);
         }
         return view('livewire.project-view')->with(['project' => $this->viewedProjects, 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
     }
