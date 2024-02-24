@@ -15,6 +15,7 @@ class Project extends Model
             'project_address',
             'project_name',
             'budget',
+            'status',
     ];
 
     public function user() {

@@ -17,7 +17,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/navbar.css', 'resources/css/sidebar.css'])
     @livewireStyles
 </head>
-<body>
+<body style="background-color: #E9E9E9;">
 <script>
         document.addEventListener("DOMContentLoaded", function() {
             var dropdownToggle = document.getElementById("navbarDropdown");
