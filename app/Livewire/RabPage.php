@@ -41,7 +41,7 @@ class RabPage extends Component
 
     public function render()
     {
-        return view('livewire.rab-page', ['rabList' => Rab::where('project_id', $this->project_id)->paginate($this->page_length),
+        return view('livewire.rab-page', ['rabList' => Rab::where('project_id', $this->project_id)->latest()->paginate($this->page_length),
                                         'project_name' => $this->project_name])
         ->extends('components.layouts.app')->section('content');
     }
