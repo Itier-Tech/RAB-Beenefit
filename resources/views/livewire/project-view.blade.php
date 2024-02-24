@@ -28,7 +28,7 @@
                                 <h3 style="display:inline-block; margin-right:10px; color: green;">{{ $p->project_name }}</h3>
                                 <button wire:click="changeProjectStatus({{ $p }})" style="background-color:{{ $p->status === 0 ? "#FFA07A" : "#ADD8E6"}}">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
                             </div>
-                            <img src="{{ asset('clock icon.png') }}" style="color: grey; width:15px; height:15px; display:inline;" />
+                            <img src="{{ asset('images/clock icon.png') }}" style="color: grey; width:15px; height:15px; display:inline;" />
 
                             <p style="color: grey; display: inline-block; margin:5px 0;">{{ $p->created_at->format('d-m-Y H:i:s') }} WIB</p>
                             <p style="font-size:16px; margin-bottom:5px;">{{ $p->client_name }} : Rp. {{ number_format($p->budget , 0, ',', '.') }}</p>
@@ -58,19 +58,19 @@
         <div style="display:flex; width:100%;">
             @if($status_select == 2)
                 <div style="margin: 20px auto;text-align: center; flex-grow:1;">
-                    <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
+                    <img src="{{ asset('images/adding-project.png') }}" style="height: 100px; width: 100px;"></img>
                     <p>Ayo mulai RAB proyek baru !</p>
                     <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
                 </div>
             @elseif($status_select == 1)
                 <div style="margin: 20px auto;text-align: center; flex-grow:1;">
-                    <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
+                    <img src="{{ asset('images/adding-project.png') }}" style="height: 100px; width: 100px;"></img>
                     <p>Belum ada proyek dalam tahap finalisasi</p>
                     <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
                 </div>
             @else
                 <div style="margin: 20px auto;text-align: center; flex-grow:1;">
-                    <img src="{{ asset('clock icon.png') }}" style="height: 100px; width: 100px;"></img>
+                    <img src="{{ asset('images/adding-project.png') }}" style="height: 100px; width: 100px;"></img>
                     <p>Semua proyek sedang dalam tahap finalisasi</p>
                     <button wire:click="createProject" style="background-color:#FFD700; padding:10px; border:none; width:30%;">Tambah Proyek</button>
                 </div>
