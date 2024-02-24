@@ -15,7 +15,7 @@ class ProjectCreate extends Component
             'project_name' => ['required'],
             'client_name' => ['required'],
             'project_address' => ['required'],
-            'budget' => ['required'],
+            'budget' => ['required', 'integer'],
         ];
     }
     public function create()
