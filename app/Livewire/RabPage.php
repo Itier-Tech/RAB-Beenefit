@@ -16,6 +16,9 @@ class RabPage extends Component
     private $page_length = 2;
 
     public function mount ($project_id) {
+        if (count(Rab::where('project_id', $project_id)->get()) === 0) {
+            return redirect('/project' . '/' . $project_id);
+        }
         $this->project_id = $project_id;
         $this->project_name = Project::find($this->project_id)->project_name;
     }
