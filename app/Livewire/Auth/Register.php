@@ -33,7 +33,7 @@ class Register extends Component
             'phone' => $this->phone,
         ]);
         // Auth::login($user, true);
-        return redirect()->to('/home');
+        return redirect()->to('/project');
     }
 
     public function render()
