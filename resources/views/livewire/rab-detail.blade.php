@@ -94,6 +94,16 @@
         }
 
     </style>
+    {{-- <script>
+        function calculateTotal($item_id, $item_count, $item_discount, $sell_price)
+        {
+            $discountAmount = ($sell_price * $item_discount) / 100;
+            $discountedPrice = $sell_price - $discountAmount;
+            $total = $discountedPrice * $item_count;
+
+            return $total;
+        }
+    </script> --}}
     <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
         <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
             <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
@@ -132,65 +142,40 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Category Row -->
-                <tr>
-                    <td colspan="8" style="text-align: left; font-size: 18px; background-color: #E7F2E6;">Kategori: Tanaman</td>
-                </tr>
-                <!-- Item Row -->
-                <tr>
-                    <td>Adam Hawa</td>
-                    <td>m2</td>
-                    <td>Rp12,000</td>
-                    <td>Rp15,000</td>
-                    <td>
-                        <button class="quantity-modifier decrement" onclick="decrementVolume('volume1')">-</button>
-                        <span id="volume1">1</span>
-                        <button class="quantity-modifier increment" onclick="incrementVolume('volume1')">+</button>
-                    </td>
+                @foreach($item_list->groupBy('category') as $category => $items)
+                    <!-- Category Row -->
+                    <tr>
+                        <td colspan="8" style="text-align: left; font-size: 18px; background-color: #E7F2E6;">Kategori: {{ $category }}</td>
+                    </tr>
+                    <!-- Item Row -->
+                    @foreach($items as $item)
+                        <tr>
+                            <td>{{ $item->item_name }}</td>
+                            <td>{{ $item->unit }}</td>
+                            <td>Rp{{ number_format($item->buy_price, 0, ',', '.') }}</td>
+                            <td>Rp{{ number_format($item->sell_price, 0, ',', '.') }}</td>
+                            <td>
+                                <button class="quantity-modifier decrement" wire:click="decrementVolume({{ $item->item_id }})">-</button>
+                                <span id="volume{{ $item->item_id }}">1</span>
+                                <button class="quantity-modifier increment" wire:click="incrementVolume({{ $item->item_id }})">+</button>
+                            </td>
 
-                    <td>
-                        <button class="quantity-modifier" onclick="decrementDiscount('discount1')">-</button>
-                        <span id="discount1">10</span>
-                        <button class="quantity-modifier" onclick="incrementDiscount('discount1')">+</button>
-                    </td>
-                    <td>Rp13,500</td>
-                    <td>
-                        <button style="background:none; border-radius:25px;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Adam Hawa</td>
-                    <td>m2</td>
-                    <td>Rp12,000</td>
-                    <td>Rp15,000</td>
-                    <td>
-                        <button class="quantity-modifier" onclick="decrementVolume('volume1')">-</button>
-                        <span id="volume1">1</span>
-                        <button class="quantity-modifier" onclick="incrementVolume('volume1')">+</button>
-                    </td>
-                    <td>
-                        <button class="quantity-modifier" onclick="decrementDiscount('discount1')">-</button>
-                        <span id="discount1">10</span>
-                        <button class="quantity-modifier" onclick="incrementDiscount('discount1')">+</button>
-                    </td>
-                    <td>Rp13,500</td>
-                    <td>
-                        <button style="background:none; border-radius:25px;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
-                    </td>
-                </tr>
+                            <td>
+                                <button class="quantity-modifier" wire:click="decrementDiscount({{ $item->item_id }})">-</button>
+                                <span id="discount{{ $item->item_id }}">10</span>
+                                <button class="quantity-modifier" wire:click="incrementDiscount({{ $item->item_id }})">+</button>
+                            </td>
+                            {{-- <td>>Rp{{ number_format(calculateTotal($item->item_id, 1, 10, $item->sell_price), 0, ',', '.') }}</td> --}}
+                            <td>Rp 15000</td>
+                            <td>
+                                <button style="background:none; border-radius:25px;" wire:click="deleteItem({{ $item->item_id }})">
+                                    <img src="{{ asset('images/trash-icon.svg') }}">
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endforeach
             </tbody>
-            {{-- @foreach ($itemList as $item)
-                <tr wire:key="{{ $rab->rab_id }}" style="border-top: 1pt solid black; border-bottom: 1pt solid black;">
-                    <td>{{ $count++ }}</td>
-                    <td>{{ $rab->created_at }}</td>
-                    <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
-                    <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
-                    <td>
-                        <button style="background-color:orange; border-radius:25px; padding: 5px;">Lihat Detail</button>
-                        <button wire:click="deleteRab({{ $rab->rab_id }})" style="background-color:red; border-radius:25px; padding: 5px;">Hapus</button>
-                    </td>
-                </tr>
-            @endforeach --}}
         </table>
         <div style="display: flex; justify-content: flex-end; width: 65rem; align-items: end; ">
             <button style="background:none; border:none; border-radius:25px;">
