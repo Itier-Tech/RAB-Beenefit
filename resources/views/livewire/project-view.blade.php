@@ -15,9 +15,8 @@
         }
         .add-proj-cont {
             margin: 12vh auto;
-            text-align: center; 
-            flex-grow:1; 
-            width:100%;
+            text-align:center; 
+            width: 79%;
         }
         .flex-container {
             display:flex;
@@ -39,9 +38,9 @@
             }
         }
     </style>
+    <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB Berlangsung ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
+    <button wire:click="createProject" class="btn btn-warning" style="background-color: #FFD700; padding: 0.6rem; border:none; margin: 2vh 0 1vh 0;">Buat Proyek Baru</button>
     @if(count($project) > 0)
-        <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB Berlangsung ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
-        <button wire:click="createProject" class="btn btn-warning" style="background-color: #FFD700; padding: 0.6rem; border:none; margin: 2vh 0 1vh 0;">Buat Proyek Baru</button>
         <div class="flex-container">
             <ul style="list-style-type: none; width:100%; padding-left:0; padding-right:0;">
                 @foreach ($project as $p)
@@ -84,7 +83,7 @@
         </div>
     @else
         @if($project->total() === 0)
-            <div class="flex-container" style="align-items:center; justify-content:center; margin: 10.5% 0;">
+            <div class="flex-container">
                     <div class="add-proj-cont">
                         <img src="{{ asset('images/adding-project.png') }}" class="add-proj-img"></img>
                         @if($status_select == 2)
@@ -99,8 +98,9 @@
                 @if($status_select < 2)
                     <!-- Filter -->
                     <div class="project-list filter">
-                        <h4 style="color:green;">Filter</h4>
-                        <p style="color:green; margin-bottom:0;">Status pekerjaan</p>
+                        <img src="{{ asset("images/filter.svg") }}" style="vertical-align: text-top; display:inline-block; height:0.9rem; margin: 0 0.3rem 0 0;">
+                        <h5 style="display:inline-block; color:green; margin:0; font-weight:bold;">Filter</h5>
+                        <p style="color:green; margin-bottom:0; font-weight:bold;">Status pekerjaan</p>
                         <form wire:submit.prevent="$refresh">
                             <input type="radio" style="margin-right:0.5rem;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
                             <input type="radio" style="margin-right:0.5rem;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
