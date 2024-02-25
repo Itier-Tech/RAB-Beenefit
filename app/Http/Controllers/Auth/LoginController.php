@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/project';
 
     /**
      * Create a new controller instance.
@@ -46,19 +46,18 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required',
-            // $remember
         ]);
 
         $password = $request->input('password');
         $credentials['password'] = $password;
+        $remember = $request->input('remember');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             return redirect()->intended('/project');
         }
 
-        dd('eror');
         return back()->with('loginError', 'Login failed!');
     }
 
