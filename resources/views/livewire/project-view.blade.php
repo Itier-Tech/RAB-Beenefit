@@ -34,7 +34,7 @@
                                 <h3 style="display:inline-block; color: green; margin:0;">{{ $p->project_name }}</h3>
                                 <button class="btn" wire:click="changeProjectStatus({{ $p }})" style="float:right; background-color:{{ $p->status === 0 ? "#FFA07A" : "#ADD8E6"}}">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
                             </div>
-                            <img src="{{ asset('images/clock icon.png') }}" style="color: grey; width:1rem; display:inline;" />
+                            <img src="{{ asset('images/clock icon.png') }}" style="vertical-align: sub; color: grey; width:1rem; display:inline; margin-right:0.15rem;" />
 
                             <p style="color: grey; display: inline-block; margin:0.5rem 0;">{{ $p->created_at->format('d-m-Y H:i:s') }} WIB</p>
                             <p style="font-size: 1.1rem; margin-bottom:0.5rem;">{{ $p->client_name }} ; Rp. {{ number_format($p->budget , 0, ',', '.') }}</p>
