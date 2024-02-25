@@ -83,34 +83,38 @@
             </div>
         </div>
     @else
-        <div class="flex-container" style="align-items:center; justify-content:center; margin: 10.5% 0;">
-                <div class="add-proj-cont">
-                    <img src="{{ asset('images/adding-project.png') }}" class="add-proj-img"></img>
-                    @if($status_select == 2)
-                        <p>Ayo mulai RAB proyek baru !</p>
-                    @elseif($status_select == 1)
-                        <p>Belum ada proyek dalam tahap finalisasi</p>
-                    @else
-                        <p>Semua proyek sedang dalam tahap finalisasi</p>
-                    @endif
-                    <button wire:click="createProject" class="btn btn-warning" style="background-color:#FFD700; padding:0.8rem; border:none; width:30%;">Tambah Proyek</button>
-                </div>
-            @if($status_select < 2)
-                <!-- Filter -->
-                <div class="project-list filter">
-                    <h4 style="color:green;">Filter</h4>
-                    <p style="color:green; margin-bottom:0;">Status pekerjaan</p>
-                    <form wire:submit.prevent="$refresh">
-                        <input type="radio" style="margin-right:0.5rem;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
-                        <input type="radio" style="margin-right:0.5rem;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
-                        <div style="margin:auto; width:100%; text-align:center;">
-                            <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:0.5rem;" wire:click="resetSelection">Hapus</button>
-                            <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
-                        </div>
-                    </form>
-                </div>
-            @endif
-        </div>
+        @if($project->total() === 0)
+            <div class="flex-container" style="align-items:center; justify-content:center; margin: 10.5% 0;">
+                    <div class="add-proj-cont">
+                        <img src="{{ asset('images/adding-project.png') }}" class="add-proj-img"></img>
+                        @if($status_select == 2)
+                            <p>Ayo mulai RAB proyek baru !</p>
+                        @elseif($status_select == 1)
+                            <p>Belum ada proyek dalam tahap finalisasi</p>
+                        @else
+                            <p>Semua proyek sedang dalam tahap finalisasi</p>
+                        @endif
+                        <button wire:click="createProject" class="btn btn-warning" style="background-color:#FFD700; padding:0.8rem; border:none; width:30%;">Tambah Proyek</button>
+                    </div>
+                @if($status_select < 2)
+                    <!-- Filter -->
+                    <div class="project-list filter">
+                        <h4 style="color:green;">Filter</h4>
+                        <p style="color:green; margin-bottom:0;">Status pekerjaan</p>
+                        <form wire:submit.prevent="$refresh">
+                            <input type="radio" style="margin-right:0.5rem;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
+                            <input type="radio" style="margin-right:0.5rem;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
+                            <div style="margin:auto; width:100%; text-align:center;">
+                                <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:0.5rem;" wire:click="resetSelection">Hapus</button>
+                                <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
+                            </div>
+                        </form>
+                    </div>
+                @endif
+            </div>
+        @else
+            <div wire:init="askPrevPage"></div>
+        @endif
     @endif
     <div style="width: 60%; margin:auto;">
         {{ $project->links('project-pagination-links') }}
