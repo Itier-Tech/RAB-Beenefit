@@ -2,7 +2,7 @@
     <style>
         table {
             width: 100%; 
-            margin: 10px auto; 
+            margin: 3vh auto; 
             border-collapse: separate;
             border-spacing: 0 1em;
         }
@@ -11,22 +11,19 @@
         }
         button {
             background-color: #FFD700;
-            padding: 10px;
+            padding: 0.5rem;
             border: none;
         }
         th, td {
-            padding: 0.5em;
+            padding: 0.5rem;
         }
         td {
             border-top: 1px solid black;
             border-bottom: 1px solid black;
         }
-        h1 {
-            margin: 20px 0 0 20px;
-        }
     </style>
-    <h2 style="margin: 20px 0px 0px 0px; font-weight:bold;">RAB {{ $project_name }}</h2>
-    <button wire:click='addRab' style="background-color: #FFD700; padding: 8px 10px; border:none; margin: 10px 0px 0 0;">Buat RAB Baru +</button>
+    <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB {{ $project_name }}</h2>
+    <button class="btn" wire:click='addRab' style="background-color: #FFD700; padding: 0.5rem 0.8rem; border:none; margin: 3vh 0 0 0;">Buat RAB Baru +</button>
     <a href="#" style="float:right; margin: 0; color:green;">Lihat detail</a>
     <table>
         <tr style="background-color:#FFD700;">
@@ -43,8 +40,8 @@
                 <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                 <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                 <td>
-                    <button style="background-color:#FFA07A; border-radius:25px; padding: 3px 10px; margin-right: 5px;">Lihat Detail</button>
-                    <button wire:click="deleteRab({{ $rab->rab_id }})" style="background:none; border-radius:25px;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
+                    <button class="btn" style="background-color:#FFA07A; border-radius:25px; padding: 0.1rem 0.6rem; margin-right: 0.3rem;">Lihat Detail</button>
+                    <button class="btn" wire:click="deleteRab({{ $rab->rab_id }})" style="background:none;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
                 </td>
             </tr>
         @endforeach
