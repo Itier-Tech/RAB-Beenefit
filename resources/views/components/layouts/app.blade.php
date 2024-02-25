@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/navbar.css', 'resources/css/sidebar.css'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navbar.css', 'resources/css/sidebar.css'])
     @livewireStyles
 </head>
 <body style="background-color: #E9E9E9;">

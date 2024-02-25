@@ -20,9 +20,6 @@
         .form-control:focus {
             border-color: #28a745 !important;
         }
-        .error-msg {
-            color:red;
-        }
     </style>
     <h1>Proyek Baru</h1>
     <p>Ayo masukkan detail informasi mengenai proyek barumu! Nama proyek, nama client, alamat, budget.</p>
