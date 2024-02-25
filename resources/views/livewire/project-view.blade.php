@@ -50,7 +50,7 @@
             </ul>
             <!-- Filter -->
             <div class="project-list" style="align-self:flex-start; width:25%; margin-left:0;">
-                <h4 style="color:green; margin:0;">Filter</h4>
+                <img src="{{ asset("images/filter.svg") }}" style="vertical-align: text-top; display:inline-block; height:0.9rem; margin: 0 0.3rem 0 0;"><h4 style="display:inline-block; color:green; margin:0;">Filter</h4>
                 <p style="color:green; margin-bottom:0;">Status pekerjaan</p>
                 <form wire:submit.prevent="$refresh">
                     <input type="radio" style="margin-right:0.5rem;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
