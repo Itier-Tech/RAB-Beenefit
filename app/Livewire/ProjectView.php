@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Crypt;
 
 class ProjectView extends Component
 {
@@ -14,9 +14,10 @@ class ProjectView extends Component
 
     public $status_select = 2;
 
-    public function seeRab($project_id, $project_name)
+    public function seeRab($project_id)
     {
-        return redirect('/rab'. '/'. $project_id);
+        // Send project id through session and encrypt it
+        return redirect('/rab')->with('project_id', Crypt::encrypt($project_id));
     }
 
     public function createProject()

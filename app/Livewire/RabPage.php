@@ -5,7 +5,9 @@ namespace App\Livewire;
 use App\Models\Rab;
 use App\Models\Project;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Crypt;
 
 class RabPage extends Component
 {
@@ -15,9 +17,14 @@ class RabPage extends Component
     public $count = 1;
     private $page_length = 5;
 
-    public function mount ($project_id) {
+    public function mount () {
+        $project_id = Crypt::decrypt(session()->get('project_id'));
+        // Check if the logged in user has access to the project
+        if (Project::where('project_id', $project_id)->first()->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden access');
+        }
         if (count(Rab::where('project_id', $project_id)->get()) === 0) {
-            return redirect('/project' . '/' . $project_id);
+            return redirect('/addRab')->with('project_id', Crypt::encrypt($project_id));
         }
         $this->project_id = $project_id;
         $this->project_name = Project::find($this->project_id)->project_name;
@@ -36,7 +43,7 @@ class RabPage extends Component
     public function deleteRab($rab_id)
     {
         Rab::where('rab_id', $rab_id)->delete();
-        return redirect(request()->header('Referer'));
+        return redirect(request()->header('Referer'))->with('project_id', Crypt::encrypt($this->project_id));
     }
 
     public function addRab() 

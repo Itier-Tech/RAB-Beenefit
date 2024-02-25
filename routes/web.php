@@ -40,7 +40,7 @@ Route::get('/otp-verification', function() {
     return view('livewire.otp-verification');
 }) -> name('otp-verification');
 
-Route::get('/project/{projectId}', AddRab::class);
+Route::get('/addRab', AddRab::class);
 
 Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -67,7 +67,7 @@ Route::post('/profileUpdate', [ProfileController::class, 'updateProfile']);
 /**
  * Display all RAB for the project
  */
-Route::get('/rab/{project_id}', RabPage::class);
+Route::get('/rab', RabPage::class);
 
 /**
  * Display rab with the inputted id

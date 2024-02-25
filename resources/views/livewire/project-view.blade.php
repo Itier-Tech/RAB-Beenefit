@@ -72,7 +72,7 @@
                                 <p style="min-width: 0; color: grey; margin:0.5rem 0;">{{ $p->project_address }}</p>
                             </div>
                             <div style="text-align:right;">
-                                <button class="btn" wire:click="seeRab({{ $p->project_id }}, '{{ $p->project_name }}')" style="background-color:green; color:white; padding: 0.3rem 0.5rem;">Lihat Selengkapnya</button>
+                                <button class="btn" wire:click="seeRab({{ $p->project_id }})" style="background-color:green; color:white; padding: 0.3rem 0.5rem;">Lihat Selengkapnya</button>
                             </div>
                         </div>
                     </li>
