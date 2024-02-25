@@ -57,10 +57,10 @@
             <ul>
                 @foreach ($project as $p)
                     <li>
-                        <div wire:key="{{$p->project_id}}" class="project-list">
+                        <div wire:key="{{ $p->project_id }}" class="project-list">
                             <div>
                                 <h3 style="display:inline-block; color: green; margin:0;">{{ $p->project_name }}</h3>
-                                <button class="btn" wire:click="changeProjectStatus({{ $p }})" style="padding:0.2rem 0.3rem; float:right; background-color:{{ $p->status === 0 ? "#FFA07A" : "#ADD8E6"}}">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
+                                <button class="btn" wire:click="changeProjectStatus({{ $p->project_id }})" style="padding:0.2rem 0.3rem; float:right; background-color:{{ $p->status === 0 ? "#FFA07A" : "#ADD8E6"}}">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
                             </div>
                             <div style="display:flex; align-items:center; gap:0.4rem;">
                                 <img src="{{ asset('images/clock icon.png') }}" style="color: grey; width:1rem; height:1rem; display:inline-block;" />

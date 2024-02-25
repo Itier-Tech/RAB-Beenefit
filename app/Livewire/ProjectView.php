@@ -39,10 +39,11 @@ class ProjectView extends Component
         $this->resetPage();
     }
 
-    public function changeProjectStatus(Project $p)
+    public function changeProjectStatus($p_id)
     {
-        $p->status = $p->status === 1 ? 0:1;
-        $p->save();
+        $proj = Project::find($p_id);
+        $proj->status = $proj->status === 1 ? 0:1;
+        $proj->save();
     }
 
     public function render()
