@@ -16,7 +16,7 @@
         .add-proj-cont {
             margin: 12vh auto;
             text-align:center; 
-            width: 79%;
+            width:80%;
         }
         .flex-container {
             display:flex;
@@ -24,10 +24,16 @@
             margin:0;
         }
         .filter {
-            align-self:flex-start; 
+            align-self:flex-start;
             min-width:15rem; 
             max-width:20%; 
             margin-left:0;
+        }
+        ul {
+            list-style-type: none; 
+            width:80%; 
+            padding-left:0; 
+            padding-right:0;
         }
         @media (max-width: 768px) {
             .flex-container {
@@ -36,13 +42,19 @@
             .filter {
                 align-self: flex-end;
             }
+            .project-list {
+                width: 100%;
+            }
+            ul {
+                width: 100%;
+            }
         }
     </style>
     <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB Berlangsung ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
     <button wire:click="createProject" class="btn btn-warning" style="background-color: #FFD700; padding: 0.6rem; border:none; margin: 2vh 0 1vh 0;">Buat Proyek Baru</button>
     @if(count($project) > 0)
         <div class="flex-container">
-            <ul style="list-style-type: none; width:100%; padding-left:0; padding-right:0;">
+            <ul>
                 @foreach ($project as $p)
                     <li>
                         <div wire:key="{{$p->project_id}}" class="project-list">
