@@ -223,11 +223,12 @@
             <div style="display: flex; justify-content: space-between; width: 100%; padding-left: 80px; padding-right: 80px;" >
                 <div style="display: flex; justify-content: space-between;  margin-right: 10px; flex-direction: column;">
                     <label for="additional-discount" style="font-weight: bold; margin-right: 5px;">Tambahkan Diskon (%)</label>
-                    <input type="number" id="additional-discount" name="additional_discount" value="10" style="padding: 5px;">
+                    <input type="number" wire:model="rab_discount" id="additional-discount" style="padding: 5px;">
+
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
                     <span style="margin-right: 5px; font-weight: bold;">Total Harga Jual</span>
-                    <input type="text" readonly value="Rp12.150" style="background-color: #FFF; border: 1px solid #DDD; padding: 5px;">
+                    <input type="text" readonly value="Rp{{ number_format($totalFinalRAB, 0, ',', '.') }}" style="background-color: #FFF; border: 1px solid #DDD; padding: 5px;">
                 </div>
             </div>
             <button type="submit" class="btn custom-btn" style="background-color: #FFD700; color: #000; margin-top: 20px; padding: 10px 20px; border: none; border-radius: 5px; width: 90%;">Simpan</button>

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 use App\Models\Rab_item;
 use App\Models\Item;
+use App\Models\Rab;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
@@ -10,16 +11,44 @@ use Illuminate\Support\Facades\Log;
 class RabDetail extends Component
 {
     public $rab_id;
+    public $rab_discount;
 
-    public function mount ($rab_id)
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
+    public function mount($rab_id)
     {
         $this->rab_id = $rab_id;
+        $this->loadRab();
     }
+
+    public function loadRab()
+    {
+        $rab = Rab::find($this->rab_id);
+        $this->rab_discount = $rab?->rab_discount ?? 0;
+    }
+
 
     public function deleteRabItem($item_id)
     {
         // Retrieve the specific Rab_item entry
         Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->delete();
+    }
+
+        private function updateItemVolume($item_id, $operation = 'increment')
+    {
+        $rabItem = RabItem::firstOrNew(
+            ['rab_id' => $this->rab_id, 'item_id' => $item_id],
+            ['item_count' => 0]
+        );
+
+        if ($operation === 'increment') {
+            $rabItem->item_count++;
+        } elseif ($operation === 'decrement' && $rabItem->item_count > 0) {
+            $rabItem->item_count--;
+        }
+
+        $rabItem->save();
+        $this->emitSelf('refreshComponent');
     }
 
     public function decrementVolume($item_id)
@@ -97,6 +126,12 @@ class RabDetail extends Component
         return redirect(request()->header('Referer'));
     }
 
+    public function updatedRabDiscount($value)
+    {
+        Rab::where('id', $this->rab_id)->update(['rab_discount' => $value]);
+        $this->emitSelf('refreshComponent');
+    }
+
     public function calculateTotal($item_id)
     {
         $rab_item = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
@@ -122,6 +157,7 @@ class RabDetail extends Component
 
     public function render()
     {
+        $rab = Rab::find($this->rab_id);
         $rab_items = Rab_item::where('rab_id', $this->rab_id)->get()->keyBy('item_id');
         $items = Item::whereIn('item_id', $rab_items->keys())->get();
 
@@ -129,6 +165,7 @@ class RabDetail extends Component
         $totalBuyPrice = 0;
         $totalSellPrice = 0;
         $totalRAB = 0;
+        $totalFinalRAB = 0;
         $subtotals = [
             'buy' => [],
             'sell' => []
@@ -161,6 +198,10 @@ class RabDetail extends Component
             }
         }
 
+        // Now, apply the RAB discount to the total RAB
+        $rabDiscount = $rab->rab_discount ?? 0; // Assume there is a rab_discount field in your rabs table
+        $totalFinalRAB = $totalRAB * (100 - $rabDiscount) / 100;
+
         // Calculate Total Margin
         $totalMargin = $totalSellPrice - $totalBuyPrice;
 
@@ -171,11 +212,13 @@ class RabDetail extends Component
         Log::info('Total RAB: ', ['totalRAB' => $totalRAB]);
 
         return view('livewire.rab-detail', [
+            'rab' => $rab,
             'item_list' => $items,
             'rab_items' => $rab_items,
             'subtotals' => $subtotals,
             'totalMargin' => $totalMargin,
-            'totalRAB' => $totalRAB
+            'totalRAB' => $totalRAB,
+            'totalFinalRAB' => $totalFinalRAB,
         ])->extends('components.layouts.app')->section('content');
     }
 
