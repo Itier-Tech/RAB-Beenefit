@@ -28,6 +28,11 @@ class RabPage extends Component
         $this->count = ($page-1) * $this->page_length + 1;
     }
 
+    public function askPrevPage()
+    {
+        $this->previousPage();
+    }
+
     public function deleteRab($rab_id)
     {
         Rab::where('rab_id', $rab_id)->delete();

@@ -13,7 +13,6 @@ class ProjectView extends Component
     use WithPagination;
 
     public $status_select = 2;
-    private $viewedProjects;
 
     public function seeRab($project_id, $project_name)
     {
@@ -25,9 +24,18 @@ class ProjectView extends Component
         return redirect('/projectCreate');
     }
 
+    public function updatingStatusSelect() {
+        $this->resetPage();
+    }
+
+    public function askPrevPage() {
+        $this->previousPage();
+    }
+
     public function resetSelection()
     {
         $this->status_select = 2;
+        $this->resetPage();
     }
 
     public function changeProjectStatus(Project $p)
@@ -39,10 +47,11 @@ class ProjectView extends Component
     public function render()
     {
         if ($this->status_select != 2) {
-            $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->where('status', $this->status_select)->latest()->paginate(3);;
+            return view('livewire.project-view')->with(['project' => Project::where('user_id', Auth::user()->user_id)->where('status', $this->status_select)->latest()->paginate(3)
+                        , 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
         } else {
-            $this->viewedProjects = Project::where('user_id', Auth::user()->user_id)->orderBy('status')->latest()->paginate(3);
+            return view('livewire.project-view')->with(['project' => Project::where('user_id', Auth::user()->user_id)->orderBy('status')->latest()->paginate(3)
+                        , 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
         }
-        return view('livewire.project-view')->with(['project' => $this->viewedProjects, 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
     }
 }

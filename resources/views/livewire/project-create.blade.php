@@ -1,8 +1,16 @@
-<div style="width: 100%; margin:2% auto; text-align: center;">
+<div style="width: 100%; margin:5% auto; text-align: center;">
     <style>
         @media (max-width: 768px) {
             .flex-row-responsive {
                 flex-direction: column;
+                width: 100%;
+            }
+            .form-control {
+                width: 100%;
+                margin: 0 auto;
+            }
+            .main-form {
+                width: 100%;
             }
         }
         .form-control {
@@ -12,13 +20,10 @@
         .form-control:focus {
             border-color: #28a745 !important;
         }
-        .error-msg {
-            color:red;
-        }
     </style>
     <h1>Proyek Baru</h1>
     <p>Ayo masukkan detail informasi mengenai proyek barumu! Nama proyek, nama client, alamat, budget.</p>
-    <form wire:submit.prevent="create" style="display: flex; flex-direction: column; gap: 1rem; width: 80%; margin: 0 auto;">
+    <form wire:submit.prevent="create" class="main-form" style="display: flex; flex-direction: column; gap: 1rem; margin: 0 auto;">
         <!-- Row for Project Name -->
         <div class="flex-row-responsive" style="display: flex; justify-content: space-between; gap: 1rem;">
             <!-- Email input -->
