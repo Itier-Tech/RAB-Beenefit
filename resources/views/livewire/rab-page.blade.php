@@ -55,18 +55,22 @@
                 <th class="long-col">Total Harga Jual (Rp.)</th>
                 <th class="long-col">Aksi</th>
             </tr>
-            @foreach ($rabList as $rab)
-                <tr wire:key="{{ $rab->rab_id }}" style="">
-                    <td>{{ $count++ }}</td>
-                    <td>{{ $rab->created_at->format('d-m-Y H:i:s') }} WIB</td>
-                    <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
-                    <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
-                    <td>
-                        <button class="btn" style="background-color:#FFA07A; border-radius:25px; padding: 0.1rem 0.6rem; margin-right: 0.3rem;">Lihat Detail</button>
-                        <button class="btn" wire:click="deleteRab({{ $rab->rab_id }})" style="background:none;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
-                    </td>
-                </tr>
-            @endforeach
+            @if(count($rabList) === 0)
+                <div wire:init="askPrevPage"></div>
+            @else 
+                @foreach ($rabList as $rab)
+                    <tr wire:key="{{ $rab->rab_id }}" style="">
+                        <td>{{ $count++ }}</td>
+                        <td>{{ $rab->created_at->format('d-m-Y H:i:s') }} WIB</td>
+                        <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
+                        <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
+                        <td>
+                            <button class="btn" style="background-color:#FFA07A; border-radius:25px; padding: 0.1rem 0.6rem; margin-right: 0.3rem;">Lihat Detail</button>
+                            <button class="btn" wire:click="deleteRab({{ $rab->rab_id }})" style="background:none;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
         </table>
     </div>
     <div style="width: 60%; margin:auto;">
