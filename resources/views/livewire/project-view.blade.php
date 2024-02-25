@@ -77,6 +77,9 @@
                         </div>
                     </li>
                 @endforeach
+                <div style="width: 60%; margin:auto;">
+                    {{ $project->links('project-pagination-links') }}
+                </div>
             </ul>
             <!-- Filter -->
             <div class="project-list filter">
@@ -128,7 +131,4 @@
             <div wire:init="askPrevPage"></div>
         @endif
     @endif
-    <div style="width: 60%; margin:auto;">
-        {{ $project->links('project-pagination-links') }}
-    </div>
 </div>
