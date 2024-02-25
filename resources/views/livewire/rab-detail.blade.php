@@ -143,10 +143,9 @@
                     <td>Rp12,000</td>
                     <td>Rp15,000</td>
                     <td>
-                            <button class="quantity-modifier decrement" onclick="decrementVolume('volume1')">-</button>
-                            <span id="volume1" class="quantity-number">1</span>
-                            <button class="quantity-modifier increment" onclick="incrementVolume('volume1')">+</button>
-
+                        <button class="quantity-modifier decrement" onclick="decrementVolume('volume1')">-</button>
+                        <span id="volume1">1</span>
+                        <button class="quantity-modifier increment" onclick="incrementVolume('volume1')">+</button>
                     </td>
 
                     <td>
