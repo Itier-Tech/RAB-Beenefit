@@ -50,13 +50,16 @@
             </ul>
             <!-- Filter -->
             <div class="project-list" style="align-self:flex-start; width:25%; margin-left:0;">
-                <img src="{{ asset("images/filter.svg") }}" style="vertical-align: text-top; display:inline-block; height:0.9rem; margin: 0 0.3rem 0 0;"><h4 style="display:inline-block; color:green; margin:0;">Filter</h4>
-                <p style="color:green; margin-bottom:0;">Status pekerjaan</p>
+                <img src="{{ asset("images/filter.svg") }}" style="vertical-align: text-top; display:inline-block; height:0.9rem; margin: 0 0.3rem 0 0;">
+                <h5 style="display:inline-block; color:green; margin:0; font-weight:bold;">Filter</h5>
+                <p style="color:green; margin-bottom:0; font-weight:bold;">Status pekerjaan</p>
                 <form wire:submit.prevent="$refresh">
                     <input type="radio" style="margin-right:0.5rem;" name="inp" wire:model.defer="status_select" value="0"><label>Input</label></br>
                     <input type="radio" style="margin-right:0.5rem;" name="fin" wire:model.defer="status_select" value="1"><label>Finalisasi</label></br>
-                    <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:0.5rem;" wire:click="resetSelection">Hapus</button>
-                    <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
+                    <div style="margin:auto; width:100%; text-align:center;">
+                        <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:0.5rem;" wire:click="resetSelection">Hapus</button>
+                        <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
+                    </div>
                 </form>
             </div>
         </div>
