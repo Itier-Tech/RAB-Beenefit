@@ -12,6 +12,7 @@ return new class extends Migration
             $table->unsignedBigInteger('item_id');
             $table->float('item_discount')->nullable();
             $table->integer('item_count')->nullable();
+            $table->float('item_total_price')->nullable();
             $table->timestamps();
 
             $table->primary(['rab_id', 'item_id']);

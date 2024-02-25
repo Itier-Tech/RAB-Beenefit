@@ -94,16 +94,7 @@
         }
 
     </style>
-    {{-- <script>
-        function calculateTotal($item_id, $item_count, $item_discount, $sell_price)
-        {
-            $discountAmount = ($sell_price * $item_discount) / 100;
-            $discountedPrice = $sell_price - $discountAmount;
-            $total = $discountedPrice * $item_count;
 
-            return $total;
-        }
-    </script> --}}
     <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
         <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
             <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
@@ -126,7 +117,7 @@
         </div>
         <div class="m-3" style="display: flex; justify-content: space-between; width: 65rem; align-items: end; padding-top: 15px ;">
             <div class="left" style="font-size: 25px; font-weight: 800;">RAB Nama Proyek</div>
-            <a class="right" href="#" style="color: #228B22; font-weight: 700; cursor: pointer;">Lihat Detail</a>
+
         </div>
         <table style="width: 65rem; margin-left: auto; margin-right: auto;">
             <thead>
@@ -149,6 +140,11 @@
                     </tr>
                     <!-- Item Row -->
                     @foreach($items as $item)
+                        @php
+                        $rab_item = $rab_items[$item->item_id] ?? null;
+                        $volume = $rab_item ? $rab_item->item_count : 'N/A';
+                        $discount = $rab_item ? $rab_item->item_discount : 'N/A';
+                        @endphp
                         <tr>
                             <td>{{ $item->item_name }}</td>
                             <td>{{ $item->unit }}</td>
@@ -156,19 +152,24 @@
                             <td>Rp{{ number_format($item->sell_price, 0, ',', '.') }}</td>
                             <td>
                                 <button class="quantity-modifier decrement" wire:click="decrementVolume({{ $item->item_id }})">-</button>
-                                <span id="volume{{ $item->item_id }}">1</span>
+                                <span id="volume{{ $item->item_id }}">{{ $volume }}</span>
                                 <button class="quantity-modifier increment" wire:click="incrementVolume({{ $item->item_id }})">+</button>
                             </td>
 
                             <td>
                                 <button class="quantity-modifier" wire:click="decrementDiscount({{ $item->item_id }})">-</button>
-                                <span id="discount{{ $item->item_id }}">10</span>
+                                <span id="discount{{ $item->item_id }}">{{ $discount }}</span>
                                 <button class="quantity-modifier" wire:click="incrementDiscount({{ $item->item_id }})">+</button>
                             </td>
                             {{-- <td>>Rp{{ number_format(calculateTotal($item->item_id, 1, 10, $item->sell_price), 0, ',', '.') }}</td> --}}
-                            <td>Rp 15000</td>
+                            <td wire:ignore>
+                                @php
+                                $total = $this->calculateTotal($item->item_id);
+                                @endphp
+                                Rp{{ number_format($total, 0, ',', '.') }}
+                            </td>
                             <td>
-                                <button style="background:none; border-radius:25px;" wire:click="deleteItem({{ $item->item_id }})">
+                                <button style="background:none; border-radius:25px;" wire:click="deleteRabItem({{ $item->item_id }})">
                                     <img src="{{ asset('images/trash-icon.svg') }}">
                                 </button>
                             </td>
@@ -187,40 +188,32 @@
                 <!-- Left Column for Harga Beli -->
                 <div style="width: 50%; background-color: #FFFFFF; padding: 15px">
                     <div style="font-weight: bold; text-align: center; color:#146013; margin-bottom: 15px;">Harga Beli</div>
+                    @foreach($subtotals['buy'] as $category => $subtotal)
                     <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
-                        <span>Sub Total Tanaman:</span> <span>Rp12,000</span>
+                        <span>Sub Total {{ $category }}:</span> <span>Rp{{ number_format($subtotal, 0, ',', '.') }}</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
-                        <span>Sub Total Material:</span> <span>Rp0,00</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
-                        <span>Sub Total Operasional:</span> <span>Rp0,00</span>
-                    </div>
+                    @endforeach
                 </div>
 
 
                 <!-- Right Column for Harga Jual -->
                 <div style="width: 50%; background-color: #FFFFFF; padding: 15px">
                     <div style="font-weight: bold; text-align: center; color:#146013; margin-bottom: 15px;">Harga Jual</div>
+                    @foreach($subtotals['sell'] as $category => $subtotal)
                     <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
-                        <span>Sub Total Tanaman:</span> <span>Rp13,500</span>
+                        <span>Sub Total {{ $category }}:</span> <span>Rp{{ number_format($subtotal, 0, ',', '.') }}</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
-                        <span>Sub Total Material:</span> <span>Rp0,00</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
-                        <span>Sub Total Operasional:</span> <span>Rp0,00</span>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
             <div style="display: flex; justify-content: space-between; gap:20px; background-color: #BDEFBC; margin:5px; padding: 10px; border-radius: 10px;">
                 <div style="font-weight: bold; text-align: center;">Total Margin</div>
-                <div style="font-weight: bold; text-align: center;">Rp1.500</div>
+                <div style="font-weight: bold; text-align: center;">Rp{{ number_format($totalMargin, 0, ',', '.') }}</div>
             </div>
             <div style="display: flex; justify-content: space-between; gap:20px; background-color: #BDEFBC; margin:5px; ;padding: 10px; border-radius: 10px;">
                 <div style="font-weight: bold; text-align: center;">Total Rab</div>
-                <div style="font-weight: bold; text-align: center;">Rp13.500</div>
+                <div style="font-weight: bold; text-align: center;">Rp{{ number_format($totalRAB, 0, ',', '.') }}</div>
             </div>
         </div>
     </div>
