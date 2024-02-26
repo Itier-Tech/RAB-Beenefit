@@ -35,6 +35,52 @@
             padding-left:0; 
             padding-right:0;
         }
+
+        /* Slider css */
+        input[type=checkbox]{
+            height: 0;
+            width: 0;
+            visibility: hidden;
+            float: right;
+        }
+
+        .switch-lbl {
+            float:right;
+            cursor: pointer;
+            width: 7.5rem;
+            height: 1.5rem;
+            text-align: center;
+            background: #FFA07A;
+            display: block;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .switch-lbl:after {
+            content: '';
+            position: absolute;
+            top: 0.15rem;
+            left: 0.15rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            background: #fff;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        input:checked + .switch-lbl {
+            background: #ADD8E6;
+        }
+
+        input:checked + .switch-lbl:after {
+            left: calc(100% - 0.15rem);
+            transform: translateX(-100%);
+        }
+
+        .switch-lbl:active:after {
+            width: 1rem;
+        }
+
         @media (max-width: 768px) {
             .flex-container {
                 flex-direction:column-reverse;
@@ -60,7 +106,11 @@
                         <div wire:key="{{ $p->project_id }}" class="project-list">
                             <div>
                                 <h3 style="display:inline-block; color: green; margin:0;">{{ $p->project_name }}</h3>
-                                <button class="btn" wire:click="changeProjectStatus({{ $p->project_id }})" style="padding:0.2rem 0.3rem; float:right; background-color:{{ $p->status === 0 ? "#FFA07A" : "#ADD8E6"}}">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</button>
+                                <input type="checkbox" wire:change="changeProjectStatus({{ $p->project_id }})"
+                                    @if ($p->status != 0)
+                                        checked="true"
+                                    @endif
+                                id={{"switch" . $p->project_id}} class="switch" /><label for={{"switch" . $p->project_id}} class="switch-lbl">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</label>
                             </div>
                             <div style="display:flex; align-items:center; gap:0.4rem;">
                                 <img src="{{ asset('images/clock icon.png') }}" style="color: grey; width:1rem; height:1rem; display:inline-block;" />
