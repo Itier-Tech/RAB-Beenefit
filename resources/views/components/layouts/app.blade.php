@@ -14,11 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/navbar.css', 'resources/css/sidebar.css'])
-    @livewireStyles
-</head>
-<body style="background-color: #E9E9E9;">
-<script>
+    <script defer>
         document.addEventListener("DOMContentLoaded", function() {
             var dropdownToggle = document.getElementById("navbarDropdown");
             var dropdownMenu = document.querySelector(".dropdown-menu");
@@ -51,21 +47,21 @@
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
             var rabContainer = document.querySelector(".rab-container");
-
-            if (sidebar.classList.contains("open")) {
-                rabContainer.style.marginLeft = "250px";
-            } else {
-                rabContainer.style.marginLeft = "0";
-            }
+            rabContainer.classList.toggle("add-margin");
         }
     </script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navbar.css', 'resources/css/sidebar.css'])
+    @livewireStyles
+</head>
+<body style="background-color: #E9E9E9;">
     <x-navbar />
     <x-sidebar/>
     <div >
-        <main class="w-100 h-100">
+        <main class="w-100 h-100 rab-container">
             @yield('content')
         </main>
     </div>
     @livewireScripts
+    <footer>
 </body>
 </html>

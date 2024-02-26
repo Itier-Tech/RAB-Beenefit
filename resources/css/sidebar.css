@@ -1,11 +1,11 @@
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px;
+    left: 0;
     background-color: #FFFFFF;
-    width: 250px;
-    padding: 20px;
-    height: 100vh;
+    width: 15rem;
+    padding: 1.5rem;
+    height: 100%;
     overflow-y: auto;
     transition: left 0.3s ease;
     display: flex!important;
@@ -18,22 +18,19 @@
 }
 
 .navbar {
-    padding: 15px 0;
-    transition: margin-left 0.3s ease; /* Menambahkan transisi pada transform */
-}
-
-.navbar.sidebar-open {
-    margin-left: 250px;
+    padding: 1rem 0;
+    margin-left: 15rem;
     .navbar-collapse {
-        margin-right: 50px;
+        margin-right: 3.5rem;
         transition: margin-right 0.3s ease;
     }
+    transition: margin-left 0.3s ease; /* Menambahkan transisi pada transform */
 }
 
 /* Logo */
 .logo-beenefit {
-    height: 170px;
-    width: 170px;
+    height: 10rem;
+    width: 10rem;
 }
 
 /* Sidebar Menu */
@@ -47,20 +44,20 @@
 }
 
 .dropdown {
-    margin-bottom: 10px;
+    margin-bottom: 0.8rem;
     cursor: pointer;
 }
 
 .dashboard {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 0.8rem;
     border-radius: 6px;
 }
 
 .dashboard-items {
-    margin-left: 35px;
-    margin-bottom: 5px;
+    margin-left: 2rem;
+    margin-bottom: 0.3rem;
     display: flex;
     flex-direction: column;
 }
@@ -79,4 +76,25 @@
 
 a:hover {
     color: #FFA07A;
+}
+
+@media (max-width:768px) {
+    .sidebar {
+        display: none;
+        left:-20rem;
+    }
+
+    .navbar {
+        margin-left: 0;
+        padding: 1rem 0;
+        transition: margin-left 0.3s ease; /* Menambahkan transisi pada transform */
+    }
+    
+    .navbar.sidebar-open {
+        margin-left: 15rem;
+        .navbar-collapse {
+            margin-right: 3.5rem;
+            transition: margin-right 0.3s ease;
+        }
+    }
 }

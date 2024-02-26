@@ -1,4 +1,4 @@
-<div style="width: 80%; margin: auto;">
+<div style="width: 80%;">
     <style>
         @media (max-width: 768px) {
         .flex-row-responsive {
