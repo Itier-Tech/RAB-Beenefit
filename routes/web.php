@@ -1,18 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 use App\Models\User;
+
 use App\Livewire\ProjectView;
 use App\Livewire\ProjectCreate;
 use App\Livewire\RabPage;
-use Illuminate\Http\Request;
 use App\Livewire\Auth\Register;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProfileController;
-
 use App\Livewire\AddRab;
 use App\Livewire\Profile;
 use App\Livewire\RabFinal;
+
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PDFController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +101,10 @@ Route::delete('/project/{project_id}', function ($project_id) {
 });
 
 Route::get('/rabDownload', RabFinal::class);
+Route::get('rab/{rab_id}/final', [PDFController::class, 'index']);
+Route::get('/generate-pdf/{rab_id}', [PDFController::class, 'generatePDF']);
 
 Route::post('/rab/{rab_id}/item/add', [RabItemController::class, 'addItem'])->name('rab.item.add');
 Route::post('/rab/{rab_id}/discount', [RabController::class, 'applyDiscount'])->name('rab.applyDiscount');
+
+Route::get('/generatepdf', [PDFController::class, 'index']);

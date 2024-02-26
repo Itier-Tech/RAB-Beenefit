@@ -1,4 +1,6 @@
+@extends('components.layouts.app')
 
+@section('content')
 <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
     <style>
         button.download-btn {
@@ -7,7 +9,7 @@
 
         button.download-btn:hover {
             background-color: #2E8B57;
-            transform: scale(1.05);
+            transform: scale(1.1);
             width: 17rem;
         }
 
@@ -41,26 +43,33 @@
         </div>
     </div>
     <div class="m-3" style="display: flex; justify-content: space-between; width: 65rem; align-items: end; padding-top: 15px ;">
-        <div class="left" style="font-size: 25px; font-weight: 1000;">Final RAB Nama Proyek</div>
+        <div class="left" style="font-size: 25px; font-weight: 1000;">
+        Final RAB
+        @php
+                $rab = App\Models\Rab::findOrFail($rab_id);
+                $project = App\Models\Project::findOrFail($rab->project_id);
+                echo $project->project_name;
+            @endphp</div>
         <a class="right" href="#" style="color: #228B22; font-weight: 700; cursor: pointer;">Lihat Detail</a>
     </div>
-    <div class="download-section" style="padding: 30px; width: 65rem; height: 125px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; justify-content: center;">
+    <div class="download-section" style="padding: 30px; width: 65rem; height: 125px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; justify-content: space-between;">
         <div class="m-3" style="justify-content: space-between; width: 38rem; align-items: end; font-weight: 700; font-size: 18px;">
-            RAB Proyek {Nama Proyek}.pdf
+            RAB Proyek
+            @php
+                $rab = App\Models\Rab::findOrFail($rab_id);
+                $project = App\Models\Project::findOrFail($rab->project_id);
+                echo $project->project_name;
+            @endphp
+            .pdf
         </div>
-        <div class="d-flex" style="justify-content: space-between; width: 24rem; margin-right: 10px;">
-            <button class="download-btn" type="button" style="background-color: #228B22; color: white; border: none; border-radius: 5px; width: 16rem; text-align: left; padding: 10px; padding-top: 15px; padding-bottom: 15px;">Download RAB</button>
-            <button class="share-btn" type="button" style="background-color: white; color: #228B22; border-color: #228B22; border-radius: 5px; width: 6rem; text-align: left; padding: 10px;">
-                Share
-                <img src="images/send.png" style="width: 20px; margin-left: 8px;"/>
-            </button>
-        </div>
+        <button class="download-btn" onclick="window.location='/generate-pdf/{{ $rab_id }}'" type="button" style="background-color: #228B22; color: white; border: none; border-radius: 5px; width: 16rem; text-align: left; padding: 10px; padding-top: 15px; padding-bottom: 15px;">Download RAB</button>
     </div>
-    <div style="padding: 15px; width: 65rem;">
+    <!-- <div style="padding: 15px; width: 65rem;">
         <div style="font-weight: 600;">Catatan:</div>
         <ol style="margin-top: 0; padding-left: 1.5em;">
             <li>Harga sudah termasuk penanaman, pemasangan, garansi 1 bulan dan free maintenance/ Trial OKE Protect 1 kali (Garansi dan Free Maintenance dapat diklaim setelah mengisi formulir feedback customer yang akan dikirimkan tim OKE Garden setelah pekerjaan selesai).</li>
             <li>Apabila terjadi penambahan pekerjaan setalah RAB di atas disetujui, maka RAB akan disesuaikan kembali atau akan ada RAB tambahan.</li>
         </ol>
-    </div>
+    </div> -->
 </div>
+@endsection
