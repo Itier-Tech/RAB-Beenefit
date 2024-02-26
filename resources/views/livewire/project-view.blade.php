@@ -64,7 +64,16 @@
                             </div>
                             <div style="display:flex; align-items:center; gap:0.4rem;">
                                 <img src="{{ asset('images/clock icon.png') }}" style="color: grey; width:1rem; height:1rem; display:inline-block;" />
-                                <p style="color: grey; display: inline-block; margin:0.5rem 0;">{{ $p->created_at->format('d-m-Y H:i:s') }} WIB</p>
+                                <p style="color: grey; display: inline-block; margin:0.5rem 0;">
+                                    @if ($p->created_at->diffInDays(now()) > 0)  
+                                        {{$p->created_at->diffInDays(now()) . ' hari yang lalu'}}
+                                    @elseif ($p->created_at->diffInHours(now()) > 0)
+                                        {{ $p->created_at->diffInHours(now()) . ' jam yang lalu' }}
+                                    @elseif ($p->created_at->diffInMinutes(now()) > 0)
+                                        {{ $p->created_at->diffInMinutes(now()) . ' menit yang lalu' }}
+                                    @else
+                                        {{ $p->created_at->diffInSeconds(now()) . ' detik yang lalu' }}</p>
+                                    @endif
                             </div>
                             <p style="font-size: 1.1rem; margin-bottom:0.5rem;">{{ $p->client_name }} ; Rp. {{ number_format($p->budget , 0, ',', '.') }}</p>
                             <div style="display:flex; align-items:center; gap:0.4rem; word-wrap: break-word;">    
