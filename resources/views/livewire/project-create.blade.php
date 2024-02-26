@@ -1,5 +1,12 @@
 <div style="width: 100%; margin:5% auto; text-align: center;">
     <style>
+        .form-control {
+            width: 60%;
+            margin: 0 auto;
+        }
+        .form-control:focus {
+            border-color: #28a745 !important;
+        }
         @media (max-width: 768px) {
             .flex-row-responsive {
                 flex-direction: column;
@@ -10,15 +17,8 @@
                 margin: 0 auto;
             }
             .main-form {
-                width: 100%;
+                width: 85%;
             }
-        }
-        .form-control {
-            width: 60%;
-            margin: 0 auto;
-        }
-        .form-control:focus {
-            border-color: #28a745 !important;
         }
     </style>
     <h1>Proyek Baru</h1>
