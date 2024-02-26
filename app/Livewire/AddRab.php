@@ -6,19 +6,17 @@ use Livewire\Component;
 use App\Models\Rab;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 
 class AddRab extends Component
 {
     public $projectId;
 
-    public function mount () {
-        $projectId = Crypt::decrypt(session()->get('project_id'));
+    public function mount ($project_id) {
         // Check if the logged in user has access to the project
-        if (Project::where('project_id', $projectId)->first()->user_id != Auth::user()->user_id) {
+        if (Project::where('project_id', $project_id)->first()->user_id != Auth::user()->user_id) {
             abort(403, 'Forbidden access');
         }
-        $this->projectId = $projectId;
+        $this->projectId = $project_id;
     }
     public function create()
     {
@@ -29,7 +27,7 @@ class AddRab extends Component
 
         $rab->save();
         response()->json(['message' => 'Rab created successfully', 'data' => $rab], 201);
-        return redirect('/rab')->with('project_id', Crypt::encrypt($this->projectId));
+        return redirect('/rab' . '/' . $this->projectId);
     }
 
     public function render()
