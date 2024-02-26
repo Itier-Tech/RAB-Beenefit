@@ -4,7 +4,7 @@ if (! isset($scrollTo)) {
 }
 @endphp
 
-<div style="margin-bottom:5vh;">
+<div style="margin:5vh 0;">
     <style>
         .page-link {
             color:black;
@@ -15,7 +15,7 @@ if (! isset($scrollTo)) {
             display: flex;
             width: 100%;
             align-items: stretch;
-            justify-content: space-between;
+            justify-content:space-evenly;
             margin: 0;
             padding: 0;
         }

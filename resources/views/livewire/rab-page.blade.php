@@ -1,19 +1,17 @@
 <div style="width:80%; margin: auto;">
     <style>
-        @media (max-width: 768px) {
-            .table-container {
-                overflow-x:scroll;
-                /* Hide scrollbar for IE, Edge and Firefox */
-                -ms-overflow-style: none;
-                scrollbar-width: none; 
-            }
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            .table-container::-webkit-scrollbar {
-                display: none;
-            }
-        }
         .table-container {
             width:100%;
+            overflow-x:scroll;
+        }
+        .table-container {
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .table-container::-webkit-scrollbar {
+            display: none;
         }
         table {
             width: 100%; 
