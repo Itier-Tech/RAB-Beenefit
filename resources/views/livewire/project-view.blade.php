@@ -1,5 +1,9 @@
 <div style="width: 80%; margin: auto;">
     <style>
+        h3, p {
+            min-width: 30rem;
+            max-width: 30rem;
+        }
         .form-control:focus {
             border-color: #28a745 !important;
         }
@@ -144,13 +148,15 @@
             @if($project->total() === 0)
                     <div class="add-proj-cont">
                         <img src="{{ asset('images/adding-project.png') }}" class="add-proj-img"></img>
+                        <p style="text-align:center; margin: 1rem auto;">
                         @if($status_select == 2)
-                            <p>Ayo mulai RAB proyek baru !</p>
+                            Ayo mulai RAB proyek baru !
                         @elseif($status_select == 1)
-                            <p>Belum ada proyek dalam tahap finalisasi</p>
+                            Belum ada proyek dalam tahap finalisasi
                         @else
-                            <p>Semua proyek sedang dalam tahap finalisasi</p>
+                            Semua proyek sedang dalam tahap finalisasi
                         @endif
+                        </p>
                         <button wire:click="createProject" class="btn btn-warning" style="background-color:#FFD700; padding:0.8rem; border:none; width:30%;">Tambah Proyek</button>
                     </div>
             @else
