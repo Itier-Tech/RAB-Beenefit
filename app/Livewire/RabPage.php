@@ -23,6 +23,7 @@ class RabPage extends Component
         }
         $this->project_id = $project_id;
         $this->project_name = Project::find($project_id)->project_name;
+        $this->count = ($this->getPage()-1) * $this->page_length + 1;
     }
 
     public function updatingPage($page)
