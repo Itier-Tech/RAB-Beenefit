@@ -53,7 +53,9 @@
                 <th class="long-col">Total Harga Jual (Rp.)</th>
                 <th class="long-col">Aksi</th>
             </tr>
-            @if(count($rabList) === 0)
+            @if($rabList->total() === 0) 
+                <div wire:init="redirectToAddRab"></div>
+            @elseif(count($rabList) === 0)
                 <div wire:init="askPrevPage"></div>
             @else 
                 @foreach ($rabList as $rab)

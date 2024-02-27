@@ -21,9 +21,6 @@ class RabPage extends Component
         if (Project::where('project_id', $project_id)->first()->user_id != Auth::user()->user_id) {
             abort(403, 'Forbidden access');
         }
-        if (count(Rab::where('project_id', $project_id)->get()) === 0) {
-            return redirect('/addRab' . '/' . $project_id);
-        }
         $this->project_id = $project_id;
         $this->project_name = Project::find($project_id)->project_name;
     }
@@ -40,6 +37,11 @@ class RabPage extends Component
 
     public function rabDetails($rab_id)
     {
+    }
+
+    public function redirectToAddRab()
+    {
+        return redirect('/addRab' . '/' . $this->project_id);
     }
 
     public function deleteRab($rab_id)
