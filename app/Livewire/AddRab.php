@@ -4,13 +4,19 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Rab;
+use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 
 class AddRab extends Component
 {
     public $projectId;
 
-    public function mount ($projectId) {
-        $this->projectId = $projectId;
+    public function mount ($project_id) {
+        // Check if the logged in user has access to the project
+        if (Project::where('project_id', $project_id)->first()->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden access');
+        }
+        $this->projectId = $project_id;
     }
     public function create()
     {

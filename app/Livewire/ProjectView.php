@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProjectView extends Component
 {
@@ -14,9 +13,9 @@ class ProjectView extends Component
 
     public $status_select = 2;
 
-    public function seeRab($project_id, $project_name)
+    public function seeRab($project_id)
     {
-        return redirect('/rab'. '/'. $project_id);
+        return redirect('/rab' . '/' . $project_id);
     }
 
     public function createProject()
@@ -38,10 +37,11 @@ class ProjectView extends Component
         $this->resetPage();
     }
 
-    public function changeProjectStatus(Project $p)
+    public function changeProjectStatus($p_id)
     {
-        $p->status = $p->status === 1 ? 0:1;
-        $p->save();
+        $proj = Project::find($p_id);
+        $proj->status = $proj->status === 1 ? 0:1;
+        $proj->save();
     }
 
     public function render()

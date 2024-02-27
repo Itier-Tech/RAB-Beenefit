@@ -1,21 +1,33 @@
 .navbar {
     background-color: #FFD700;
-    padding: 15px 0;
+    padding: 1rem 0;
 
     display: flex;
     flex-wrap: inherit;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 999;
 }
 
 .container {
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
-    margin-left: 30px;
+    margin-left: 2rem;
+    padding-right: 5%;
 }
 
 .navbar-toggler {
+    display: none;
     border: none;
     background-color: transparent;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
 }
 
 .navbar-collapse {
@@ -23,16 +35,22 @@
     flex-wrap: inherit;
     flex-basis: unset;
     flex-grow: unset;
+    align-items: center;
 }
 
 .navbar-text {
     color: #343a40;
 }
 
+.form-inline {
+    display: flex;
+    gap: 2%;
+}
+
 .searchTerm {
-    width: 350px;
-    padding: 10px;
-    height: 35px;
+    width:20rem;
+    padding: 0.8rem;
+    height: 2rem;
     border-radius: 8px 0px 0px 8px;
     border: #BFBFBF;
 }
@@ -40,7 +58,7 @@
 .src-btn {
     background-color: transparent;
     border: none;
-    padding: 6px;
+    padding: 0.2rem;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -50,8 +68,8 @@
 }
 
 .profile-picture {
-    width: 30px;
-    height: 30px;
+    width: 2rem;
+    height: 2rem;
     object-fit: cover;
 }
 
@@ -60,14 +78,24 @@
     top: 100%;
     left: 0;
     background-color: #ffffff;
-    min-width: 160px;
+    min-width: 10rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
-.navbar {
-    position: relative;
-    z-index: 999;
+@media (max-width: 768px) {
+    .navbar {
+        left: 0;
+    }
+    .navbar-toggler {
+        display: block;
+    }
+    .navbar-collapse {
+        margin-left: 5%;
+    }
+    .searchTerm {
+        width: 10rem;
+    }
 }

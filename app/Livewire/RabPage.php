@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Rab;
 use App\Models\Project;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
 class RabPage extends Component
@@ -16,11 +17,13 @@ class RabPage extends Component
     private $page_length = 5;
 
     public function mount ($project_id) {
-        if (count(Rab::where('project_id', $project_id)->get()) === 0) {
-            return redirect('/project' . '/' . $project_id);
+        // Check if the logged in user has access to the project
+        if (Project::where('project_id', $project_id)->first()->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden access');
         }
         $this->project_id = $project_id;
-        $this->project_name = Project::find($this->project_id)->project_name;
+        $this->project_name = Project::find($project_id)->project_name;
+        $this->count = ($this->getPage()-1) * $this->page_length + 1;
     }
 
     public function updatingPage($page)
@@ -31,6 +34,15 @@ class RabPage extends Component
     public function askPrevPage()
     {
         $this->previousPage();
+    }
+
+    public function rabDetails($rab_id)
+    {
+    }
+
+    public function redirectToAddRab()
+    {
+        return redirect('/addRab' . '/' . $this->project_id);
     }
 
     public function deleteRab($rab_id)

@@ -1,19 +1,15 @@
 <div style="display: flex; flex-direction: column;">
     <style>
-        .rab-container {
-            transition: margin-left 0.3s ease;
-        }
-
         .progres-section {
             width: 65rem;
-            height: 150px;
+            height: 10rem;
             background-color: white;
             border-radius: 20px;
             align-items: center!important;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px;
+            padding: 1.5rem;
             font-weight: bold;
         }
 
@@ -50,50 +46,9 @@
         }
 
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdownToggle = document.getElementById("navbarDropdown");
-            var dropdownMenu = document.querySelector(".dropdown-menu");
 
-            dropdownToggle.addEventListener("click", function() {
-                dropdownMenu.classList.toggle("show");
-            });
-
-            window.addEventListener("click", function(event) {
-                if (!dropdownToggle.contains(event.target)) {
-                    dropdownMenu.classList.remove("show");
-                }
-            });
-        });
-
-        function open_sidebar() {
-            var sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("open");
-
-            var navbar = document.querySelector(".navbar");
-            navbar.classList.toggle("sidebar-open");
-
-            toggleSidebar();
-        }
-
-        function close_sidebar() {
-            document.getElementById("sidebar").style.display = "none";
-        }
-
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            var rabContainer = document.querySelector(".rab-container");
-
-            if (sidebar.classList.contains("open")) {
-                rabContainer.style.marginLeft = "250px";
-            } else {
-                rabContainer.style.marginLeft = "0";
-            }
-        }
-    </script>
-
-    <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
-        <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
+    <div class="justify-content-center" style="display: flex; flex-direction: column;  align-items: center;">
+        <div class="progres-section align-self:flex-start;">
             <div class="rab-info">
                 <div class="left">Input RAB</div>
                 <div class="right">Final RAB</div>

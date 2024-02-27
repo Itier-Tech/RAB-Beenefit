@@ -1,22 +1,9 @@
-<div style="width:80%; margin: auto;">
+<div style="width:80%;">
     <style>
-        @media (max-width: 768px) {
-            .table-container {
-                overflow-x:scroll;
-                /* Hide scrollbar for IE, Edge and Firefox */
-                -ms-overflow-style: none;
-                scrollbar-width: none; 
-            }
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            .table-container::-webkit-scrollbar {
-                display: none;
-            }
-        }
         .table-container {
-            width:100%;
+            overflow-x:scroll;
         }
         table {
-            width: 100%; 
             margin: 3vh auto; 
             border-collapse: separate;
             border-spacing: 0 1em;
@@ -43,6 +30,17 @@
             border-top: 1px solid black;
             border-bottom: 1px solid black;
         }
+        @media (max-width:768px) {
+            /* Hide scrollbar for IE, Edge and Firefox */
+            .table-container {
+                -ms-overflow-style: none;
+                scrollbar-width: none; 
+            }
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .table-container::-webkit-scrollbar {
+                display: none;
+            }
+        }
     </style>
     <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB {{ $project_name }}</h2>
     <button class="btn" wire:click='addRab' style="background-color: #FFD700; padding: 0.5rem 0.8rem; border:none; margin: 1.5vh 0 0 0;">Buat RAB Baru +</button>
@@ -55,7 +53,9 @@
                 <th class="long-col">Total Harga Jual (Rp.)</th>
                 <th class="long-col">Aksi</th>
             </tr>
-            @if(count($rabList) === 0)
+            @if($rabList->total() === 0) 
+                <div wire:init="redirectToAddRab"></div>
+            @elseif(count($rabList) === 0)
                 <div wire:init="askPrevPage"></div>
             @else 
                 @foreach ($rabList as $rab)
@@ -73,7 +73,7 @@
             @endif
         </table>
     </div>
-    <div style="width: 60%; margin:auto;">
+    <div style="width: 70%; margin:auto;">
         {{ $rabList->links('project-pagination-links') }}
     </div>
 </div>

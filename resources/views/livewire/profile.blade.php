@@ -33,38 +33,13 @@
                 }
             }
         });
-
-        function open_sidebar() {
-            var sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("open");
-
-            var navbar = document.querySelector(".navbar");
-            navbar.classList.toggle("sidebar-open");
-
-            toggleSidebar();
-        }
-
-        function close_sidebar() {
-            document.getElementById("sidebar").style.display = "none";
-        }
-
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            var profileContainer = document.querySelector(".profile-container");
-
-            if (sidebar.classList.contains("open")) {
-                profileContainer.style.marginLeft = "250px";
-            } else {
-                profileContainer.style.marginLeft = "0";
-            }
-        }
     </script>
     <style>
         button:hover {
             transform: scale(1.05);
         }
     </style>
-    <div class="profile-container" style="padding: 5rem;display: flex; flex-direction: column;  align-items: center; justify-content: center; transition: margin-left 0.3s ease;">
+    <div class="profile-container" style="padding: 5rem; display: flex; flex-direction: column;  align-items: center; justify-content: center; transition: margin-left 0.3s ease;">
         <div class="profile-img-container" style="position: relative; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editFotoProfilModal" >
             <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" style="width: 250px"/>
             <div style="position: absolute; bottom: 0; right: 0; background-color= #FF700D;">
