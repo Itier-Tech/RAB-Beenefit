@@ -3,14 +3,16 @@
 }
 
 .rab-container {
-    margin-left: 18rem;
-    margin-top: 20vh;
+    padding-left: 18rem;
+    padding-top: 15vh;
+    margin-bottom: 15vh;
     transition: margin-left 0.3s ease;
-    width: fit-content;
+    width: 100vw;
+    height: 100vh;
 }
 
 @media(max-width:768px) {
     .rab-container {
-        margin-left: 10vw;
+        padding-left: 10vw;
     }
 }

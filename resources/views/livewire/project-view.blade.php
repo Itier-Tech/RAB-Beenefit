@@ -145,7 +145,7 @@
                         </div>
                     </li>
                 @endforeach
-                <div style="width: 60%; margin:auto;">
+                <div style="width: 70%; margin: 0 auto;">
                     {{ $project->links('project-pagination-links') }}
                 </div>
             </ul>

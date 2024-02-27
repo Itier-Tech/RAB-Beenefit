@@ -1,11 +1,9 @@
 <div style="width:80%;">
     <style>
         .table-container {
-            width:100%;
             overflow-x:scroll;
         }
         table {
-            width: min-content; 
             margin: 3vh auto; 
             border-collapse: separate;
             border-spacing: 0 1em;
@@ -73,7 +71,7 @@
             @endif
         </table>
     </div>
-    <div style="width: 60%; margin:auto;">
+    <div style="width: 70%; margin:auto;">
         {{ $rabList->links('project-pagination-links') }}
     </div>
 </div>
