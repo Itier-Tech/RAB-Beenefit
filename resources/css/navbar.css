@@ -16,6 +16,7 @@
     justify-content: space-between;
     align-items: center;
     margin-left: 2rem;
+    padding-right: 5%;
 }
 
 .navbar-toggler {
@@ -47,7 +48,7 @@
 }
 
 .searchTerm {
-    width:40vw;
+    width:20rem;
     padding: 0.8rem;
     height: 2rem;
     border-radius: 8px 0px 0px 8px;
@@ -90,5 +91,11 @@
     }
     .navbar-toggler {
         display: block;
+    }
+    .navbar-collapse {
+        margin-left: 5%;
+    }
+    .searchTerm {
+        width: 10rem;
     }
 }

@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <div class="container">
+    <div class="container justify-content-end">
         <button class="navbar-toggler" id="navbar-toggler" onclick="open_sidebar()">
             <span class="navbar-toggler-icon"></span>
         </button>
