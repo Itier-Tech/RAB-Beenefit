@@ -38,6 +38,10 @@ class RabPage extends Component
         $this->previousPage();
     }
 
+    public function rabDetails($rab_id)
+    {
+    }
+
     public function deleteRab($rab_id)
     {
         Rab::where('rab_id', $rab_id)->delete();

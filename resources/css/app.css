@@ -1,3 +1,16 @@
 .error-msg {
     color:red;
 }
+
+.rab-container {
+    margin-left: 18rem;
+    margin-top: 20vh;
+    transition: margin-left 0.3s ease;
+    width: fit-content;
+}
+
+@media(max-width:768px) {
+    .rab-container {
+        margin-left: 10vw;
+    }
+}

@@ -1,20 +1,11 @@
-<div style="width:80%; margin: auto;">
+<div style="width:80%;">
     <style>
         .table-container {
             width:100%;
             overflow-x:scroll;
         }
-        .table-container {
-            /* Hide scrollbar for IE, Edge and Firefox */
-            -ms-overflow-style: none;
-            scrollbar-width: none; 
-        }
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .table-container::-webkit-scrollbar {
-            display: none;
-        }
         table {
-            width: 100%; 
+            width: min-content; 
             margin: 3vh auto; 
             border-collapse: separate;
             border-spacing: 0 1em;
@@ -40,6 +31,17 @@
         td {
             border-top: 1px solid black;
             border-bottom: 1px solid black;
+        }
+        @media (max-width:768px) {
+            /* Hide scrollbar for IE, Edge and Firefox */
+            .table-container {
+                -ms-overflow-style: none;
+                scrollbar-width: none; 
+            }
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .table-container::-webkit-scrollbar {
+                display: none;
+            }
         }
     </style>
     <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB {{ $project_name }}</h2>

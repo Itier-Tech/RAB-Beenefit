@@ -1,4 +1,4 @@
-<div style="width: 80%; margin: auto;">
+<div style="width: 80%;">
     <style>
         h3, p {
             min-width: 30rem;
@@ -20,7 +20,12 @@
         .add-proj-cont {
             margin: 12vh auto;
             text-align:center; 
+            align-items: center;
             width:80%;
+        }
+        .add-proj-cont p {
+            min-width: unset;
+            max-width: unset;
         }
         .flex-container {
             display:flex;
@@ -90,7 +95,7 @@
                 flex-direction:column-reverse;
             }
             .filter {
-                align-self: flex-end;
+                align-self: center;
             }
             .project-list {
                 width: 100%;
@@ -148,7 +153,7 @@
             @if($project->total() === 0)
                     <div class="add-proj-cont">
                         <img src="{{ asset('images/adding-project.png') }}" class="add-proj-img"></img>
-                        <p style="text-align:center; margin: 1rem auto;">
+                        <p style="">
                         @if($status_select == 2)
                             Ayo mulai RAB proyek baru !
                         @elseif($status_select == 1)
