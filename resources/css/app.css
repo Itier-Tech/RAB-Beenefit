@@ -19,7 +19,11 @@
 
 @media(max-width:768px) {
     .rab-container {
-        padding-left: 10vw;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
         padding-top: 8rem;
     }
 }

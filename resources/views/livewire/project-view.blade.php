@@ -22,6 +22,10 @@
             display:flex;
         }
 
+        .toggle-status {
+            margin-left: auto;
+        }
+
         .add-proj-img {
             height: 25vh;
         }
@@ -113,13 +117,20 @@
             width: 1rem;
         }
 
+        @media (max-width: 540px) {
+            .project-header {
+                flex-direction: column;
+            }
+
+            .toggle-status {
+                margin-left: unset;
+                margin-top : 2%;
+            }
+        }
+
         @media (max-width: 768px) {
             .flex-container {
                 flex-direction:column-reverse;
-            }
-
-            .project-header div {
-                margin-left: unset;
             }
 
             .filter {
@@ -143,6 +154,10 @@
             ul {
                 width: 100%;
             }
+
+            li {
+                margin: 0;
+            }
         }
     </style>
     <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB Berlangsung ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
@@ -157,7 +172,7 @@
                                 <div>
                                     <h3 style="display:inline-block; color: green; margin:0;">{{ $p->project_name }}</h3>
                                 </div>
-                                <div style="margin-left:auto;">
+                                <div class="toggle-status">
                                     <input type="checkbox" wire:change="changeProjectStatus({{ $p->project_id }})"
                                         @if ($p->status != 0)
                                             checked="true"

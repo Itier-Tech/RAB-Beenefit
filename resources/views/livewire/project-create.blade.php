@@ -1,4 +1,4 @@
-<div style="width: 100%; margin:5% 0;">
+<div style="width: 80%; margin-top:5%;">
     <style>
         .form-control {
             width: 60%;
