@@ -1,6 +1,6 @@
 <div style="width: 80%;">
     <style>
-        h3, p {
+        p {
             min-width: 30rem;
             max-width: 30rem;
         }
@@ -54,7 +54,6 @@
         }
 
         .switch-lbl {
-            float:right;
             cursor: pointer;
             width: 7.5rem;
             height: 1.5rem;
@@ -113,13 +112,18 @@
                 @foreach ($project as $p)
                     <li>
                         <div wire:key="{{ $p->project_id }}" class="project-list">
-                            <div>
-                                <h3 style="display:inline-block; color: green; margin:0;">{{ $p->project_name }}</h3>
-                                <input type="checkbox" wire:change="changeProjectStatus({{ $p->project_id }})"
-                                    @if ($p->status != 0)
-                                        checked="true"
-                                    @endif
-                                id={{"switch" . $p->project_id}} class="switch" /><label for={{"switch" . $p->project_id}} class="switch-lbl">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</label>
+                            <div style="display:flex;">
+                                <div>
+                                    <h3 style="display:inline-block; color: green; margin:0;">{{ $p->project_name }}</h3>
+                                </div>
+                                <div style="margin-left:auto;">
+                                    <input type="checkbox" wire:change="changeProjectStatus({{ $p->project_id }})"
+                                        @if ($p->status != 0)
+                                            checked="true"
+                                        @endif
+                                    id={{"switch" . $p->project_id}} class="switch" />
+                                    <label for={{"switch" . $p->project_id}} class="switch-lbl">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</label>
+                                </div>
                             </div>
                             <div style="display:flex; align-items:center; gap:0.4rem;">
                                 <img src="{{ asset('images/clock icon.png') }}" style="color: grey; width:1rem; height:1rem; display:inline-block;" />
