@@ -38,6 +38,10 @@
             max-width:20%; 
             margin-left:0;
         }
+        .filter-choice {
+            display: flex;
+            flex-direction: column;
+        }
         ul {
             list-style-type: none; 
             width:80%; 
@@ -95,6 +99,11 @@
             }
             .filter {
                 align-self: center;
+            }
+            .filter-choice {
+                flex-direction: row;
+                align-items: center;
+                gap: 5%;
             }
             .project-list {
                 width: 100%;
@@ -179,8 +188,14 @@
             <h5 style="display:inline-block; color:green; margin:0; font-weight:bold;">Filter</h5>
             <p style="color:green; margin-bottom:0; font-weight:bold;">Status pekerjaan</p>
             <form wire:submit.prevent="$refresh">
-                <input type="radio" id="inp-filter" style="margin-right:0.5rem;" name="inp" wire:model.defer="status_select" value="0"><label for="inp-filter">Input</label></br>
-                <input type="radio" id="fin-filter" style="margin-right:0.5rem;" name="fin" wire:model.defer="status_select" value="1"><label for="fin-filter">Finalisasi</label></br>
+                <div class="filter-choice">
+                    <div>
+                        <input type="radio" id="inp-filter" style="margin-right:0.5rem;" name="inp" wire:model.defer="status_select" value="0"><label for="inp-filter">Input</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="fin-filter" style="margin-right:0.5rem;" name="fin" wire:model.defer="status_select" value="1"><label for="fin-filter">Finalisasi</label>
+                    </div>
+                </div>
                 <div style="margin:auto; width:100%; text-align:center;">
                     <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:0.5rem;" wire:click="resetSelection">Hapus</button>
                     <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
