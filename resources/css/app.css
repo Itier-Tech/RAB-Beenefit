@@ -11,7 +11,7 @@
 .rab-container {
     overflow: hidden;
     padding-left: 18rem;
-    padding-top: 15vh;
+    padding-top: 5rem;
     margin-bottom: 15vh;
     transition: margin-left 0.3s ease;
     width: 100%;
@@ -20,6 +20,6 @@
 @media(max-width:768px) {
     .rab-container {
         padding-left: 10vw;
-        padding-top: 25vh;
+        padding-top: 8rem;
     }
 }
