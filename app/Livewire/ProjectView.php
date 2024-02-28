@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Livewire\WithPagination;
 
 class ProjectView extends Component
@@ -12,6 +13,12 @@ class ProjectView extends Component
     use WithPagination;
 
     public $status_select = 2;
+    public $project_name = '';
+
+    public function mount() 
+    {
+        $this->project_name = request()->query('searchTerm');
+    }
 
     public function seeRab($project_id)
     {
@@ -46,11 +53,17 @@ class ProjectView extends Component
 
     public function render()
     {
+        $project_list;
+        if ($this->project_name != '') {
+            $project_list = Project::where('user_id', Auth::user()->user_id)->where('project_name', 'LIKE', '%'. $this->project_name . '%');
+        } else {
+            $project_list = Project::where('user_id', Auth::user()->user_id);
+        }
         if ($this->status_select != 2) {
-            return view('livewire.project-view')->with(['project' => Project::where('user_id', Auth::user()->user_id)->where('status', $this->status_select)->latest()->paginate(3)
+            return view('livewire.project-view')->with(['project' => $project_list->where('status', $this->status_select)->latest()->paginate(3)
                         , 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
         } else {
-            return view('livewire.project-view')->with(['project' => Project::where('user_id', Auth::user()->user_id)->orderBy('status')->latest()->paginate(3)
+            return view('livewire.project-view')->with(['project' => $project_list->orderBy('status')->latest()->paginate(3)
                         , 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
         }
     }

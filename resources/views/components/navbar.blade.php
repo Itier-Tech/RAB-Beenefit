@@ -6,8 +6,8 @@
 
         <div class="navbar-collapse" id="navbarSupportedContent">
             <!-- Search Bar -->
-            <form class="form-inline my-2 my-lg-0" id="search-form">
-                <input type="text" class="searchTerm" placeholder="Cari proyek">
+            <form class="form-inline my-2 my-lg-0" action="/project" id="search-form" method="GET">
+                <input type="text" class="searchTerm" name="searchTerm" placeholder="Cari proyek">
                 <button class="btn src-btn" type="submit">
                     <img src="/images/search-icon.png" alt="search" class="logo"></img>
                 </button>

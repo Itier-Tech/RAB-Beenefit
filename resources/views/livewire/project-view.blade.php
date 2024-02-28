@@ -4,44 +4,64 @@
             min-width: 30rem;
             max-width: 30rem;
         }
+
         .form-control:focus {
             border-color: #28a745 !important;
         }
+
         .project-list {
             background-color : white;
             border-radius: 25px;
             margin: 3% 0;
             padding: 2em 2em;
             width: 95%;
+            min-width: 15rem;
         }
+
+        .project-header {
+            display:flex;
+        }
+
         .add-proj-img {
             height: 25vh;
         }
+
         .add-proj-cont {
             margin: 12vh auto;
             text-align:center; 
             align-items: center;
             width:80%;
         }
+
         .add-proj-cont p {
             min-width: unset;
             max-width: unset;
         }
+
         .flex-container {
             display:flex;
             width:100%; 
             margin:0;
         }
+
         .filter {
             align-self:flex-start;
             min-width:15rem; 
             max-width:20%; 
             margin-left:0;
         }
+
         .filter-choice {
             display: flex;
             flex-direction: column;
         }
+
+        .act-btns {
+            margin:auto; 
+            width:100%;
+            text-align: center;
+        }
+
         ul {
             list-style-type: none; 
             width:80%; 
@@ -97,17 +117,29 @@
             .flex-container {
                 flex-direction:column-reverse;
             }
+
+            .project-header div {
+                margin-left: unset;
+            }
+
             .filter {
                 align-self: center;
             }
+
             .filter-choice {
                 flex-direction: row;
                 align-items: center;
                 gap: 5%;
             }
+
             .project-list {
                 width: 100%;
             }
+
+            .act-btns {
+                text-align: left;
+            }
+
             ul {
                 width: 100%;
             }
@@ -121,7 +153,7 @@
                 @foreach ($project as $p)
                     <li>
                         <div wire:key="{{ $p->project_id }}" class="project-list">
-                            <div style="display:flex;">
+                            <div class="project-header">
                                 <div>
                                     <h3 style="display:inline-block; color: green; margin:0;">{{ $p->project_name }}</h3>
                                 </div>
@@ -196,7 +228,7 @@
                         <input type="radio" id="fin-filter" style="margin-right:0.5rem;" name="fin" wire:model.defer="status_select" value="1"><label for="fin-filter">Finalisasi</label>
                     </div>
                 </div>
-                <div style="margin:auto; width:100%; text-align:center;">
+                <div class="act-btns" style="">
                     <button style="color:green; border-color: green; background:none; border-radius:5px; margin-top:0.5rem;" wire:click="resetSelection">Hapus</button>
                     <button type="submit" style="background-color:#FFD700; border-radius:5px;">Terapkan</button>
                 </div>
