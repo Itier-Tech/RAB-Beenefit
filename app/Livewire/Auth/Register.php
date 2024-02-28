@@ -29,7 +29,7 @@ class Register extends Component
         // Auth::login($user, true);
 
         // return redirect()->to('/otp-verification');
-        return redirect("/otp-verification/");
+        return redirect("/otp-verification");
     }
 
     public function render()

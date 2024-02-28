@@ -12,6 +12,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\AddRab;
 use App\Livewire\Profile;
 use App\Livewire\RabFinal;
+use App\Livewire\OtpVerification;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
@@ -41,9 +42,7 @@ Route::get('/profile', function () {
     return view('/profile');
 });
 
-Route::get('/otp-verification', function() {
-    return view('livewire.otp-verification');
-}) -> name('otp-verification');
+Route::get('/otp-verification', OtpVerification::class) -> name('otp-verification');
 
 Route::get('/addRab/{project_id}', AddRab::class);
 
