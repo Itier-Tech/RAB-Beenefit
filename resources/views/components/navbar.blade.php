@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <div class="container justify-content-end">
+    <div class="nav-elem-container">
         <button class="navbar-toggler" id="navbar-toggler" onclick="open_sidebar()">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,7 +17,7 @@
             <span class="navbar-text mx-3">|</span>
 
             <!-- User Profile -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown">
                         <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" class="rounded-circle profile-picture">

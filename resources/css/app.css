@@ -2,17 +2,23 @@
     color:red;
 }
 
+.main-container {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 .rab-container {
+    overflow: hidden;
     padding-left: 18rem;
     padding-top: 15vh;
     margin-bottom: 15vh;
     transition: margin-left 0.3s ease;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
 }
 
 @media(max-width:768px) {
     .rab-container {
         padding-left: 10vw;
+        padding-top: 25vh;
     }
 }

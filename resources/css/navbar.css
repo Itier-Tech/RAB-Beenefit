@@ -7,16 +7,16 @@
     width: 100vw;
     position: fixed;
     top: 0;
-    z-index: 999;
+    right: 0;
+    z-index: 10;
 }
 
-.container {
+.nav-elem-container {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-left: 2rem;
-    padding-right: 5%;
 }
 
 .navbar-toggler {
@@ -36,6 +36,7 @@
     flex-basis: unset;
     flex-grow: unset;
     align-items: center;
+    margin-left: auto;
 }
 
 .navbar-text {
@@ -90,12 +91,27 @@
         left: 0;
     }
     .navbar-toggler {
-        display: block;
+        display: inline-flex;
+        align-self: flex-start;
+        text-align: left;
     }
     .navbar-collapse {
-        margin-left: 5%;
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+    .navbar-text {
+        display: none;
+    }
+    .form-inline {
+        width: 100%;
+    }
+    .navbar-nav {
+        margin-left: auto;
+    }
+    .nav-item {
+        margin-left: auto;
     }
     .searchTerm {
-        width: 10rem;
+        width: 100%;
     }
 }

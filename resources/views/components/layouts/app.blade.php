@@ -56,12 +56,9 @@
 <body style="background-color: #E9E9E9;">
     <x-navbar />
     <x-sidebar/>
-    <div >
-        <main class="rab-container">
-            @yield('content')
-        </main>
+    <div class="rab-container">
+        @yield('content')
     </div>
     @livewireScripts
-    <footer>
 </body>
 </html>
