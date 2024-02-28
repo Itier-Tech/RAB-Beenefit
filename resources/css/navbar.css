@@ -82,6 +82,7 @@
         left: 0;
     }
     .navbar-toggler {
+        width: min-content;
         display: block;
         text-align: left;
         grid-column: 1 / 1;
