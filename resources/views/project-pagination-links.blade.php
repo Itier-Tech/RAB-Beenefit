@@ -11,12 +11,12 @@ if (! isset($scrollTo)) {
         }
         .pagination {
             list-style-type: none;
-            overflow: hidden;
             display: flex;
+            min-width: fit-content;
             width: 100%;
             align-items: stretch;
             justify-content:space-evenly;
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
         }
         .page-item button {

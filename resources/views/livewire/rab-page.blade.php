@@ -73,7 +73,7 @@
             @endif
         </table>
     </div>
-    <div style="width: 70%; margin:auto;">
+    <div class="pagination-container">
         {{ $rabList->links('project-pagination-links') }}
     </div>
 </div>

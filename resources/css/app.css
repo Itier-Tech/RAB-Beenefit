@@ -17,6 +17,18 @@
     width: 100%;
 }
 
+.pagination-container {
+    width: 70%;
+    margin: auto;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+.pagination-container::-webkit-scrollbar {
+    display: none;
+}
+
 @media(max-width:768px) {
     .rab-container {
         width: 100%;
