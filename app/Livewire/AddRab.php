@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AddRab extends Component
 {
     public $projectId;
+    public $projectName;
 
     public function mount ($project_id) {
         // Check if the logged in user has access to the project
@@ -17,6 +18,13 @@ class AddRab extends Component
             abort(403, 'Forbidden access');
         }
         $this->projectId = $project_id;
+        $project = Project::find($project_id);
+
+        if ($project) {
+            $this->projectName = $project->project_name;
+        } else {
+            $this->projectName = 'Nama Proyek Tidak Ditemukan';
+        }
     }
     public function create()
     {
