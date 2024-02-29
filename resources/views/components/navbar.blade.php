@@ -22,7 +22,7 @@
                     <span style="margin-left: 0.4rem; font-weight: 700; cursor: default;">{{ Auth::user()->full_name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/userUpdate">Profile</a>
+                    <a class="dropdown-item" href="/user-update">Profile</a>
                     <div class="dropdown-divider"></div>
                     <!-- Logout Form -->
                     <form id="logout-form" action="/logout" method="POST" style="display: none;">
