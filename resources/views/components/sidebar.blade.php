@@ -6,11 +6,11 @@
             <div style="margin-left: 10px; font-weight: 800;">Dashboard</div>
         </div>
         <div class="dashboard-items">
-            <a class="dashboard-item" href="/projectCreate">
+            <a class="dashboard-item" href="/project-create">
                 <img src="/images/note-add.png" style="height: 15px; Width: 15px; margin-right: 7px;">
                 Proyek Baru
             </a>
-            <a class="dashboard-item" href="/project">
+            <a class="dashboard-item" href="/">
                 <img src="/images/document-text.png" style="height: 15px; Width: 15px; margin-right: 7px;">
                 Proyek Berlangsung
             </a>

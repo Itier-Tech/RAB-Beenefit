@@ -46,7 +46,7 @@ class RabPage extends Component
 
     public function redirectToAddRab()
     {
-        return redirect('/addRab' . '/' . $this->project_id);
+        return redirect('/add-rab' . '/' . $this->project_id);
     }
 
     public function deleteRab($rab_id)

@@ -30,17 +30,7 @@ use App\Http\Controllers\PDFController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('homepage'); // delete soon
-});
-
-Route::get('/profile', function () {
-    return view('/profile'); // delete soon
-});
+Route::get('/', ProjectView::class)->middleware('auth');
 
 Route::get('/login', function () {
     return view('login');
@@ -54,27 +44,21 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/otp-verification', OtpVerification::class)->name('otp-verification');
 
-Route::get('/project', ProjectView::class);
-Route::get('/projectCreate', ProjectCreate::class);
-Route::get('/add-rab/{project_id}', AddRab::class);
-Route::delete('/project/{project_id}', function ($project_id) {});
+Route::get('/project-create', ProjectCreate::class)->middleware('auth');
+Route::get('/add-rab/{project_id}', AddRab::class)->middleware('auth');
+// Route::delete('/project/{project_id}', function ($project_id) {})->middleware('auth');
 
-Route::get('/user', function () {
-    return User::all();
-});
+Route::get('/user-update', Profile::class)->middleware('auth');
+Route::post('/profpic-update', [ProfileController::class, 'updateProfilePicture'])->middleware('auth');
+Route::post('/profile-update', [ProfileController::class, 'updateProfile'])->middleware('auth');
 
-Route::get('/user-update', Profile::class);
-Route::post('/profpic-update', [ProfileController::class, 'updateProfilePicture']);
-Route::post('/profile-update', [ProfileController::class, 'updateProfile']);
+Route::get('/rab/{project_id}', RabPage::class)->middleware('auth');
+Route::post('/rab/{project_id}', [RabController::class, 'create'])->middleware('auth');
+Route::post('/rab_item', function (Request $request) {})->middleware('auth');
+Route::get('/rabDownload', RabFinal::class)->middleware('auth'); // delete soon
+Route::get('rab/{rab_id}/final', [PDFController::class, 'index'])->middleware('auth');
+Route::post('/rab/{rab_id}/item/add', [RabItemController::class, 'addItem'])->name('rab.item.add')->middleware('auth');
+Route::post('/rab/{rab_id}/discount', [RabController::class, 'applyDiscount'])->name('rab.applyDiscount')->middleware('auth');
 
-Route::get('/rab/{project_id}', RabPage::class);
-Route::get('/rab/{rab_id}', function ($rab_id) {});
-Route::post('/rab/{project_id}', [RabController::class, 'create']);
-Route::post('/rab_item', function (Request $request) {});
-Route::get('/rabDownload', RabFinal::class); // delete soon
-Route::get('rab/{rab_id}/final', [PDFController::class, 'index']);
-Route::post('/rab/{rab_id}/item/add', [RabItemController::class, 'addItem'])->name('rab.item.add');
-Route::post('/rab/{rab_id}/discount', [RabController::class, 'applyDiscount'])->name('rab.applyDiscount');
-
-Route::get('/generate-pdf/{rab_id}', [PDFController::class, 'generatePDF']);
+Route::get('/generate-pdf/{rab_id}', [PDFController::class, 'generatePDF'])->middleware('auth');
 Route::get('/generatepdf', [PDFController::class, 'index']); // delete soon
