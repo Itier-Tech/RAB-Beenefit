@@ -12,7 +12,7 @@ class ProjectCreate extends Component
 
     public function rules() {
         return [
-            'project_name' => ['required', 'unique:projects,project_name'],
+            'project_name' => ['required'],
             'client_name' => ['required'],
             'project_address' => ['required'],
             'budget' => ['required', 'integer'],
