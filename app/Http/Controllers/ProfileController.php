@@ -30,6 +30,8 @@ class ProfileController extends Controller
 
             session()->flash('message', 'Profile picture updated successfully.');
         } else {
+            $user = Auth::user();
+            $user->update(['profpic' => '../images/profpic-icon.png']);
             session()->flash('message', 'No image selected.');
         }
 

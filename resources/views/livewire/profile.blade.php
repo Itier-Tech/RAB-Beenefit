@@ -67,7 +67,7 @@
             transition: margin-left 0.3s ease;
         }
 
-        .profpic {
+        #profpic {
             width: 15.625rem;
         }
 
@@ -97,7 +97,7 @@
                 padding: 2rem;
             }
 
-            .profpic {
+            #profpic {
                 width: 10rem;
             }
 
@@ -113,7 +113,7 @@
     </style>
     <div class="profile-container">
         <div class="profile-img-container" style="position: relative; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editFotoProfilModal" >
-            <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" class="profpic"/>
+            <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" id="profpic"/>
             <div style="position: absolute; bottom: 0; right: 0; background-color= #FF700D;">
                 <i class="fas fa-plus-circle" style="font-size: 40px; color: black;"></i>
             </div>
