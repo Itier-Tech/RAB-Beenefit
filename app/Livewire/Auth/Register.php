@@ -4,6 +4,7 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 
 
 class Register extends Component
@@ -24,8 +25,7 @@ class Register extends Component
 
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        $user = User::create($validatedData);
-        session(['user_id' => $user->user_id]);
+        session(['user_data' => Crypt::encrypt($validatedData)]);
         // Auth::login($user, true);
 
         // return redirect()->to('/otp-verification');

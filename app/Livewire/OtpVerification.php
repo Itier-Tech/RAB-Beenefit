@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Cache;
 use App\Mail\OtpMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class OtpVerification extends Component
 {
@@ -20,15 +22,14 @@ class OtpVerification extends Component
 
     public function mount()
     {
-        $user_id = session('user_id');
-        $user = User::find($user_id);
+        $user_data = Crypt::decrypt(session('user_data'));
 
-        if (!$user) {
+        if (!$user_data) {
             return Redirect::to('/register');
         }
 
-        $this->phone = $user->phone;
-        $this->userEmail = $user->email;
+        $this->phone = $user_data['phone'];
+        $this->userEmail = $user_data['email'];
         $this->setOtp();
     }
 
@@ -48,7 +49,11 @@ class OtpVerification extends Component
 
         if ($inputOtp === $storedOtp) {
             // OTP valid
-            Redirect::to('/login');
+            // Simpan data user
+            $user = User::create(Crypt::decrypt(session('user_data')));
+            session()->forget('user_data');
+            Auth::login($user, false);
+            Redirect::to('/project');
             Cache::forget('otp_'.$this->phone);
         } else {
             // OTP tidak valid
