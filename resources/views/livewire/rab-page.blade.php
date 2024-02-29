@@ -42,7 +42,7 @@
             }
         }
     </style>
-    <h2 style="font-weight:bold;">RAB {{ $project_name }}</h2>
+    <h2 style="margin: 0; font-weight:bold;">RAB {{ $project_name }}</h2>
     <button class="btn" wire:click='addRab' style="background-color: #FFD700; padding: 0.5rem 0.8rem; border:none; margin: 1.5vh 0 0 0;">Buat RAB Baru +</button>
     <div class="table-container">
         <table>
