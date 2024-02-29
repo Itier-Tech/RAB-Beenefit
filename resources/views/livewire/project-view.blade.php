@@ -22,7 +22,7 @@
             margin: 3% 0;
             padding: 2em 2em;
             width: 95%;
-            min-width: 15rem;
+            min-width: 13rem;
         }
 
         .project-header {
@@ -130,13 +130,24 @@
         }
 
         @media (max-width: 375px) {
+            .main-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
             .flex-container {
                 padding: 0 auto;
+            }
+            li {
+                display:flex;
             }
             .project-list {
                 margin-left: 0;
                 margin-right: 0;
                 align-self: center;
+                min-width:0;
+            }
+            p {
+                min-width: 0;
             }
         }
 
