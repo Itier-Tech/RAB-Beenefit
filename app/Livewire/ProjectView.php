@@ -5,7 +5,6 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Livewire\WithPagination;
 
 class ProjectView extends Component
@@ -46,6 +45,9 @@ class ProjectView extends Component
 
     public function changeProjectStatus($p_id)
     {
+        if (Project::where('project_id', $p_id)->first()->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden access');
+        }
         $proj = Project::find($p_id);
         $proj->status = $proj->status === 1 ? 0:1;
         $proj->save();
@@ -53,7 +55,6 @@ class ProjectView extends Component
 
     public function render()
     {
-        $project_list;
         if ($this->project_name != '') {
             $project_list = Project::where('user_id', Auth::user()->user_id)->where('project_name', 'LIKE', '%'. $this->project_name . '%');
         } else {

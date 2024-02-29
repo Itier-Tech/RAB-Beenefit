@@ -160,9 +160,10 @@
             }
         }
     </style>
-    <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB Berlangsung ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
+    <h2 style="margin: 5vh 0 0 0; font-weight:bold;">RAB {{$project_name == '' ? "Berlangsung" : $project_name}} ({{ $project->total() }} {{$status_select == 2 ? "proyek" : ($status_select == 1 ? "Finalisasi" : "Input")}})</h2>
     <button wire:click="createProject" class="btn btn-warning" style="background-color: #FFD700; padding: 0.6rem; border:none; margin: 2vh 0 1vh 0;">Buat Proyek Baru</button>
     <div class="flex-container">
+    <!-- Daftar proyek -->
     @if(count($project) > 0)
             <ul>
                 @foreach ($project as $p)
@@ -177,8 +178,8 @@
                                         @if ($p->status != 0)
                                             checked="true"
                                         @endif
-                                    id={{"switch" . $p->project_id}} class="switch" />
-                                    <label for={{"switch" . $p->project_id}} class="switch-lbl">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</label>
+                                    id={{"switch" . $p->project_id }} class="switch" />
+                                    <label for={{"switch" . $p->project_id }} class="switch-lbl">{{ $p->status === 0 ? "Input" : "Finalisasi" }}</label>
                                 </div>
                             </div>
                             <div style="display:flex; align-items:center; gap:0.4rem;">
