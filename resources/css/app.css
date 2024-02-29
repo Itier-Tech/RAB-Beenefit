@@ -1,18 +1,50 @@
 .error-msg {
     color:red;
+    margin-bottom: 0;
+}
+
+.main-container {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .rab-container {
+
     padding-left: 15rem;
     padding-top: 15vh;
     margin-bottom: 15vh;
     transition: margin-left 0.3s ease;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    padding-left: 18rem;
+    padding-top: 5rem;
+    margin-bottom: 15vh;
+    transition: margin-left 0.3s ease;
+    width: 100%;
+}
+
+.pagination-container {
+    width: 70%;
+    margin: auto;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+.pagination-container::-webkit-scrollbar {
+    display: none;
+>>>>>>> dev
 }
 
 @media(max-width:768px) {
     .rab-container {
-        padding-left: 0vw;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
+        padding-top: 8rem;
+>>>>>>> dev
     }
 }

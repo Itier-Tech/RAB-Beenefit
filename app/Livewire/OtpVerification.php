@@ -35,10 +35,9 @@ class OtpVerification extends Component
     private function setOtp()
     {
         $otpCode = rand(1000, 9999);
-        Cache::put('otp_'.$this->phone, $otpCode, 300); // Store the OTP in cache for 5 minutes
+        Cache::put('otp_'.$this->phone, strval($otpCode), 300); // Store the OTP in cache for 5 minutes
         Mail::to($this->userEmail)->send(new OtpMail($otpCode));
         $this->resetTimer();
-        return redirect("/");
     }
 
     public function verifyOtp()
@@ -49,7 +48,7 @@ class OtpVerification extends Component
 
         if ($inputOtp === $storedOtp) {
             // OTP valid
-            Redirect::to('/');
+            Redirect::to('/login');
             Cache::forget('otp_'.$this->phone);
         } else {
             // OTP tidak valid
@@ -71,6 +70,6 @@ class OtpVerification extends Component
 
     public function render()
     {
-        return view('livewire.otp-verification')->layout('layouts.app');
+        return view('livewire.otp-verification')->extends('layouts.app');
     }
 }

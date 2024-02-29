@@ -4,8 +4,8 @@
             <img src="{{ asset('images/logo_beenefit.png') }}" alt="Beenefit Logo" style="width: 120px; margin-bottom: 1rem;">
             <h2 style="font-weight: bold; margin-bottom: 0.5rem;">Verifikasi Akun</h2>
             <div class="text-center" style="margin-top: 2rem;">
-                <p>Kode OTP sudah dikirim ke nomor {{ $phone }}
-                    <a wire:click="resendOtp" class="text-decoration-none" style="color: #228B22; font-weight: bold; cursor: pointer;">(ubah nomor)</a>
+                <p>Kode OTP sudah dikirim ke email {{ $userEmail }}
+                    <a wire:click="resendOtp" class="text-decoration-none" style="color: #228B22; font-weight: bold; cursor: pointer;">(Kirim ulang kode)</a>
                 </p>
             </div>
         </div>

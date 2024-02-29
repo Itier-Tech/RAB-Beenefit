@@ -29,7 +29,7 @@
             }
         }
     </style>
-    <h1 style="font-weight: bold;">Proyek Baru</h1>
+    <h2 style="margin: 0; font-weight: bold;">Proyek Baru</h1>
     <p>Ayo masukkan detail informasi mengenai proyek barumu! Nama proyek, nama client, alamat, budget.</p>
     <form wire:submit.prevent="create" class="main-form" style="display: flex; flex-direction: column; gap: 1rem;">
         <!-- Row for Project Name -->
