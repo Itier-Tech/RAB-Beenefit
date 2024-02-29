@@ -38,7 +38,7 @@ class RabPage extends Component
 
     public function rabDetails($rab_id)
     {
-        $openedRab = Rab::find($rab_id)->first();
+        $openedRab = Rab::where('rab_id',$rab_id)->first();
         if ($openedRab->project_id != $this->project_id) {
             abort(403, 'Forbidden access');
         }
@@ -51,7 +51,7 @@ class RabPage extends Component
 
     public function deleteRab($rab_id)
     {
-        $deletedRab = Rab::find($rab_id)->first();
+        $deletedRab = Rab::where('rab_id',$rab_id)->first();
         // Cek apakah id rab masih ada dalam proyek yang sedang dibuka
         if ($deletedRab->project_id != $this->project_id) {
             abort(403, 'Forbidden access');
