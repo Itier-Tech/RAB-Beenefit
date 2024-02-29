@@ -33,10 +33,29 @@
                 }
             }
         });
-    </script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var hapusFotoProfilBtn = document.getElementById('hapusFotoProfil');
+            var newProfPicInput = document.getElementById('newProfPic');
+            var imagePreview = document.getElementById('imagePreview');
+
+            hapusFotoProfilBtn.addEventListener('click', function () {
+                newProfPicInput.value = '';
+                imagePreview.src = "/images/profpic-icon.png";
+            });
+        });
+        </script>
     <style>
         button:hover {
             transform: scale(1.05);
+        }
+
+        .profile-img-container {
+        transition: transform 0.3s ease;
+        }
+
+        .profile-img-container:hover {
+            transform: scale(1.1);
         }
 
         .profile-container {
