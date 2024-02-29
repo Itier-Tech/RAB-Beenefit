@@ -59,7 +59,7 @@ class Profile extends Component
         ]);
 
         session()->flash('message', 'Profile updated successfully.');
-        redirect('/userUpdate');
+        redirect('/user-update');
     }
 
     public $passwordLama;
@@ -87,7 +87,7 @@ class Profile extends Component
         }
 
         $this->reset(['passwordLama', 'passwordBaru', 'retypePasswordBaru']);
-        redirect('/userUpdate');
+        redirect('/user-update');
     }
 
     public function updateProfilePicture(Request $request)
@@ -110,7 +110,7 @@ class Profile extends Component
             session()->flash('message', 'No image selected.');
         }
 
-        return redirect('/userUpdate');
+        return redirect('/user-update');
     }
 
     public function render()

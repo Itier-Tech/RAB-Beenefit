@@ -150,7 +150,7 @@
             <div class="modal fade" id="editFotoProfilModal" tabindex="-1" aria-labelledby="editFotoProfilModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <form enctype="multipart/form-data" method="POST" action="/profpicUpdate">
+                        <form enctype="multipart/form-data" method="POST" action="/profpic-update">
                             @csrf
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editFotoProfilModalLabel" style="font-weight: 800;">Ubah Foto Profil Anda</h5>
@@ -226,7 +226,7 @@
             <div class="modal fade" id="editProfilModal" tabindex="-1" aria-labelledby="editProfilModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
-                        <form enctype="multipart/form-data" method="POST" action="/profileUpdate">
+                        <form enctype="multipart/form-data" method="POST" action="/profile-update">
                             @csrf
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editProfilModalLabel" style="font-weight: 800;">Edit Profil</h5>

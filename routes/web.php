@@ -35,75 +35,46 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('homepage');
+    return view('homepage'); // delete soon
 });
 
 Route::get('/profile', function () {
-    return view('/profile');
+    return view('/profile'); // delete soon
 });
 
-Route::get('/otp-verification', OtpVerification::class) -> name('otp-verification');
-
-Route::get('/addRab/{project_id}', AddRab::class);
-
-Route::get('/login', function () {return view('login');})->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/login', function () {
+    return view('login');
+})->name('login')->middleware('guest');
+Route::middleware('guest')->group(function () {
+    Route::get('/register', Register::class)->name('register');
+});
 
 Auth::routes(['login' => false, 'register' => false]);
-
-Route::middleware('guest')->group(function() {
-    Route::get('/register', Register::class) -> name('register');
-});
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/otp-verification', OtpVerification::class)->name('otp-verification');
 
 Route::get('/project', ProjectView::class);
 Route::get('/projectCreate', ProjectCreate::class);
+Route::get('/add-rab/{project_id}', AddRab::class);
+Route::delete('/project/{project_id}', function ($project_id) {});
 
-Route::get('/user', function() {
-    $user = User::all();
-    return $user;
+Route::get('/user', function () {
+    return User::all();
 });
 
-Route::get('/userUpdate', Profile::class);
-Route::post('/profpicUpdate', [ProfileController::class, 'updateProfilePicture']);
-Route::post('/profileUpdate', [ProfileController::class, 'updateProfile']);
+Route::get('/user-update', Profile::class);
+Route::post('/profpic-update', [ProfileController::class, 'updateProfilePicture']);
+Route::post('/profile-update', [ProfileController::class, 'updateProfile']);
 
-/**
- * Display all RAB for the project
- */
 Route::get('/rab/{project_id}', RabPage::class);
-
-/**
- * Display rab with the inputted id
- */
-Route::get('/rab/{rab_id}', function ($rab_id) {
-    //
-});
-
-/**
- * Add A New RAB for the project
- */
-Route::post('/rab/{project_id}', [RabController::class, 'create'] );
-
-/**
- * Add A New item for the RAB for the project
- */
-Route::post('/rab_item', function (Request $request) {
-    //
-});
-
-/**
- * Delete An Existing Project
- */
-Route::delete('/project/{project_id}', function ($project_id) {
-    //
-});
-
-Route::get('/rabDownload', RabFinal::class);
+Route::get('/rab/{rab_id}', function ($rab_id) {});
+Route::post('/rab/{project_id}', [RabController::class, 'create']);
+Route::post('/rab_item', function (Request $request) {});
+Route::get('/rabDownload', RabFinal::class); // delete soon
 Route::get('rab/{rab_id}/final', [PDFController::class, 'index']);
-Route::get('/generate-pdf/{rab_id}', [PDFController::class, 'generatePDF']);
-
 Route::post('/rab/{rab_id}/item/add', [RabItemController::class, 'addItem'])->name('rab.item.add');
 Route::post('/rab/{rab_id}/discount', [RabController::class, 'applyDiscount'])->name('rab.applyDiscount');
 
-Route::get('/generatepdf', [PDFController::class, 'index']);
+Route::get('/generate-pdf/{rab_id}', [PDFController::class, 'generatePDF']);
+Route::get('/generatepdf', [PDFController::class, 'index']); // delete soon
