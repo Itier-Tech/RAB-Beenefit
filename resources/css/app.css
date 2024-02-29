@@ -11,7 +11,7 @@
 .rab-container {
     overflow: hidden;
     padding-left: 18rem;
-    padding-top: 15vh;
+    padding-top: 5rem;
     margin-bottom: 15vh;
     transition: margin-left 0.3s ease;
     width: 100%;
@@ -36,6 +36,6 @@
         flex-direction: column;
         align-items: center;
         padding-left: 0;
-        padding-top: 25vh;
+        padding-top: 8rem;
     }
 }

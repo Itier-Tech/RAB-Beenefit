@@ -1,4 +1,4 @@
-<div style="width: 100%; margin:5% 0; padding-left: 4rem; padding-right: 4rem;">
+<div style="width: 100%; margin-top:5vh; padding-left: 4rem; padding-right: 4rem;">
     <style>
         .form-control {
             width: 60%;
