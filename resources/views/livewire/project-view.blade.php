@@ -28,6 +28,7 @@
 
         .add-proj-img {
             height: 25vh;
+            min-height: 0;
         }
 
         .add-proj-cont {
@@ -128,7 +129,7 @@
             }
         }
 
-        @media (max-width: 1021px) {
+        @media (max-width: 1160px) {
             .flex-container {
                 flex-direction:column-reverse;
             }
@@ -223,7 +224,7 @@
                             Semua proyek sedang dalam tahap finalisasi
                         @endif
                         </p>
-                        <button wire:click="createProject" class="btn btn-warning" style="background-color:#FFD700; padding:0.8rem; border:none; width:30%;">Tambah Proyek</button>
+                        <button wire:click="createProject" class="btn btn-warning" style="background-color:#FFD700; padding:0.8rem; border:none; width:30%; min-width:fit-content;">Tambah Proyek</button>
                     </div>
             @else
                 <div wire:init="askPrevPage"></div>
