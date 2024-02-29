@@ -1,4 +1,4 @@
-<div style="width: 80%; margin-top: 5vh;">
+<div style="width: 100%; padding-left: 4rem; padding-right: 4rem;">
     <style>
         p {
             min-width: 30rem;
@@ -32,7 +32,7 @@
 
         .add-proj-cont {
             margin: 12vh auto;
-            text-align:center; 
+            text-align:center;
             align-items: center;
             width:80%;
         }
@@ -44,14 +44,14 @@
 
         .flex-container {
             display:flex;
-            width:100%; 
+            width:100%;
             margin:0;
         }
 
         .filter {
             align-self:flex-start;
-            min-width:15rem; 
-            max-width:20%; 
+            min-width:15rem;
+            max-width:20%;
             margin-left:0;
         }
 
@@ -67,9 +67,9 @@
         }
 
         ul {
-            list-style-type: none; 
-            width:80%; 
-            padding-left:0; 
+            list-style-type: none;
+            width:80%;
+            padding-left:0;
             padding-right:0;
         }
 
@@ -185,7 +185,7 @@
                             <div style="display:flex; align-items:center; gap:0.4rem;">
                                 <img src="{{ asset('images/clock icon.png') }}" style="color: grey; width:1rem; height:1rem; display:inline-block;" />
                                 <p style="color: grey; display: inline-block; margin:0.5rem 0;">
-                                    @if ($p->created_at->diffInDays(now()) > 0)  
+                                    @if ($p->created_at->diffInDays(now()) > 0)
                                         {{$p->created_at->diffInDays(now()) . ' hari yang lalu'}}
                                     @elseif ($p->created_at->diffInHours(now()) > 0)
                                         {{ $p->created_at->diffInHours(now()) . ' jam yang lalu' }}
@@ -196,7 +196,7 @@
                                     @endif
                             </div>
                             <p style="font-size: 1.1rem; margin-bottom:0.5rem;">{{ $p->client_name }} ; Rp. {{ number_format($p->budget , 0, ',', '.') }}</p>
-                            <div style="display:flex; align-items:center; gap:0.4rem; word-wrap: break-word;">    
+                            <div style="display:flex; align-items:center; gap:0.4rem; word-wrap: break-word;">
                                 <img src="{{ asset('gps icon.png') }}" style="display:inline-block; color: grey; width:1rem;" />
                                 <p style="min-width: 0; color: grey; margin:0.5rem 0;">{{ $p->project_address }}</p>
                             </div>

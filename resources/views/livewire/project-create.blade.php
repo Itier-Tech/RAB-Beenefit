@@ -1,12 +1,12 @@
-<div style="width: 80%; margin-top:5vh;">
+<div style="width: 100%; margin:5% 0; padding-left: 4rem; padding-right: 4rem;">
     <style>
         .form-control {
             width: 60%;
         }
         .submit-btn {
-            background-color: #FFD700; 
-            border: none; 
-            padding: 0.5rem; 
+            background-color: #FFD700;
+            border: none;
+            padding: 0.5rem;
             width: 60%;
             width:60%;
         }
@@ -37,7 +37,7 @@
             <!-- Email input -->
             <div class="form-group" style="flex: 1;">
                 <label for="project_name" class="form-label">Nama Proyek</label><br>
-                <input type="project_name" id="project_name" wire:model="project_name" style="border-color: #228B22" 
+                <input type="project_name" id="project_name" wire:model="project_name" style="border-color: #228B22"
                         class="form-control @error('project_name') is-invalid @enderror" placeholder="Masukkan nama proyek" >
                 <!-- Error message for project_name -->
                 @error('project_name')
@@ -50,7 +50,7 @@
             <!-- Client name input -->
             <div class="form-group" style="flex: 1;">
                 <label for="client_name" class="form-label">Nama klien</label><br>
-                <input type="tel" id="client_name" wire:model="client_name" style="border-color: #228B22" 
+                <input type="tel" id="client_name" wire:model="client_name" style="border-color: #228B22"
                         class="form-control @error('client_name') is-invalid @enderror" placeholder="Masukkan nama klien">
                 <!-- Error message for client_name -->
                 @error('client_name')
@@ -63,7 +63,7 @@
             <!-- Project address input -->
             <div class="form-group" style="flex: 1;">
                 <label for="project_address" class="form-label">Alamat Proyek</label><br>
-                <input type="tel" id="project_address" wire:model="project_address" style="border-color: #228B22" 
+                <input type="tel" id="project_address" wire:model="project_address" style="border-color: #228B22"
                         class="form-control @error('project_address') is-invalid @enderror" placeholder="Masukkan alamat proyek">
                 <!-- Error message for project_address -->
                 @error('project_address')
@@ -76,7 +76,7 @@
             <!-- Budget input -->
             <div class="form-group" style="flex: 1;">
                 <label for="budget" class="form-label">Budget</label><br>
-                <input type="tel" id="budget" wire:model="budget" style="border-color: #228B22" 
+                <input type="tel" id="budget" wire:model="budget" style="border-color: #228B22"
                         class="form-control @error('budget') is-invalid @enderror" placeholder="Masukkan budget proyek">
                 <!-- Error message for budget -->
                 @error('budget')

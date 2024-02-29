@@ -33,20 +33,92 @@
                 }
             }
         });
-    </script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var hapusFotoProfilBtn = document.getElementById('hapusFotoProfil');
+            var newProfPicInput = document.getElementById('newProfPic');
+            var imagePreview = document.getElementById('imagePreview');
+
+            hapusFotoProfilBtn.addEventListener('click', function () {
+                newProfPicInput.value = '';
+                imagePreview.src = "/images/profpic-icon.png";
+            });
+        });
+        </script>
     <style>
         button:hover {
             transform: scale(1.05);
         }
+
+        .profile-img-container {
+        transition: transform 0.3s ease;
+        }
+
+        .profile-img-container:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-container {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: margin-left 0.3s ease;
+        }
+
+        .profpic {
+            width: 15.625rem;
+        }
+
+        .profile-text {
+            font-weight: 800;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .buttons {
+            display: flex;
+        }
+
+        .edit-btn {
+            margin: 0.5rem;
+        }
+
+        @media (max-width:768px) {
+            .profile-container {
+                width: 100%;
+            }
+        }
+
+        @media(max-width:540px) {
+            .profile-container {
+                padding: 2rem;
+            }
+
+            .profpic {
+                width: 10rem;
+            }
+
+            .profile-text {
+                font-size: 0.8rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+
     </style>
-    <div class="profile-container" style="padding: 5rem; display: flex; flex-direction: column;  align-items: center; justify-content: center; transition: margin-left 0.3s ease;">
+    <div class="profile-container">
         <div class="profile-img-container" style="position: relative; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editFotoProfilModal" >
-            <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" style="width: 250px"/>
+            <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" class="profpic"/>
             <div style="position: absolute; bottom: 0; right: 0; background-color= #FF700D;">
                 <i class="fas fa-plus-circle" style="font-size: 40px; color: black;"></i>
             </div>
         </div>
-        <div class="p-4" style="font-weight: 800;display: flex; flex-direction: column;  align-items: center;">
+        <div class="p-4 profile-text">
             <div>
             {{ Auth::user()->full_name }}
             </div>
@@ -57,18 +129,18 @@
             {{ Auth::user()->phone }}
             </div>
         </div>
-        <div style="display: flex;">
-            <div style="margin: 0.5rem;">
+        <div class="buttons">
+            <div class="edit-btn">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#editRekeningModal" style="width: 150px; background-color: #228B22; border: none; padding: 0.6rem; color: white; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">
                     Edit Rekening
                 </button>
             </div>
-            <div style="margin: 0.5rem;">
+            <div class="edit-btn">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#editProfilModal" style="width: 150px; background-color: #228B22;  border: none; padding: 0.6rem; color: white; cursor: pointer; transition: transform 0.3s ease; border-radius: 10px;">
                     Edit Profile
                 </button>
             </div>
-            <div style="margin: 0.5rem;">
+            <div class="edit-btn">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#editPasswordModal" style="width: 150px; background-color: #FFD700; border: none; padding: 0.6rem; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">
                     Edit Password
                 </button>
@@ -88,14 +160,14 @@
                                 <div class="col-md-6">
                                     <div class="mb-3 col-md-6">
                                             <label for="newProfPic" class="btn btn-primary text-left" style="width: 10rem; background-color: rgba(0,0,0,0); border: none; color: black; transition: transform 0.3s ease">
-                                                <img src="/images/charm_upload.png" style="height: 20px; width: 20px;">
+                                                <img src="/images/charm_upload.png" style="height: 1.25rem; width: 1.25rem;">
                                                 Unggah Gambar
                                             </label>
                                             <input type="file" class="form-control d-none" id="newProfPic" accept="image/png, image/jpeg, image/jpg" name="newProfPic">
                                         </div>
                                         <div class="mb-3 col-md-3">
                                             <button type="button" class="btn btn-danger text-left" id="hapusFotoProfil" style="width: 10rem; background-color: rgba(0,0,0,0); border: none; color: black; transition: transform 0.3s ease">
-                                                <img src="/images/trash.png" style="height: 20px; width: 20px;">
+                                                <img src="/images/trash.png" style="height: 1.25rem; width: 1.25rem;">
                                                 Hapus Gambar
                                             </button>
                                         </div>

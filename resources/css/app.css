@@ -9,6 +9,13 @@
 }
 
 .rab-container {
+
+    padding-left: 15rem;
+    padding-top: 15vh;
+    margin-bottom: 15vh;
+    transition: margin-left 0.3s ease;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     padding-left: 18rem;
     padding-top: 5rem;
@@ -27,6 +34,7 @@
 
 .pagination-container::-webkit-scrollbar {
     display: none;
+>>>>>>> dev
 }
 
 @media(max-width:768px) {
@@ -37,5 +45,6 @@
         align-items: center;
         padding-left: 0;
         padding-top: 8rem;
+>>>>>>> dev
     }
 }

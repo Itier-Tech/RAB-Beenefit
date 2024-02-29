@@ -1,16 +1,16 @@
-<div style="width:80%; margin-top:5vh;">
+<div style="width:100%; padding-left: 4rem; padding-right: 4rem;">
     <style>
         .table-container {
             overflow-x:scroll;
         }
         table {
-            margin: 3vh auto; 
+            margin: 3vh auto;
             border-collapse: separate;
             border-spacing: 0 1em;
             text-align:center;
         }
         tr {
-            text-align: center; 
+            text-align: center;
         }
         button {
             background-color: #FFD700;
@@ -34,7 +34,7 @@
             /* Hide scrollbar for IE, Edge and Firefox */
             .table-container {
                 -ms-overflow-style: none;
-                scrollbar-width: none; 
+                scrollbar-width: none;
             }
             /* Hide scrollbar for Chrome, Safari and Opera */
             .table-container::-webkit-scrollbar {
@@ -53,11 +53,11 @@
                 <th class="long-col">Total Harga Jual (Rp.)</th>
                 <th class="long-col">Aksi</th>
             </tr>
-            @if($rabList->total() === 0) 
+            @if($rabList->total() === 0)
                 <div wire:init="redirectToAddRab"></div>
             @elseif(count($rabList) === 0)
                 <div wire:init="askPrevPage"></div>
-            @else 
+            @else
                 @foreach ($rabList as $rab)
                     <tr wire:key="{{ $rab->rab_id }}" style="">
                         <td>{{ $count++ }}</td>

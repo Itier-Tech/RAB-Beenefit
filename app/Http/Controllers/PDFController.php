@@ -13,6 +13,15 @@ class PDFController extends Controller
     public function generatePDF($rab_id)
     {
         $rab = Rab::findOrFail($rab_id);
+
+        // Retrieve the project associated with this RAB
+        $project = $rab->project;
+
+        // Check if the logged in user has access to the project
+        if ($project->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden access');
+        }
+        
         $items = $rab->rab_item()->get();
 
         $data = [
