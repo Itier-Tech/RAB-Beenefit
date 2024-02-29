@@ -47,6 +47,11 @@ class RabPage extends Component
 
     public function deleteRab($rab_id)
     {
+        $deletedRab = Rab::find($rab_id)->first();
+        // Cek apakah id rab masih ada dalam proyek yang sedang dibuka
+        if ($deletedRab->project_id != $this->project_id) {
+            abort(403, 'Forbidden access');
+        }
         Rab::where('rab_id', $rab_id)->delete();
         return redirect(request()->header('Referer'));
     }
