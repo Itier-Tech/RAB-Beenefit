@@ -1,8 +1,15 @@
-<div style="width: 100%; margin-top:5vh; padding-left: 4rem; padding-right: 4rem;">
+<div class="main-container" style="">
     <style>
         p {
             min-width: 30rem;
             max-width: 30rem;
+        }
+
+        .main-container {
+            width: 100%; 
+            margin-top:5vh; 
+            padding-left:4rem; 
+            padding-right: 4rem;
         }
 
         .form-control:focus {
@@ -50,6 +57,10 @@
         }
 
         .filter {
+            background-color : white;
+            border-radius: 25px;
+            margin: 3% 0;
+            padding: 2em 2em;
             align-self:flex-start;
             min-width:15rem;
             max-width:20%;
@@ -116,6 +127,17 @@
 
         .switch-lbl:active:after {
             width: 1rem;
+        }
+
+        @media (max-width: 375px) {
+            .flex-container {
+                padding: 0 auto;
+            }
+            .project-list {
+                margin-left: 0;
+                margin-right: 0;
+                align-self: center;
+            }
         }
 
         @media (max-width: 540px) {
@@ -232,7 +254,7 @@
         @endif
         @if ($project->total() > 0 || $status_select < 2)
         <!-- Filter -->
-        <div class="project-list filter">
+        <div class="filter">
             <img src="{{ asset("images/filter.svg") }}" style="vertical-align: text-top; display:inline-block; height:0.9rem; margin: 0 0.3rem 0 0;">
             <h5 style="display:inline-block; color:green; margin:0; font-weight:bold;">Filter</h5>
             <p style="color:green; margin-bottom:0; font-weight:bold;">Status pekerjaan</p>
