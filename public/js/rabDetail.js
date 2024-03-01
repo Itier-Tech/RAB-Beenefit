@@ -1,4 +1,19 @@
-let selectedItemCategory = ""
+let selectedItemCategory = "";
+
+function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+}
+
+function updateVolume(itemId, vol) {
+    $wire.updateItemVolume(itemId, vol);
+}
+
 function updateSelectedItemCategory() {
     // Mengambil nilai dari select kategori
     const categorySelect = document.getElementById('kategori');
@@ -14,6 +29,7 @@ function incrementVolume(itemId) {
     const volumeDisplay = document.getElementById(`volume${itemId}`);
     let volume = parseInt(volumeDisplay.innerText);
     volumeDisplay.innerText = ++volume; // Menambahkan nilai dan memperbarui tampilan
+    debounce(updateVolume(itemId,volume), 300);
 }
 
 // Fungsi untuk mengurangi volume
@@ -23,6 +39,7 @@ function decrementVolume(itemId) {
     if (volume > 0) { // Memastikan volume tidak menjadi negatif
         volumeDisplay.innerText = --volume; // Mengurangi nilai dan memperbarui tampilan
     }
+    debounce(updateVolume(itemId,volume), 300);
 }
 // Fungsi untuk menambah diskon
 function incrementDiscount(itemId) {
@@ -40,10 +57,4 @@ function decrementDiscount(itemId) {
     if (discount > 0) { // Memastikan diskon tidak menjadi negatif
         discountDisplay.innerText = --discount; // Mengurangi nilai dan memperbarui tampilan
     }
-}
-
-function deleteRow(button) {
-    // Navigasi dari button ke parent terdekatnya yang merupakan <tr> dan hapus
-    var row = button.closest('tr');
-    row.remove();
 }

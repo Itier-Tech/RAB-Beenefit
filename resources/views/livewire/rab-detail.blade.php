@@ -1,7 +1,6 @@
 <div>
     @once
         <link href="{{ asset('css/rabDetail.css') }}" rel="stylesheet">
-        <script src="{{ asset('js/rabDetail.js')}}"></script>
     @endonce
     <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
         <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
@@ -78,7 +77,7 @@
                                 Rp{{ number_format($total, 0, ',', '.') }}
                             </td>
                             <td>
-                                <button style="background:none; border-radius:25px;" onclick="deleteRow(this)">
+                                <button style="background:none; border-radius:25px;" wire:click="deleteRabItem({{$item->item_id}})">
                                     <img src="{{ asset('images/trash-icon.svg') }}">
                                 </button>
                             </td>
@@ -103,12 +102,11 @@
                         <form>
                             <div class="mb-3">
                                 <label for="kategori">Kategori</label>
-                                <select class="form-control" id="kategori" onchange="updateSelectedItemCategory()" wire:model="selectedCategory">
+                                <select wire:changed="getSelected" class="form-control" id="kategori" onchange="updateSelectedItemCategory()" wire:model="selectedCategory">
                                     <option value="">Pilih Kategori</option>
-                                    @foreach($item_list->groupBy('category') as $category => $items)
+                                    @foreach($categoryList as $category)
                                     <option value="{{ $category }}">{{ $category }}</option>
                                     @endforeach
-
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -116,8 +114,12 @@
                                 <select class="form-control" id="itemKatalog" wire:model="selectedItem">
                                     <option value="">{{ $selectedCategory }}</option>
                                     @if(!is_null($selectedCategory))
-                                        @foreach($availableItems->where('category', $selectedCategory) as $item)
+                                        @foreach($availableItems->where('category', $selectedCategory)->all() as $item)
                                         <option style="color:#000" value="{{ $item->item_id }}">{{ $item->item_name }}</option>
+                                        @endforeach
+                                    @else 
+                                        @foreach($availableItems->all() as $item)
+                                            <option style="color:#000" value="{{ $item->item_id }}">{{ $item->item_name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -193,3 +195,69 @@
     </div>
 {{-- </form> --}}
 </div>
+@script
+<script>
+    document.addEventListener('livewire:init', () => {
+        let selectedItemCategory = "";
+
+        function debounce(func, timeout = 300) {
+            let timer;
+            return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                func.apply(this, args);
+            }, timeout);
+            };
+        }
+
+        function updateVolume(itemId, vol) {
+            @this.updateItemVolume(itemId, vol);
+        }
+
+        function updateSelectedItemCategory() {
+            // Mengambil nilai dari select kategori
+            const categorySelect = document.getElementById('kategori');
+            selectedItemCategory = categorySelect.value;
+
+            // Log untuk debugging
+            console.log("Selected Item Category:", selectedItemCategory);
+            window.livewire.emit('updateCategory', selectedItemCategory);
+        }
+
+        // Fungsi untuk menambah volume
+        function incrementVolume(itemId) {
+            const volumeDisplay = document.getElementById(`volume${itemId}`);
+            let volume = parseInt(volumeDisplay.innerText);
+            volumeDisplay.innerText = ++volume; // Menambahkan nilai dan memperbarui tampilan
+            debounce(updateVolume(itemId,volume), 300);
+        }
+
+        // Fungsi untuk mengurangi volume
+        function decrementVolume(itemId) {
+            const volumeDisplay = document.getElementById(`volume${itemId}`);
+            let volume = parseInt(volumeDisplay.innerText);
+            if (volume > 0) { // Memastikan volume tidak menjadi negatif
+                volumeDisplay.innerText = --volume; // Mengurangi nilai dan memperbarui tampilan
+            }
+            debounce(updateVolume(itemId,volume), 300);
+        }
+        // Fungsi untuk menambah diskon
+        function incrementDiscount(itemId) {
+            const discountDisplay = document.getElementById(`discount${itemId}`);
+            let discount = parseInt(discountDisplay.innerText);
+            if (discount < 100) { // Memastikan diskon tidak lebih dari 100%
+                discountDisplay.innerText = ++discount; // Menambahkan nilai dan memperbarui tampilan
+            }
+        }
+
+        // Fungsi untuk mengurangi diskon
+        function decrementDiscount(itemId) {
+            const discountDisplay = document.getElementById(`discount${itemId}`);
+            let discount = parseInt(discountDisplay.innerText);
+            if (discount > 0) { // Memastikan diskon tidak menjadi negatif
+                discountDisplay.innerText = --discount; // Mengurangi nilai dan memperbarui tampilan
+            }
+        }
+    })
+</script>
+@endscript

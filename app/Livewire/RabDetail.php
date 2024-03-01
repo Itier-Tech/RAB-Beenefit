@@ -14,10 +14,16 @@ class RabDetail extends Component
 {
     public $rab_id;
     public $rab_discount;
+    public $categoryList = ['Tanaman', 'Material', 'Operasional'];
     public $selectedCategory;
-    public $availableItems = [];
+    public $availableItems;
+    public $selectedItem;
+    public $itemQuantity = 0;
+    public $discountPercentage = 0;
 
-    protected $listeners = ['refreshComponent' => '$refresh', 'updateCategory'];
+    protected $listeners = ['refreshComponent' => '$refresh', 'updateCategory' => 'updatedSelectedCategory',
+                            'decrementVol' => 'decrementVolume', 'incrementVol' => 'incrementVolume',
+                            'decrementDisc' => 'decrementDiscount', 'incrementDisc' => 'incrementDiscount'];
 
     public function mount($rab_id)
     {
@@ -42,6 +48,18 @@ class RabDetail extends Component
         $this->availableItems = Item::all();
     }
 
+    public function addItem()
+    {
+        $rab_item = new Rab_item();
+        $rab_item->rab_id = $this->rab_id;
+        $rab_item->item_id = $this->selectedItem;
+        $rab_item->item_discount = $this->discountPercentage;
+        $rab_item->item_count = $this->itemQuantity;
+        $rab_item->save();
+
+        $this->reset(['rab_id', 'selectedItem', 'discountPercentage', 'itemQuantity']);
+        return redirect(request()->header('Referer'));
+    }
 
     public function deleteRabItem($item_id)
     {
@@ -53,18 +71,17 @@ class RabDetail extends Component
         
     }
 
-    private function updateItemVolume($item_id, $operation = 'increment')
+    private function updateItemVolume($item_id, $newVol)
     {
-        $rabItem = RabItem::firstOrNew(
-            ['rab_id' => $this->rab_id, 'item_id' => $item_id],
-            ['item_count' => 0]
-        );
+        $rabItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
 
-        if ($operation === 'increment') {
-            $rabItem->item_count++;
-        } elseif ($operation === 'decrement' && $rabItem->item_count > 0) {
-            $rabItem->item_count--;
+        if($newVol === 0) {
+            $rabItem->delete();
+            $this->emitSelf('refreshComponent');
+            return;
         }
+
+        $rabItem->item_count = $newVol;
 
         $rabItem->save();
         $this->emitSelf('refreshComponent');
@@ -82,10 +99,10 @@ class RabDetail extends Component
             ->where('item_id', $item_id)
             ->decrement('item_count');
 
-            // // If after decrementing the count is 0, delete the row
-            // if ($affectedRows->item_count === 0) {
-            //     $affectedRows->delete();
-            // }
+            // If after decrementing the count is 0, delete the row
+            if ($affectedRows->item_count <= 0) {
+                $affectedRows->delete();
+            }
         }
         return redirect(request()->header('Referer'));
     }
@@ -110,16 +127,16 @@ class RabDetail extends Component
         return redirect(request()->header('Referer'));
     }
 
-    public function updatedSelectedCategory($value)
-    {
-        if (!empty($value)) {
-            // Filter `availableItems` berdasarkan kategori yang dipilih
-            $this->availableItems = Item::where('category', $value)->get();
-        } else {
-            // Reset atau ambil semua item jika tidak ada kategori yang dipilih
-            $this->availableItems = Item::all();
-        }
-    }
+    // public function updatedSelectedCategory($value)
+    // {
+    //     if (!empty($value)) {
+    //         // Filter `availableItems` berdasarkan kategori yang dipilih
+    //         $this->availableItems = Item::where('category', $value)->get();
+    //     } else {
+    //         // Reset atau ambil semua item jika tidak ada kategori yang dipilih
+    //         $this->availableItems = Item::all();
+    //     }
+    // }
 
     public function decrementDiscount($item_id)
     {

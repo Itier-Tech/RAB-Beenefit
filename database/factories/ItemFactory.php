@@ -20,7 +20,7 @@ class ItemFactory extends Factory
             'item_name' => fake()->word(),
             'buy_price' => fake()->randomNumber(6, false),
             'sell_price' => fake()->randomNumber(6, false),
-            'category' => fake()->word(),
+            'category' => fake()->randomElement(['Tanaman', 'Material', 'Operasional']),
             'unit' => fake()->randomElement(['kg', 'g', 'pcs', 'm', 'cm']),
             'created_at' => now(),
             'updated_at' => now(),
