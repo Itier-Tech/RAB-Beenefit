@@ -35,7 +35,7 @@ class ProfileController extends Controller
             session()->flash('message', 'No image selected.');
         }
 
-        return redirect('/userUpdate');
+        return redirect('/user-update');
     }
 
     public function updateProfile(Request $request)
@@ -71,6 +71,6 @@ class ProfileController extends Controller
 
         $user->update($userData);
         session()->flash('message', 'Profile updated successfully.');
-        return redirect('/userUpdate');
+        return redirect('/user-update');
     }
 }
