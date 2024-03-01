@@ -197,21 +197,28 @@
 </div>
 @script
 <script>
-    document.addEventListener('livewire:init', () => {
+    document.addEventListener('livewire:initialized', () => {
         let selectedItemCategory = "";
-
-        function debounce(func, timeout = 300) {
-            let timer;
-            return (...args) => {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                func.apply(this, args);
-            }, timeout);
-            };
-        }
+        const delay = 1500;
+        let timeout;
 
         function updateVolume(itemId, vol) {
+            console.log("vol updated");
             @this.updateItemVolume(itemId, vol);
+        }
+
+        function updateItemDisc(itemId, disc) {
+            @this.updateItemDiscount(itemId, disc);
+        }
+
+        function debouncedUpdVol(itemId,vol) {
+            clearTimeout(timeout);
+            timeout = setTimeout(updateVolume(itemId, vol), 500);
+        }
+
+        function debouncedUpdDisc(itemId,disc) {
+            clearTimeout(timeout);
+            timeout = setTimeout(updateItemDisc(itemId,disc), 500);
         }
 
         function updateSelectedItemCategory() {
@@ -229,7 +236,7 @@
             const volumeDisplay = document.getElementById(`volume${itemId}`);
             let volume = parseInt(volumeDisplay.innerText);
             volumeDisplay.innerText = ++volume; // Menambahkan nilai dan memperbarui tampilan
-            debounce(updateVolume(itemId,volume), 300);
+            debouncedUpdVol(itemId,volume);
         }
 
         // Fungsi untuk mengurangi volume
@@ -239,7 +246,7 @@
             if (volume > 0) { // Memastikan volume tidak menjadi negatif
                 volumeDisplay.innerText = --volume; // Mengurangi nilai dan memperbarui tampilan
             }
-            debounce(updateVolume(itemId,volume), 300);
+            debouncedUpdVol(itemId,volume);
         }
         // Fungsi untuk menambah diskon
         function incrementDiscount(itemId) {
@@ -248,6 +255,7 @@
             if (discount < 100) { // Memastikan diskon tidak lebih dari 100%
                 discountDisplay.innerText = ++discount; // Menambahkan nilai dan memperbarui tampilan
             }
+            debouncedUpdDisc(itemId,discount);
         }
 
         // Fungsi untuk mengurangi diskon
@@ -257,7 +265,13 @@
             if (discount > 0) { // Memastikan diskon tidak menjadi negatif
                 discountDisplay.innerText = --discount; // Mengurangi nilai dan memperbarui tampilan
             }
-        }
-    })
+            debouncedUpdDisc(itemId,discount);
+        }    
+
+        window.incrementVolume = incrementVolume;
+        window.decrementVolume = decrementVolume;
+        window.incrementDiscount = incrementDiscount;
+        window.decrementDiscount = decrementDiscount;
+    });
 </script>
 @endscript

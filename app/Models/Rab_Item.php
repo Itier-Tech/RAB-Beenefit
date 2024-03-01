@@ -16,6 +16,7 @@ class Rab_item extends Model
             'item_discount',
             'item_count',
     ];
+    protected $primaryKey = ['rab_id', 'item_id'];
 
     public function rab()
     {

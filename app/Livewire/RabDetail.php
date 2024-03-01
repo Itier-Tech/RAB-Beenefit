@@ -9,6 +9,7 @@ use App\Models\Project;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RabDetail extends Component
 {
@@ -21,9 +22,7 @@ class RabDetail extends Component
     public $itemQuantity = 0;
     public $discountPercentage = 0;
 
-    protected $listeners = ['refreshComponent' => '$refresh', 'updateCategory' => 'updatedSelectedCategory',
-                            'decrementVol' => 'decrementVolume', 'incrementVol' => 'incrementVolume',
-                            'decrementDisc' => 'decrementDiscount', 'incrementDisc' => 'incrementDiscount'];
+    protected $listeners = ['refreshComponent' => '$refresh', 'updateCategory' => 'updatedSelectedCategory',];
 
     public function mount($rab_id)
     {
@@ -67,64 +66,36 @@ class RabDetail extends Component
         Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->delete();
     }
 
-    public function getSelected() {
-        
-    }
-
-    private function updateItemVolume($item_id, $newVol)
+    public function updateItemVolume(int $item_id, int $newVol)
     {
-        $rabItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
-
         if($newVol === 0) {
             $rabItem->delete();
             $this->emitSelf('refreshComponent');
             return;
         }
 
-        $rabItem->item_count = $newVol;
+        $rabItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
 
-        $rabItem->save();
-        $this->emitSelf('refreshComponent');
+        $data = [
+            'rab_id' => $rabItem->rab_id,
+            'item_id'=> $rabItem->item_id,
+            'item_discount' => $rabItem->item_discount,
+            'item_count' => $newVol,
+        ];
+        Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->update($data);
     }
 
-    public function decrementVolume($item_id)
+    public function updateItemDiscount(int $item_id, int $newDisc)
     {
-        // Retrieve the specific Rab_item entry
-        $rab_item = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
+        $rabItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
 
-        // Check if the rab_item exists and item_count is greater than 0
-        if ($rab_item && $rab_item->item_count > 0) {
-            // Decrement the item_count
-            $affectedRows = Rab_item::where('rab_id', $this->rab_id)
-            ->where('item_id', $item_id)
-            ->decrement('item_count');
-
-            // If after decrementing the count is 0, delete the row
-            if ($affectedRows->item_count <= 0) {
-                $affectedRows->delete();
-            }
-        }
-        return redirect(request()->header('Referer'));
-    }
-
-    public function incrementVolume($item_id)
-    {
-        // Perform a manual update on the rab_items table
-        $affectedRows = Rab_item::where('rab_id', $this->rab_id)
-                                 ->where('item_id', $item_id)
-                                 ->increment('item_count');
-
-        // If no rows are affected, it means the rab_item doesn't exist, so create it.
-        if ($affectedRows === 0) {
-            Rab_item::create([
-                'rab_id' => $this->rab_id,
-                'item_id' => $item_id,
-                'item_count' => 1, // Starting count
-                // Set other fields as needed
-                'updated_at' => now() // Use the now() helper to set the current timestamp
-            ]);
-        }
-        return redirect(request()->header('Referer'));
+        $data = [
+            'rab_id' => $rabItem->rab_id,
+            'item_id'=> $rabItem->item_id,
+            'item_discount' => $newDisc,
+            'item_count' => $rabItem->item_count,
+        ];
+        Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->update($data);
     }
 
     // public function updatedSelectedCategory($value)
@@ -137,41 +108,6 @@ class RabDetail extends Component
     //         $this->availableItems = Item::all();
     //     }
     // }
-
-    public function decrementDiscount($item_id)
-    {
-        // Retrieve the specific Rab_item entry
-        $rab_item = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
-
-        // Check if the rab_item exists and item_discount is greater than 0
-        if ($rab_item && $rab_item->item_discount > 0) {
-            // Decrement the item_discount
-            $affectedRows = Rab_item::where('rab_id', $this->rab_id)
-            ->where('item_id', $item_id)
-            ->decrement('item_discount');
-        }
-        return redirect(request()->header('Referer'));
-    }
-
-    public function incrementDiscount($item_id)
-    {
-        // Perform a manual update on the rab_items table
-        $affectedRows = Rab_item::where('rab_id', $this->rab_id)
-                                 ->where('item_id', $item_id)
-                                 ->increment('item_discount');
-
-        // If no rows are affected, it means the rab_item doesn't exist, so create it.
-        if ($affectedRows === 0) {
-            Rab_item::create([
-                'rab_id' => $this->rab_id,
-                'item_id' => $item_id,
-                'item_discount' => 1, // Starting count
-                // Set other fields as needed
-                'updated_at' => now() // Use the now() helper to set the current timestamp
-            ]);
-        }
-        return redirect(request()->header('Referer'));
-    }
 
     public function updatedRabDiscount($value)
     {
