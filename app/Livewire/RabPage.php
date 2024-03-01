@@ -38,10 +38,7 @@ class RabPage extends Component
 
     public function rabDetails($rab_id)
     {
-        $openedRab = Rab::where('rab_id',$rab_id)->first();
-        if ($openedRab->project_id != $this->project_id) {
-            abort(403, 'Forbidden access');
-        }
+        return redirect('/rab-detail' . '/' . $rab_id);
     }
 
     public function redirectToAddRab()

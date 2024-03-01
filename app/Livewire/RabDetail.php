@@ -4,9 +4,11 @@ namespace App\Livewire;
 use App\Models\Rab_item;
 use App\Models\Item;
 use App\Models\Rab;
+use App\Models\Project;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class RabDetail extends Component
 {
@@ -19,6 +21,11 @@ class RabDetail extends Component
 
     public function mount($rab_id)
     {
+        $openedRab = Rab::where('rab_id',$rab_id)->first();
+        $project = Project::where('project_id', $openedRab->project_id)->first();
+        if ($project->user_id != Auth::user()->user_id) {
+            abort(403, 'Forbidden access');
+        }
         $this->rab_id = $rab_id;
         $this->loadRab();
         $this->loadAvailableItems();

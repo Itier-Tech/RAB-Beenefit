@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
@@ -24,35 +25,5 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
-    /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/userUpdate';
-
-    use Illuminate\Support\Facades\Password;
-
-    public function resetPassword(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'passwordLama' => 'required',
-            'passwordBaru' => 'required|min:8',
-            'retypePasswordBaru' => 'required|same:passwordBaru',
-        ]);
-
-        $user = Auth::user();
-
-        // Periksa apakah password lama cocok
-        if (!Hash::check($request->passwordLama, $user->password)) {
-            return back()->with('error', 'Password lama tidak cocok.');
-        }
-
-        // Update password baru
-        $user->password = Hash::make($request->passwordBaru);
-        $user->save();
-
-        return back()->with('success', 'Password berhasil diubah.');
-    }
+    protected $redirectTo = '/';
 }

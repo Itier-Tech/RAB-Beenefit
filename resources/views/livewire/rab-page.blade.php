@@ -25,7 +25,7 @@
                         <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                         <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                         <td>
-                            <button class="btn" style="background-color:#FFA07A; border-radius:25px; padding: 0.1rem 0.6rem; margin-right: 0.3rem;">Lihat Detail</button>
+                            <button class="btn" wire:click="rabDetails({{ $rab->rab_id }})" style="background-color:#FFA07A; border-radius:25px; padding: 0.1rem 0.6rem; margin-right: 0.3rem;">Lihat Detail</button>
                             <button class="btn" wire:click="deleteRab({{ $rab->rab_id }})" style="background:none;"><img src="{{ asset('images/trash-icon.svg') }}"></button>
                         </td>
                     </tr>
