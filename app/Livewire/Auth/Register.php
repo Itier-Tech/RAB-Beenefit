@@ -23,12 +23,14 @@ class Register extends Component
             'phone' => 'required|string',
         ]);
 
+        $validatedData['full_name'] = trim(strip_tags($validatedData['full_name']));
+        $validatedData['email'] = trim(strip_tags($validatedData['email']));
+        $validatedData['password'] = trim($validatedData['password']);
+        $validatedData['phone'] = trim(strip_tags($validatedData['phone']));
+        
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         session(['user_data' => Crypt::encrypt($validatedData)]);
-        // Auth::login($user, true);
-
-        // return redirect()->to('/otp-verification');
         return redirect("/otp-verification");
     }
 
