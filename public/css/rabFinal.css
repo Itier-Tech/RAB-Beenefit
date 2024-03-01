@@ -1,0 +1,20 @@
+button.download-btn {
+    transition: transform 0.3s ease, width 0.3s ease;
+}
+
+button.download-btn:hover {
+    background-color: #2E8B57;
+    transform: scale(1.1);
+    width: 17rem;
+}
+
+.share-btn {
+    transition: transform 0.3s ease, width 0.3s ease, color 0.3s ease, background-color 0.3s ease; /* Menambahkan efek transisi untuk transformasi, lebar, warna teks, dan latar belakang */
+}
+
+.share-btn:hover {
+    color: white;
+    background-color: #228B22;
+    transform: scale(1.1);
+    width: 8rem;
+}

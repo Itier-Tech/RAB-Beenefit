@@ -1,34 +1,7 @@
 <div style="width: 100%; margin-top:5vh; padding-left: 4rem; padding-right: 4rem;">
-    <style>
-        .form-control {
-            width: 60%;
-        }
-        .submit-btn {
-            background-color: #FFD700;
-            border: none;
-            padding: 0.5rem;
-            width: 60%;
-            width:60%;
-        }
-        .form-control:focus {
-            border-color: #28a745 !important;
-        }
-        @media (max-width: 768px) {
-            .flex-row-responsive {
-                flex-direction: column;
-                width: 100%;
-            }
-            .form-control {
-                width: 100%;
-            }
-            .main-form {
-                width: 85%;
-            }
-            .submit-btn {
-                width: 100%;
-            }
-        }
-    </style>
+    @once
+        <link href="{{ asset('css/projectCreate.css') }}" rel="stylesheet">
+    @endonce
     <h2 style="margin: 0; font-weight: bold;">Proyek Baru</h1>
     <p>Ayo masukkan detail informasi mengenai proyek barumu! Nama proyek, nama client, alamat, budget.</p>
     <form wire:submit.prevent="create" class="main-form" style="display: flex; flex-direction: column; gap: 1rem;">

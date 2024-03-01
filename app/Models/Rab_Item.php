@@ -8,14 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Rab_item extends Model
 {
     use HasFactory;
+    public $incrementing = false;
+    public $decrementing = false;
     public $fillable = [
             'rab_id',
             'item_id',
             'item_discount',
             'item_count',
     ];
-    
-    public function rab() 
+
+    public function rab()
     {
         return $this->belongsTo(Rab::class);
     }

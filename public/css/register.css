@@ -1,0 +1,9 @@
+
+@media(max-width:768px) {
+    .flex-row-responsive {
+        flex-direction: column;
+    }
+}
+.form-control:focus {
+    border-color: #28a745 !important;
+}

@@ -1,47 +1,7 @@
 <div style="width:100%; margin-top:5vh; padding-left: 4rem; padding-right: 4rem;">
-    <style>
-        .table-container {
-            overflow-x:scroll;
-        }
-        table {
-            margin: 3vh auto;
-            border-collapse: separate;
-            border-spacing: 0 1em;
-            text-align:center;
-        }
-        tr {
-            text-align: center;
-        }
-        button {
-            background-color: #FFD700;
-            padding: 0.5rem;
-            border: none;
-        }
-        th, td {
-            padding: 0.5rem;
-        }
-        .long-col {
-            min-width:15rem;
-        }
-        .short-col {
-            min-width:2rem;
-        }
-        td {
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
-        }
-        @media (max-width:768px) {
-            /* Hide scrollbar for IE, Edge and Firefox */
-            .table-container {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            .table-container::-webkit-scrollbar {
-                display: none;
-            }
-        }
-    </style>
+    @once
+        <link href="{{ asset('css/rabPage.css') }}" rel="stylesheet">
+    @endonce
     <h2 style="margin: 0; font-weight:bold;">RAB {{ $project_name }}</h2>
     <button class="btn" wire:click='addRab' style="background-color: #FFD700; padding: 0.5rem 0.8rem; border:none; margin: 1.5vh 0 0 0;">Buat RAB Baru +</button>
     <div class="table-container">

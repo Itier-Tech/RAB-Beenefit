@@ -1,0 +1,28 @@
+.form-control {
+    width: 60%;
+}
+.submit-btn {
+    background-color: #FFD700;
+    border: none;
+    padding: 0.5rem;
+    width: 60%;
+    width:60%;
+}
+.form-control:focus {
+    border-color: #28a745 !important;
+}
+@media (max-width: 768px) {
+    .flex-row-responsive {
+        flex-direction: column;
+        width: 100%;
+    }
+    .form-control {
+        width: 100%;
+    }
+    .main-form {
+        width: 85%;
+    }
+    .submit-btn {
+        width: 100%;
+    }
+}

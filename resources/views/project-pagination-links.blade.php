@@ -3,35 +3,10 @@ if (! isset($scrollTo)) {
     $scrollTo = 'body';
 }
 @endphp
-
 <div style="margin:5vh 0;">
-    <style>
-        .page-link {
-            color:black;
-        }
-        .pagination {
-            list-style-type: none;
-            display: flex;
-            min-width: fit-content;
-            width: 100%;
-            align-items: stretch;
-            justify-content:space-evenly;
-            margin: 0 auto;
-            padding: 0;
-        }
-        .page-item button {
-            display: block;
-            background: none;
-            border: none;
-            font-size: 15px;
-        }
-        button:hover {
-            cursor: pointer;
-        }
-        .active {
-            background-color: #FFD700;
-        }
-    </style>
+    @once
+        <link href="{{ asset('css/pagination.css') }}" rel="stylesheet">
+    @endonce
     @if ($paginator->hasPages())
         <ul class="pagination">
             {{-- Previous Page Link --}}

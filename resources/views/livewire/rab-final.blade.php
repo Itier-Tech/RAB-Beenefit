@@ -2,29 +2,9 @@
 
 @section('content')
 <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
-    <style>
-        button.download-btn {
-            transition: transform 0.3s ease, width 0.3s ease;
-        }
-
-        button.download-btn:hover {
-            background-color: #2E8B57;
-            transform: scale(1.1);
-            width: 17rem;
-        }
-
-        .share-btn {
-            transition: transform 0.3s ease, width 0.3s ease, color 0.3s ease, background-color 0.3s ease; /* Menambahkan efek transisi untuk transformasi, lebar, warna teks, dan latar belakang */
-        }
-
-        .share-btn:hover {
-            color: white;
-            background-color: #228B22;
-            transform: scale(1.1);
-            width: 8rem;
-        }
-    </style>
-
+    @once
+        <link href="{{ asset('css/rabFinal.css') }}" rel="stylesheet">
+    @endonce
     <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
         <div class="rab-info d-flex" style="justify-content: space-between; width: 96%;">
             <div class="left">Input RAB</div>
