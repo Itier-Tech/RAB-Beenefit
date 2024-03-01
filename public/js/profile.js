@@ -42,3 +42,16 @@ document.addEventListener('DOMContentLoaded', function () {
         imagePreview.src = "/images/profpic-icon.png";
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('newProfPic');
+    const imagePreview = document.getElementById('imagePreview');
+
+    input.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            imagePreview.src = imageUrl;
+        }
+    });
+});
