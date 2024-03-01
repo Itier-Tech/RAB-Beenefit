@@ -12,19 +12,27 @@ class RabDetail extends Component
 {
     public $rab_id;
     public $rab_discount;
+    public $selectedCategory;
+    public $availableItems = [];
 
-    protected $listeners = ['refreshComponent' => '$refresh'];
+    protected $listeners = ['refreshComponent' => '$refresh', 'updateCategory'];
 
     public function mount($rab_id)
     {
         $this->rab_id = $rab_id;
         $this->loadRab();
+        $this->loadAvailableItems();
     }
 
     public function loadRab()
     {
         $rab = Rab::find($this->rab_id);
         $this->rab_discount = $rab?->rab_discount ?? 0;
+    }
+
+    public function loadAvailableItems()
+    {
+        $this->availableItems = Item::all();
     }
 
 
@@ -34,7 +42,11 @@ class RabDetail extends Component
         Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->delete();
     }
 
-        private function updateItemVolume($item_id, $operation = 'increment')
+    public function getSelected() {
+        
+    }
+
+    private function updateItemVolume($item_id, $operation = 'increment')
     {
         $rabItem = RabItem::firstOrNew(
             ['rab_id' => $this->rab_id, 'item_id' => $item_id],
@@ -89,6 +101,17 @@ class RabDetail extends Component
             ]);
         }
         return redirect(request()->header('Referer'));
+    }
+
+    public function updatedSelectedCategory($value)
+    {
+        if (!empty($value)) {
+            // Filter `availableItems` berdasarkan kategori yang dipilih
+            $this->availableItems = Item::where('category', $value)->get();
+        } else {
+            // Reset atau ambil semua item jika tidak ada kategori yang dipilih
+            $this->availableItems = Item::all();
+        }
     }
 
     public function decrementDiscount($item_id)
@@ -154,12 +177,12 @@ class RabDetail extends Component
         return $total;
     }
 
-
     public function render()
     {
         $rab = Rab::find($this->rab_id);
         $rab_items = Rab_item::where('rab_id', $this->rab_id)->get()->keyBy('item_id');
         $items = Item::whereIn('item_id', $rab_items->keys())->get();
+        $items_category = Item::whereIn('item_id', $rab_items->keys())->get();
 
         // Initialize totals and subtotals
         $totalBuyPrice = 0;
@@ -210,6 +233,8 @@ class RabDetail extends Component
         Log::info('Subtotals: ', ['subtotals' => $subtotals]);
         Log::info('Total Margin: ', ['totalMargin' => $totalMargin]);
         Log::info('Total RAB: ', ['totalRAB' => $totalRAB]);
+        Log::info('Total Item: ', ['availableItems' => $this->availableItems]);
+
 
         return view('livewire.rab-detail', [
             'rab' => $rab,
@@ -219,6 +244,7 @@ class RabDetail extends Component
             'totalMargin' => $totalMargin,
             'totalRAB' => $totalRAB,
             'totalFinalRAB' => $totalFinalRAB,
+            'availableItems' => $this->availableItems,
         ])->extends('components.layouts.app')->section('content');
     }
 
