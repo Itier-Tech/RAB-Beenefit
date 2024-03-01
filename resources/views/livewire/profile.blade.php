@@ -1,10 +1,8 @@
 <div>
     @once
         <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/profile.js') }}"></script>
     @endonce
-    @push('scripts')
-        <script src="{{ asset('js/profile.js')}}"
-    @endpush
     <div class="profile-container">
         <div class="profile-img-container" style="position: relative; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editFotoProfilModal" >
             <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" id="profpic"/>

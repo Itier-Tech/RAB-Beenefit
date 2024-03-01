@@ -1,10 +1,8 @@
 <div>
     @once
         <link href="{{ asset('css/rabDetail.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/rabDetail.js')}}"></script>
     @endonce
-    @push('scripts')
-        <script src="{{ asset('js/rabDetail.js')}}"
-    @endpush
     <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
         <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
             <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
