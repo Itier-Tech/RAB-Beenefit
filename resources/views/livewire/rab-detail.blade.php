@@ -2,9 +2,9 @@
     @once
         <link href="{{ asset('css/rabDetail.css') }}" rel="stylesheet">
     @endonce
-    <div class="rab-container justify-content-center p-5" style="display: flex; flex-direction: column;  align-items: center;">
-        <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
-            <div class="progres-section" style="width: 65rem; height: 150px; background-color: white; border-radius: 20px; align-items: center!important; display: flex; flex-direction: column; justify-content: center;">
+    <div class="rab-container justify-content-center p-5">
+        <div class="progres-section">
+            <div class="progres-section" >
                 <div class="rab-info">
                     <div class="left">Input RAB</div>
                     <div class="right">Final RAB</div>
@@ -13,7 +13,7 @@
                     <div style="background-color: #228B22; width: min-content; border-radius: 30px; padding: 4px;">
                         <img src="/images/input-rab.png" alt="Input RAB">
                     </div>
-                    <div class="progress prg" style="height: 15px; width: 900px;">
+                    <div class="progress prg">
                         <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div style="background-color: #228B22; width: min-content; border-radius: 30px; padding: 4px;">
@@ -22,12 +22,12 @@
                 </div>
             </div>
         </div>
-        <div class="m-3" style="display: flex; justify-content: space-between; width: 65rem; align-items: end; padding-top: 15px ;">
+        <div class="m-3 pr-dt">
             <div class="left" style="font-size: 25px; font-weight: 800;">RAB Nama Proyek</div>
 
         </div>
         {{-- <form method="post" > --}}
-        <table style="width: 65rem; margin-left: auto; margin-right: auto;">
+        <table>
             <thead>
                 <tr style="background-color:#FFD700;">
                     <th>Nama Item</th>
@@ -86,7 +86,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div style="display: flex; justify-content: flex-end; width: 65rem; align-items: end; ">
+        <div class="add-item">
             <button ype="button" data-bs-toggle="modal" data-bs-target="#addRabItemModal" style="background:none; border:none; border-radius:25px;  padding: 0.6rem; transition: transform 0.3s ease;">
                 <img src="{{ asset('images/add.svg') }}">
             </button>
@@ -117,7 +117,7 @@
                                         @foreach($availableItems->where('category', $selectedCategory)->all() as $item)
                                         <option style="color:#000" value="{{ $item->item_id }}">{{ $item->item_name }}</option>
                                         @endforeach
-                                    @else 
+                                    @else
                                         @foreach($availableItems->all() as $item)
                                             <option style="color:#000" value="{{ $item->item_id }}">{{ $item->item_name }}</option>
                                         @endforeach
@@ -142,8 +142,8 @@
                 </div>
             </div>
         </div>
-        <div style="width: 65rem; margin-left: auto; margin-right: auto; padding-top: 15px;">
-            <div style="display: flex; justify-content: space-between; gap:20px; background-color: #E7F2E6; padding: 10px; border-radius: 10px;">
+        <div class="harga-container">
+            <div class="left-right">
                 <!-- Left Column for Harga Beli -->
                 <div style="width: 50%; background-color: #FFFFFF; padding: 15px">
                     <div style="font-weight: bold; text-align: center; color:#146013; margin-bottom: 15px;">Harga Beli</div>
@@ -177,20 +177,25 @@
         </div>
     </div>
 
-    <div class="discount-section" style="width: 100%;  margin-top: 50px; padding: 20px; background-color: #FFFFFF;">
-        <div  method="post" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; width: 100%;">
-            <div style="display: flex; justify-content: space-between; width: 100%; padding-left: 80px; padding-right: 80px;" >
-                <div style="display: flex; justify-content: space-between;  margin-right: 10px; flex-direction: column;">
-                    <label for="additional-discount" style="font-weight: bold; margin-right: 5px;">Tambahkan Diskon (%)</label>
-                    <input type="number" wire:model="rab_discount" id="additional-discount" style="padding: 5px;">
+    <div class="discount-section">
+        <div class="disc">
+            <div method="post" class="form-disc">
+                <div class="disc-desc">
+                    <div style="display: flex; justify-content: space-between;  margin-right: 10px; flex-direction: column;">
+                        <label for="additional-discount" style="font-weight: bold; margin-right: 5px;">Tambahkan Diskon (%)</label>
+                        <input type="number" wire:model="rab_discount" id="additional-discount" style="padding: 5px;">
 
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+                        <span style="margin-right: 5px; font-weight: bold;">Total Harga Jual</span>
+                        <input type="text" readonly value="Rp{{ number_format($totalFinalRAB, 0, ',', '.') }}" style="background-color: #FFF; border: 1px solid #DDD; padding: 5px;">
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
-                    <span style="margin-right: 5px; font-weight: bold;">Total Harga Jual</span>
-                    <input type="text" readonly value="Rp{{ number_format($totalFinalRAB, 0, ',', '.') }}" style="background-color: #FFF; border: 1px solid #DDD; padding: 5px;">
+                <div class="d-flex btns">
+                    <button type="button" class="custom-btn2" wire:click="unduhRAB">Unduh RAB</button>
+                    <button type="submit" class="btn custom-btn">Simpan</button>
                 </div>
             </div>
-            <button type="submit" class="btn custom-btn" style="background-color: #FFD700; color: #000; margin-top: 20px; padding: 10px 20px; border: none; border-radius: 5px; width: 90%;">Simpan</button>
         </div>
     </div>
 {{-- </form> --}}
@@ -210,8 +215,8 @@
                     = setTimeout(() => func.apply(context, args), delay);
             }
         }
-        
-        
+
+
 
         function updateVolume(itemId, vol) {
             @this.updateItemVolume(itemId, vol);
@@ -266,7 +271,7 @@
                 discountDisplay.innerText = --discount; // Mengurangi nilai dan memperbarui tampilan
             }
             debounce(() => updateItemDisc(itemId,discount))();
-        }    
+        }
 
         window.incrementVolume = incrementVolume;
         window.decrementVolume = decrementVolume;

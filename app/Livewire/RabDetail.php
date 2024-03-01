@@ -72,7 +72,7 @@ class RabDetail extends Component
             Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->delete();
             return;
         }
-        
+
         $rabItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
 
         $data = [
@@ -134,6 +134,11 @@ class RabDetail extends Component
             'item_total_price' => $total
         ]);
         return $total;
+    }
+
+    public function unduhRAB()
+    {
+        return redirect()->to("/rab/{$this->rab_id}/final");
     }
 
     public function render()
