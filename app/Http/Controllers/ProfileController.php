@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -71,6 +72,49 @@ class ProfileController extends Controller
 
         $user->update($userData);
         session()->flash('message', 'Profile updated successfully.');
+        return redirect('/user-update');
+    }
+
+    public function editPassword(Request $request) {
+        $user = Auth::user();
+
+        $request->validate([
+            'passwordLama' => 'required',
+            'passwordBaru' => 'required|min:8',
+            'retypePasswordBaru' => 'required|same:passwordBaru',
+        ]);
+
+        if (!Hash::check($request->passwordLama, $user->password)) {
+            return back()->withErrors(['passwordLama' => 'Password lama tidak sesuai']);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->passwordBaru)
+        ]);
+
+        
+
+        session()->flash('message', 'Password updated successfully.');
+        return redirect('/user-update');
+    }
+
+    public function editRekening(Request $request) {
+        $user = Auth::user();
+
+        $request->validate([
+            'bank_dest' => 'nullable',
+            'account_number' => 'nullable|integer',
+            'account_name' => 'nullable',
+        ]);
+
+        $userData = [
+            'bank_dest' => $request->input('bank_dest'),
+            'account_number' => $request->input('account_number'),
+            'account_name' => $request->input('account_name'),
+        ];
+
+        $user->update($userData);
+        session()->flash('message', 'Bank account information updated successfully.');
         return redirect('/user-update');
     }
 }

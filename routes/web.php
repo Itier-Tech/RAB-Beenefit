@@ -97,6 +97,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-update', Profile::class);
     Route::post('/profpic-update', [ProfileController::class, 'updateProfilePicture']);
     Route::post('/profile-update', [ProfileController::class, 'updateProfile']);
+    Route::post('/rekening-update', [ProfileController::class, 'editRekening']);
+    Route::post('/password-update', [ProfileController::class, 'editPassword']);
     Route::get('/rab/{project_id}', RabPage::class);
     Route::get('/rab-detail/{rab_id}', RabDetail::class);
     Route::post('/rab/{project_id}', [RabController::class, 'create']);

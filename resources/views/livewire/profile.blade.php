@@ -73,46 +73,60 @@
                                     <button type="submit"  class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
                                 </div>
                             </div>
-                        <form>
+                        </form>
                     </div>
                 </div>
+            </div>
 
 
             <!-- Modal Edit Rekening -->
             <div class="modal fade" id="editRekeningModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 800;">Rekening Bank</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
+                        <form enctype="multipart/form-data" method="POST" action="/rekening-update">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 800;">Rekening Bank</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="bankTujuan">Bank Tujuan</label>
-                                    <input type="text" class="form-control" id="bankTujuan" placeholder="Masukkan Bank Tujuan" wire:model="bank_dest">
+                                    <label for="bank_dest">Bank Tujuan</label>
+                                    <input type="text" class="form-control" id="bank_dest" name="bank_dest" placeholder="Masukkan Bank Tujuan"
+                                    @if(Auth::user()->bank_dest)
+                                        value="{{ Auth::user()->bank_dest }}"
+                                    @endif
+                                    >
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="nomorRekening">Nomor Rekening</label>
-                                    <input type="text" class="form-control" id="nomorRekening" placeholder="Masukkan Nomor Rekening" wire:model="account_number">
+                                    <label for="account_number">Nomor Rekening</label>
+                                    <input type="text" class="form-control" id="account_number" name="account_number" placeholder="Masukkan Nomor Rekening"
+                                    @if(Auth::user()->account_number)
+                                        value="{{ Auth::user()->account_number }}"
+                                    @endif
+                                    >
+                                    @if (session('message'))
+                                        <p>{{ session('message') }}</p>
+                                    @endif
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="atasNama">Atas Nama</label>
-                                    <input type="text" class="form-control" id="atasNama" placeholder="Masukkan Nama Pemilik Rekening" wire:model="account_name"
+                                    <label for="account_name">Atas Nama</label>
+                                    <input type="text" class="form-control" id="account_name" name="account_name" placeholder="Masukkan Nama Pemilik Rekening"
                                     @if(Auth::user()->account_name)
                                         value="{{ Auth::user()->account_name }}"
                                     @endif
                                     >
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: ##FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
-                            <button type="button" class="btn btn-primary" wire:click="update" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: ##FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
 
             <!-- Modal Profil -->
             <div class="modal fade" id="editProfilModal" tabindex="-1" aria-labelledby="editProfilModalLabel" aria-hidden="true">
@@ -213,30 +227,31 @@
             <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="editPasswordModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editPasswordModalLabel" style="font-weight: 800;">Edit Password</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form wire:submit.prevent="resetPassword">
+                        <form action="/password-update" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editPasswordModalLabel" style="font-weight: 800;">Edit Password</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="passwordLama" class="form-label">Password Lama</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="passwordLama" placeholder="Masukkan Password Lama" wire:model="passwordLama">
+                                        <input type="password" class="form-control" id="passwordLama" name="passwordLama" placeholder="Masukkan Password Lama">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePasswordLama"><i class="bi bi-eye" id="eyeIconLama"></i></button>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="passwordBaru" class="form-label">Password Baru</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="passwordBaru" placeholder="Masukkan Password Baru" wire:model="passwordBaru">
+                                        <input type="password" class="form-control" id="passwordBaru" name="passwordBaru" placeholder="Masukkan Password Baru">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePasswordBaru"><i class="bi bi-eye" id="eyeIconBaru"></i></button>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="retypePasswordBaru" class="form-label">Re-type Password Baru</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="retypePasswordBaru" placeholder="Masukkan Ulang Password Baru" wire:model="retypePasswordBaru">
+                                        <input type="password" class="form-control" id="retypePasswordBaru" name="retypePasswordBaru" placeholder="Masukkan Ulang Password Baru">
                                         <button class="btn btn-outline-secondary" type="button" id="toggleRetypePasswordBaru"><i class="bi bi-eye" id="eyeIconRetype"></i></button>
                                     </div>
                                 </div>
@@ -244,8 +259,8 @@
                                     <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>
                                     <button type="submit" class="btn btn-primary" style="background-color: #FFD700; border: none; color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Simpan</button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
