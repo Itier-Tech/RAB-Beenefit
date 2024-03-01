@@ -188,7 +188,7 @@
                     <label for="password" style="font-family: Inter; font-size: 12px; font-weight: 800;">Password</label>
                     <input type="password" id="password" name="password" placeholder="Password" required style="margin-bottom: 10px;">
 
-                    <div class="forgot-password"style="color: #FFA07A; font-family: Inter; font-size: 12px; text-align: right; cursor: pointer;">Lupa Password?</div>
+                    <div class="forgot-password"style="font-family: Inter; font-size: 12px; text-align: right; cursor: pointer;"><a style="color: #FFA07A; text-decoration:none;" href="/forgot-password">Lupa Password?</a></div>
 
                     <input type="checkbox" id="remember" name="remember">
                     <label for="remember" style="font-family: Inter; font-size: 12px; font-weight: 800; display: inline-block; align-items: center;">Ingat Saya</label>

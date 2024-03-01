@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Search Bar -->
-        <form class="form-inline my-2 my-lg-0" action="/project" id="search-form" method="GET">
+        <form class="form-inline my-2 my-lg-0" action="/" id="search-form" method="GET">
             <input type="text" class="searchTerm" name="searchTerm" placeholder="Cari proyek">
             <button class="btn src-btn" type="submit">
                 <img src="/images/search-icon.png" alt="search" class="logo"></img>

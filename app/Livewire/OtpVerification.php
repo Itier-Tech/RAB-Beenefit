@@ -53,7 +53,7 @@ class OtpVerification extends Component
             $user = User::create(Crypt::decrypt(session('user_data')));
             session()->forget('user_data');
             Auth::login($user, false);
-            Redirect::to('/project');
+            Redirect::to('/');
             Cache::forget('otp_'.$this->phone);
         } else {
             // OTP tidak valid

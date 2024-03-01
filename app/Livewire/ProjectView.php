@@ -26,7 +26,7 @@ class ProjectView extends Component
 
     public function createProject()
     {
-        return redirect('/projectCreate');
+        return redirect('/project-create');
     }
 
     public function updatingStatusSelect() {

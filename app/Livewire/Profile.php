@@ -76,6 +76,9 @@ class Profile extends Component
 
 
         $user = Auth::user();
+        if(!$user) {
+            return redirect('/');
+        }
 
         if (Hash::check($this->passwordLama, $user->password)) {
             $user->password = Hash::make($this->passwordBaru);
