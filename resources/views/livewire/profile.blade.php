@@ -105,9 +105,9 @@
                                         value="{{ Auth::user()->account_number }}"
                                     @endif
                                     >
-                                    @if (session('message'))
-                                        <p>{{ session('message') }}</p>
-                                    @endif
+                                    @error('account_number')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="account_name">Atas Nama</label>
@@ -116,6 +116,9 @@
                                         value="{{ Auth::user()->account_name }}"
                                     @endif
                                     >
+                                    @error('account_name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -159,6 +162,9 @@
                                                         value="{{ Auth::user()->email }}"
                                                     @endif
                                                     >
+                                                    @error('email')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -169,6 +175,9 @@
                                                         value="{{ Auth::user()->phone }}"
                                                     @endif
                                                     >
+                                                    @error('phone')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -190,6 +199,9 @@
                                                         value="{{ Auth::user()->company_phone }}"
                                                     @endif
                                                     >
+                                                    @error('company_phone')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
@@ -203,7 +215,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="company_logo_path">Logo Perusahaan</label>
-                                                    <input type="file" class="form-control" id="company_logo_path" name="company_logo_path" accept="image/png, image/gif, image/jpeg, image.jpg"
+                                                    <input type="file" class="form-control" id="company_logo_path" name="company_logo_path" accept="image/png, image/gif, image/jpeg, image/jpg"
                                                     @if(Auth::user()->company_logo_path)
                                                         value="{{ Auth::user()->company_logo_path }}"
                                                     @endif
@@ -240,6 +252,9 @@
                                         <input type="password" class="form-control" id="passwordLama" name="passwordLama" placeholder="Masukkan Password Lama">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePasswordLama"><i class="bi bi-eye" id="eyeIconLama"></i></button>
                                     </div>
+                                    @error('passwordLama')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="passwordBaru" class="form-label">Password Baru</label>
@@ -247,6 +262,9 @@
                                         <input type="password" class="form-control" id="passwordBaru" name="passwordBaru" placeholder="Masukkan Password Baru">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePasswordBaru"><i class="bi bi-eye" id="eyeIconBaru"></i></button>
                                     </div>
+                                    @error('passwordBaru')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="retypePasswordBaru" class="form-label">Re-type Password Baru</label>
@@ -254,6 +272,9 @@
                                         <input type="password" class="form-control" id="retypePasswordBaru" name="retypePasswordBaru" placeholder="Masukkan Ulang Password Baru">
                                         <button class="btn btn-outline-secondary" type="button" id="toggleRetypePasswordBaru"><i class="bi bi-eye" id="eyeIconRetype"></i></button>
                                     </div>
+                                    @error('retypePasswordBaru')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #FFFFFF; border-color: rgba(0, 0, 0, 0.5); color: black; cursor: pointer; transition: transform 0.3s ease; border-radius: 8px;">Batal</button>

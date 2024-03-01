@@ -46,10 +46,10 @@ class ProfileController extends Controller
         $request->validate([
             'full_name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required',
+            'phone' => 'required|regex:/^(?:\+?62|0\d{1,3})(?:-?\d{3,9}){1,2}$/',
             'company_name' => 'nullable',
             'company_address' => 'nullable',
-            'company_phone' => 'nullable',
+            'company_phone' => 'nullable|regex:/^(?:\+?62|0\d{1,3})(?:-?\d{3,9}){1,2}$/',
             'company_logo_path' => 'nullable|image',
         ]);
 
@@ -78,21 +78,25 @@ class ProfileController extends Controller
     public function editPassword(Request $request) {
         $user = Auth::user();
 
-        $request->validate([
-            'passwordLama' => 'required',
-            'passwordBaru' => 'required|min:8',
-            'retypePasswordBaru' => 'required|same:passwordBaru',
-        ]);
-
         if (!Hash::check($request->passwordLama, $user->password)) {
             return back()->withErrors(['passwordLama' => 'Password lama tidak sesuai']);
         }
 
+        $request->validate([
+            'passwordLama' => 'required',
+            'passwordBaru' => 'required|min:8',
+            'retypePasswordBaru' => 'required|same:passwordBaru',
+        ], [
+            'passwordLama.required' => 'Password lama harus diisi.',
+            'passwordBaru.required' => 'Password baru harus diisi.',
+            'passwordBaru.min' => 'Password baru minimal harus terdiri dari :min karakter.',
+            'retypePasswordBaru.required' => 'Konfirmasi password baru harus diisi.',
+            'retypePasswordBaru.same' => 'Konfirmasi password baru harus sama dengan password baru.',
+        ]);
+
         $user->update([
             'password' => Hash::make($request->passwordBaru)
         ]);
-
-        
 
         session()->flash('message', 'Password updated successfully.');
         return redirect('/user-update');
