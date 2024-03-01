@@ -18,6 +18,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\AddRab;
 use App\Livewire\Profile;
 use App\Livewire\RabFinal;
+use App\Livewire\RabDetail;
 use App\Livewire\OtpVerification;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -99,6 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profpic-update', [ProfileController::class, 'updateProfilePicture']);
     Route::post('/profile-update', [ProfileController::class, 'updateProfile']);
     Route::get('/rab/{project_id}', RabPage::class);
+    Route::get('/rab-detail/{rab_id}', RabDetail::class);
     Route::post('/rab/{project_id}', [RabController::class, 'create']);
     Route::post('/rab_item', function (Request $request) {});
     Route::get('/rabDownload', RabFinal::class); // delete soon
