@@ -69,11 +69,10 @@ class RabDetail extends Component
     public function updateItemVolume(int $item_id, int $newVol)
     {
         if($newVol === 0) {
-            $rabItem->delete();
-            $this->emitSelf('refreshComponent');
+            Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->delete();
             return;
         }
-
+        
         $rabItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->first();
 
         $data = [

@@ -197,13 +197,12 @@
 </div>
 @script
 <script>
+    const delay = 1500;
+    let timeout;
     document.addEventListener('livewire:initialized', () => {
         let selectedItemCategory = "";
-        const delay = 1500;
-        let timeout;
 
         function updateVolume(itemId, vol) {
-            console.log("vol updated");
             @this.updateItemVolume(itemId, vol);
         }
 
