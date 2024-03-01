@@ -25,8 +25,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PDFController;
 
-use App\Livewire\RabDetail;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
