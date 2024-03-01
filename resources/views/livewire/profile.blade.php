@@ -3,6 +3,42 @@
         <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
         <script src="{{ asset('js/profile.js') }}"></script>
     @endonce
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var validationError = {
+        editFotoProfil: {{ $errors->has('newProfPic') ? 'true' : 'false' }},
+        editRekening: {{ $errors->has('account_number') || $errors->has('account_name') ? 'true' : 'false' }},
+        editProfil: {{ $errors->has('full_name') || $errors->has('email') || $errors->has('phone') || $errors->has('company_name') || $errors->has('company_phone') || $errors->has('company_address') || $errors->has('company_logo_path') ? 'true' : 'false' }},
+        editPassword: {{ $errors->has('passwordLama') || $errors->has('passwordBaru') || $errors->has('retypePasswordBaru') ? 'true' : 'false' }}
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        if (validationError.editRekening) {
+            var modal = document.getElementById('editRekeningModal');
+            modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        if (validationError.editFotoProfil) {
+            var modal = document.getElementById('editFotoProfilModal');
+            modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        if (validationError.editProfil) {
+            var modal = document.getElementById('editProfilModal');
+            modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        if (validationError.editPassword) {
+            var modal = document.getElementById('editPasswordModal');
+            modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+    });
+
+    </script>
     <div class="profile-container">
         <div class="profile-img-container" style="position: relative; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editFotoProfilModal" >
             <img src="{{ asset(Auth::user()->profpic ? 'storage/' . Auth::user()->profpic : '/images/profpic-icon.png') }}" alt="Profile Picture" id="profpic"/>
