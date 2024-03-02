@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF</title>
-    <link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="header">
-        <img src="{{ 'storage/' . Auth::user()->company_logo_path }}" alt="Profpic" class="company-logo"/>
+        <img src="{{ '/app/storage/' . Auth::user()->company_logo_path }}" alt="Profpic" class="company-logo"/>
         <div class="company-name">
             {{ Auth::user()->company_name }}
         </div>
@@ -28,7 +28,7 @@
     <div class="greeting">Dengan hormat kami lampirkan RAB <span class="bold-text">'Nama RAB'</span></div>
 
     <div class="table" style="width: 100%;">
-        <table border="1" style="border-color: black; border-collapse: collapse; width: 100%;">
+        <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
             <thead style="font-weight: bold;">
                 <tr>
                     <th>No</th>

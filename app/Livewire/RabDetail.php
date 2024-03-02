@@ -9,11 +9,11 @@ use App\Models\Project;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class RabDetail extends Component
 {
     public $rab_id;
+    public $project_name;
     public $rab_discount;
     public $categoryList = ['Tanaman', 'Material', 'Operasional'];
     public $selectedCategory;
@@ -39,6 +39,7 @@ class RabDetail extends Component
         if ($project->user_id != Auth::user()->user_id) {
             abort(403, 'Forbidden access');
         }
+        $this->project_name = $project->project_name;
         $this->rab_id = $rab_id;
         $this->loadRab();
         $this->loadAvailableItems();
@@ -212,7 +213,7 @@ class RabDetail extends Component
         // Calculate Total Margin
         $totalMargin = $totalSellPrice - $totalBuyPrice;
         // Save to RAB
-        $rab->update(['total_price' => round($totalSellPrice), 'total_buy_price' => round($totalBuyPrice)]);
+        $rab->update(['total_price' => round($totalFinalRAB), 'total_buy_price' => round($totalBuyPrice)]);
 
         // Log data
         Log::info('Complete Items Data1: ', ['item_list' => $items->toArray()]);

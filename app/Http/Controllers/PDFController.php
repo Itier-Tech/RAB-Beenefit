@@ -7,7 +7,7 @@ use App\Models\Rab;
 use App\Models\Project;
 use App\Models\Rab_item;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
 class PDFController extends Controller
@@ -31,16 +31,9 @@ class PDFController extends Controller
             'date' => Carbon::now()->locale('id_ID')->isoFormat('D, MMMM YYYY'),
             'items' => $items,
         ];
-        $pdf = PDF::loadView('pdf', $data);
+        Pdf::setOption(['isHtml5ParserEnabled' => true, 'debugCss' => true, 'isPhpEnabled' => true]);
+        $pdf = Pdf::loadView('pdf', $data);
 
-        $pdf->getDomPDF()->set_option('enable_css_float', true);
-        $pdf->getDomPDF()->set_option('enable_html5_parser', true);
-        $pdf->getDomPDF()->set_option('isHtml5ParserEnabled', true);
-        $pdf->getDomPDF()->set_option('isPhpEnabled', true);
-        $pdf->getDomPDF()->set_option('isRemoteEnabled', true);
-        $pdf->getDomPDF()->set_option('isHtml5ParserEnabled', true);
-
-        // dd($data);
         return $pdf->download('document.pdf');
     }
 

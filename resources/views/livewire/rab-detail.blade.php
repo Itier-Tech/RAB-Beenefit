@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="m-3 pr-dt">
-            <div class="left" style="font-size: 25px; font-weight: 800;">RAB Nama Proyek</div>
+            <div class="left" style="font-size: 25px; font-weight: 800;">RAB {{ $project_name }} </div>
 
         </div>
         {{-- <form method="post" > --}}
