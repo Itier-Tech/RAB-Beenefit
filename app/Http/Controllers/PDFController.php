@@ -23,7 +23,7 @@ class PDFController extends Controller
         if ($project->user_id != Auth::user()->user_id) {
             abort(403, 'Forbidden access');
         }
-        
+
         $items = Rab_item::where('rab_id', $rab_id)->get();
 
         $data = [
@@ -40,6 +40,7 @@ class PDFController extends Controller
         $pdf->getDomPDF()->set_option('isRemoteEnabled', true);
         $pdf->getDomPDF()->set_option('isHtml5ParserEnabled', true);
 
+        // dd($data);
         return $pdf->download('document.pdf');
     }
 

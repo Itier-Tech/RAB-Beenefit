@@ -43,55 +43,76 @@
                 <tr>
                     <th colspan="6" class="table-section">Tanaman</th>
                 </tr>
+                <?php $total_tanaman = 0; ?>
                 @foreach($items as $key => $item)
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $item['nama_item'] }}</td>
-                    <td>{{ $item['satuan'] }}</td>
-                    <td>{{ $item['volume'] }}</td>
-                    <td>{{ $item['harga'] }}</td>
-                    <td>{{ $item['jumlah'] }}</td>
-                </tr>
+                    <?php
+                        $itemObject = \App\Models\Item::find($item->item_id);
+                    ?>
+                    @if($itemObject->category === 'Tanaman')
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $itemObject->item_name }}</td>
+                            <td>{{ $itemObject->unit }}</td>
+                            <td>{{ $itemObject->item_count }}</td>
+                            <td>{{ $itemObject->buy_price }}</td>
+                            <td>{{ $itemObject->item_count * $itemObject->buy_price }}</td>
+                        </tr>
+                        <?php $total_tanaman += $itemObject->item_count * $itemObject->buy_price; ?>
+                    @endif
                 @endforeach
                 <tr class="bold-text subtotal">
                     <td colspan="5" style="text-align: center;">Sub Total Pembelian Tanaman</td>
-                    <td>1000</td>
+                    <td>{{ $total_tanaman }}</td>
                 </tr>
 
                 <tr>
                     <th colspan="6" class="table-section">Material</th>
                 </tr>
+                <?php $total_material = 0; ?>
                 @foreach($items as $key => $item)
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $item['nama_item'] }}</td>
-                    <td>{{ $item['satuan'] }}</td>
-                    <td>{{ $item['volume'] }}</td>
-                    <td>{{ $item['harga'] }}</td>
-                    <td>{{ $item['jumlah'] }}</td>
-                </tr>
+                    <?php
+                        $itemObject = \App\Models\Item::find($item->item_id);
+                    ?>
+                    @if($itemObject && $itemObject->category === 'Material')
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $itemObject->item_name }}</td>
+                            <td>{{ $itemObject->unit }}</td>
+                            <td>{{ $itemObject->item_count }}</td>
+                            <td>{{ $itemObject->buy_price }}</td>
+                            <td>{{ $itemObject->item_count * $itemObject->buy_price }}</td>
+                        </tr>
+                        <?php $total_material += $itemObject->item_count * $itemObject->buy_price; ?>
+                    @endif
                 @endforeach
                 <tr class="bold-text subtotal">
                     <td colspan="5" style="text-align: center;">Sub Total Pembelian Operasional</td>
-                    <td>1000</td>
+                    <td>{{ $total_material }}</td>
                 </tr>
 
                 <tr>
                     <th colspan="6" class="table-section">Operasional</th>
                 </tr>
+                <?php $total_operasional = 0; ?>
                 @foreach($items as $key => $item)
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $item->item_name }}</td>
-                    <td>{{ $item->satuan }}</td>
-                    <td>{{ $item->item_count }}</td>
-                    <td>{{ $item->buy_price }}</td>
-                    <td>{{ $item->item_count * $item->buy_price }}</td>
-                </tr>
+                    <?php
+                        $itemObject = \App\Models\Item::find($item->item_id);
+                    ?>
+                    @if($itemObject && $itemObject->category === 'Operasional')
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $itemObject->item_name }}</td>
+                            <td>{{ $itemObject->unit }}</td>
+                            <td>{{ $itemObject->item_count }}</td>
+                            <td>{{ $itemObject->buy_price }}</td>
+                            <td>{{ $itemObject->item_count * $itemObject->buy_price }}</td>
+                        </tr>
+                        <?php $total_operasional += $itemObject->item_count * $itemObject->buy_price; ?>
+                    @endif
                 @endforeach
                 <tr class="bold-text subtotal">
                     <td colspan="5" style="text-align: center;">Sub Total Pembelian Operasional</td>
-                    <td>1000</td>
+                    <td>{{ $total_operasional }}</td>
                 </tr>
 
 
@@ -104,15 +125,15 @@
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold subtotal">Sub Total Pembelian Tanaman</th>
-                    <th class="text-bold subtotal">1000</th>
+                    <th class="text-bold subtotal">{{ $total_tanaman }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold subtotal">Sub Total Pembelian Material</th>
-                    <th class="text-bold subtotal">1000</th>
+                    <th class="text-bold subtotal">{{ $total_material }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold subtotal">Sub Total Pembelian Operasional</th>
-                    <th class="text-bold subtotal">1000</th>
+                    <th class="text-bold subtotal">{{ $total_operasional }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold rekap-total">Total Harga</th>
