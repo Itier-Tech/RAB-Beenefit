@@ -48,6 +48,9 @@
                     <?php
                         $itemObject = \App\Models\Item::find($item->item_id);
                     ?>
+                    <script>
+                        console.log('Checking tr for Tanaman...');
+                    </script>
                     @if($itemObject->category === 'Tanaman')
                         <tr>
                             <td>{{ $key + 1 }}</td>
@@ -137,7 +140,7 @@
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold rekap-total">Total Harga</th>
-                    <th class="text-bold rekap-total">1000</th>
+                    <th class="text-bold rekap-total">{{ $total_tanaman + $total_material + $total_operasional }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold rekap-total">Biaya Admin</th>
@@ -149,11 +152,11 @@
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold rekap-total">PPN 11%</th>
-                    <th class="text-bold rekap-total">1000</th>
+                    <th class="text-bold rekap-total">{{ ($total_tanaman + $total_material + $total_operasional + 100000) * 0.11 }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold rekap-total">Total Biaya</th>
-                    <th class="text-bold rekap-total">1000</th>
+                    <th class="text-bold rekap-total">{{ ($total_tanaman + $total_material + $total_operasional + 100000) * 1.1 }}</th>
                 </tr>
             </tbody>
         </table>
