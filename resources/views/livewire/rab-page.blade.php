@@ -22,7 +22,7 @@
                     <tr wire:key="{{ $rab->rab_id }}" style="">
                         <td>{{ $count++ }}</td>
                         <td>{{ $rab->created_at->format('d-m-Y H:i:s') }} WIB</td>
-                        <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
+                        <td>{{ number_format($rab->total_buy_price , 0, ',', '.') }}</td>
                         <td>{{ number_format($rab->total_price , 0, ',', '.') }}</td>
                         <td>
                             <button class="btn" wire:click="rabDetails({{ $rab->rab_id }})" style="background-color:#FFA07A; border-radius:25px; padding: 0.1rem 0.6rem; margin-right: 0.3rem;">Lihat Detail</button>

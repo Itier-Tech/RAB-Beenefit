@@ -196,7 +196,7 @@
                 </div>
                 <div class="d-flex btns">
                     <button type="button" class="custom-btn2" wire:click="unduhRAB">Unduh RAB</button>
-                    <button type="submit" class="btn custom-btn">Simpan</button>
+                    <button type="submit" wire:click="backToRABList" class="btn custom-btn">Kembali ke daftar RAB</button>
                 </div>
             </div>
         </div>

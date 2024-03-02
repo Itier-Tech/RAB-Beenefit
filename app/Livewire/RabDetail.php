@@ -156,6 +156,11 @@ class RabDetail extends Component
         return redirect()->to("/rab/{$this->rab_id}/final");
     }
 
+    public function backToRABList()
+    {
+        return redirect()->to("/rab" ."/". Rab::where('rab_id', $this->rab_id)->first()->project_id);
+    }
+
     public function render()
     {
         $rab = Rab::find($this->rab_id);
@@ -206,6 +211,8 @@ class RabDetail extends Component
 
         // Calculate Total Margin
         $totalMargin = $totalSellPrice - $totalBuyPrice;
+        // Save to RAB
+        $rab->update(['total_price' => round($totalSellPrice), 'total_buy_price' => round($totalBuyPrice)]);
 
         // Log data
         Log::info('Complete Items Data1: ', ['item_list' => $items->toArray()]);
