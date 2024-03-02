@@ -1,3 +1,57 @@
+.progres-section {
+    width: 65rem;
+    height: 10rem;
+    background-color: white;
+    border-radius: 20px;
+    align-items: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    font-weight: bold;
+}
+
+.prg {
+    height: 15px;
+    width: 56.25rem;
+}
+
+.pr-dt {
+    display: flex;
+    justify-content: space-between;
+    width: 65rem;
+    align-items: end;
+    padding-top: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #228B22;
+}
+
+.download-section {
+    padding: 30px;
+    width: 65rem;
+    height: 125px;
+    background-color: white;
+    border-radius: 20px;
+    align-items: center!important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.download-btn {
+    background-color: #228B22;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 16rem;
+    text-align: left;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 button.download-btn {
     transition: transform 0.3s ease, width 0.3s ease;
 }
@@ -17,4 +71,91 @@ button.download-btn:hover {
     background-color: #228B22;
     transform: scale(1.1);
     width: 8rem;
+}
+
+.ds {
+    justify-content: space-between;
+    width: 38rem;
+    align-items: end;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+@media (max-width:1320px) {
+    .progres-section {
+        width: 40rem;
+        height: 7rem;
+    }
+
+    .prg {
+        width: 30rem;
+    }
+
+    .pr-dt {
+        width: 39rem;
+    }
+
+    .download-section {
+        width: 39rem;
+    }
+}
+
+@media (max-width:670px) {
+    .progres-section {
+        width: 17rem;
+        height: 7rem;
+    }
+
+    .prg {
+        width: 10rem;
+        height: 1rem;
+    }
+
+    .progress-bar {
+        height: 1rem;
+    }
+
+    .pr-dt {
+        width: 16rem;
+    }
+
+    .download-section {
+        width: 100%;
+    }
+}
+
+@media (max-width:540px) {
+    .download-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: max-content;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ds {
+        width: 100%;
+        text-align: center;
+    }
+}
+@media (max-width:375px) {
+    .download-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: max-content;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ds {
+        width: 100%;
+        text-align: center;
+    }
+
+    .download-btn {
+        width: 10rem;
+        text-align: center;
+    }
 }
