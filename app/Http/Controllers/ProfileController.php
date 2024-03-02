@@ -46,10 +46,10 @@ class ProfileController extends Controller
         $request->validate([
             'full_name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required|regex:/^(?:\+?62|0\d{1,3})(?:-?\d{3,9}){1,2}$/',
+            'phone' => ['required','regex:/^(?:\+?62|0\d{1,3})(?:-?\d{3,9}){1,2}$/'],
             'company_name' => 'nullable',
             'company_address' => 'nullable',
-            'company_phone' => 'nullable|regex:/^(?:\+?62|0\d{1,3})(?:-?\d{3,9}){1,2}$/',
+            'company_phone' => ['nullable','regex:/^(?:\+?62|0\d{1,3})(?:-?\d{3,9}){1,2}$/'],
             'company_logo_path' => 'nullable|image',
         ]);
 
