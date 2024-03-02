@@ -22,7 +22,7 @@ class RabDetail extends Component
     public $itemQuantity = 0;
     public $discountPercentage = 0;
 
-    protected $listeners = ['refreshComponent' => '$refresh', 'updateCategory' => 'updatedSelectedCategory',];
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function rules() {
         return [
