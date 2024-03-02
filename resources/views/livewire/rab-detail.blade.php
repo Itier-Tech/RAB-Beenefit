@@ -102,7 +102,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="kategori">Kategori</label>
-                                <select class="form-control" id="kategori" onchange="updateSelectedItemCategory()" wire:model.defer="selectedCategory">
+                                <select class="form-control" id="kategori" wire:model.live="selectedCategory">
                                     <option value="">Pilih Kategori</option>
                                     @foreach($categoryList as $category)
                                     <option value="{{ $category }}">{{ $category }}</option>
@@ -111,17 +111,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="itemKatalog">Item Katalog</label>
-                                <select class="form-control @error('selectedItem') is-invalid @enderror" id="itemKatalog" wire:model.defer="selectedItem">
+                                <select class="form-control @error('selectedItem') is-invalid @enderror" id="itemKatalog" wire:model.live="selectedItem" wire:key="{{ $selectedCategory }}">
                                     <option value="">{{ $selectedCategory }}</option>
-                                    @if(!is_null($selectedCategory))
-                                        @foreach($availableItems->where('category', $selectedCategory)->all() as $item)
+                                    @foreach($availableItems as $item)
                                         <option style="color:#000" value="{{ $item->item_id }}">{{ $item->item_name }}</option>
-                                        @endforeach
-                                    @else
-                                        @foreach($availableItems->all() as $item)
-                                            <option style="color:#000" value="{{ $item->item_id }}">{{ $item->item_name }}</option>
-                                        @endforeach
-                                    @endif
+                                    @endforeach
                                 </select>
                                 @error('selectedItem')
                                     <p class="error-msg">{{ $message }}</p>

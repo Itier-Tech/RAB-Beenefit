@@ -58,13 +58,20 @@ class RabDetail extends Component
     public function addItem()
     {
         $this->validate();
-        $rab_item = new Rab_item();
-        $rab_item->rab_id = $this->rab_id;
-        $rab_item->item_id = $this->selectedItem;
-        $rab_item->item_discount = $this->discountPercentage;
-        $rab_item->item_count = $this->itemQuantity;
-        $rab_item->save();
-
+        // Check if item has been added before
+        $checkItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $this->selectedItem)->first();
+        if ($checkItem === null) {
+            $rab_item = new Rab_item();
+            $rab_item->rab_id = $this->rab_id;
+            $rab_item->item_id = $this->selectedItem;
+            $rab_item->item_discount = $this->discountPercentage;
+            $rab_item->item_count = $this->itemQuantity;
+            $rab_item->save();
+        } else {
+            $this->updateItemVolume($this->selectedItem, $this->itemQuantity + $checkItem->item_count);
+            $this->updateItemDiscount($this->selectedItem, $this->discountPercentage + $checkItem->item_discount);
+        }
+        
         $this->reset(['rab_id', 'selectedItem', 'discountPercentage', 'itemQuantity']);
         return redirect(request()->header('Referer'));
     }
@@ -106,16 +113,16 @@ class RabDetail extends Component
         Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->update($data);
     }
 
-    // public function updatedSelectedCategory($value)
-    // {
-    //     if (!empty($value)) {
-    //         // Filter `availableItems` berdasarkan kategori yang dipilih
-    //         $this->availableItems = Item::where('category', $value)->get();
-    //     } else {
-    //         // Reset atau ambil semua item jika tidak ada kategori yang dipilih
-    //         $this->availableItems = Item::all();
-    //     }
-    // }
+    public function updatedSelectedCategory()
+    {
+        if (!empty($value)) {
+            // Filter `availableItems` berdasarkan kategori yang dipilih
+            $this->availableItems = Item::where('category', $value)->get();
+        } else {
+            // Reset atau ambil semua item jika tidak ada kategori yang dipilih
+            $this->availableItems = Item::all();
+        }
+    }
 
     public function updatedRabDiscount($value)
     {
