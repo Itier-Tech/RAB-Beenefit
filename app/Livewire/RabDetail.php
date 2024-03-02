@@ -24,6 +24,14 @@ class RabDetail extends Component
 
     protected $listeners = ['refreshComponent' => '$refresh', 'updateCategory' => 'updatedSelectedCategory',];
 
+    public function rules() {
+        return [
+            'selectedItem' => ['required'],
+            'itemQuantity' => ['required', 'gt:0'],
+            'discountPercentage' => ['required'],
+        ];
+    }
+
     public function mount($rab_id)
     {
         $openedRab = Rab::where('rab_id',$rab_id)->first();
@@ -49,6 +57,7 @@ class RabDetail extends Component
 
     public function addItem()
     {
+        $this->validate();
         $rab_item = new Rab_item();
         $rab_item->rab_id = $this->rab_id;
         $rab_item->item_id = $this->selectedItem;

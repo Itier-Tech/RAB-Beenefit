@@ -91,7 +91,7 @@
                 <img src="{{ asset('images/add.svg') }}">
             </button>
         </div>
-        <div class="modal fade" id="addRabItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addRabItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -102,7 +102,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="kategori">Kategori</label>
-                                <select wire:changed="getSelected" class="form-control" id="kategori" onchange="updateSelectedItemCategory()" wire:model="selectedCategory">
+                                <select class="form-control" id="kategori" onchange="updateSelectedItemCategory()" wire:model.defer="selectedCategory">
                                     <option value="">Pilih Kategori</option>
                                     @foreach($categoryList as $category)
                                     <option value="{{ $category }}">{{ $category }}</option>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="itemKatalog">Item Katalog</label>
-                                <select class="form-control" id="itemKatalog" wire:model="selectedItem">
+                                <select class="form-control @error('selectedItem') is-invalid @enderror" id="itemKatalog" wire:model.defer="selectedItem">
                                     <option value="">{{ $selectedCategory }}</option>
                                     @if(!is_null($selectedCategory))
                                         @foreach($availableItems->where('category', $selectedCategory)->all() as $item)
@@ -123,15 +123,24 @@
                                         @endforeach
                                     @endif
                                 </select>
+                                @error('selectedItem')
+                                    <p class="error-msg">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="jumlahItem">Jumlah Item</label>
-                                <input type="number" class="form-control" id="jumlahItem" placeholder="Masukkan Jumlah Item" wire:model="itemQuantity">
+                                <input type="number" class="form-control @error('itemQuantity') is-invalid @enderror" id="jumlahItem" placeholder="Masukkan Jumlah Item" wire:model.defer="itemQuantity">
+                                @error('itemQuantity')
+                                    <p class="error-msg">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="diskon">Diskon (%)</label>
-                                <input type="number" class="form-control" id="diskon" placeholder="Masukkan Diskon" wire:model="discountPercentage">
+                                <input type="number" class="form-control @error('discountPercentage') is-invalid @enderror" id="diskon" placeholder="Masukkan Diskon" wire:model.defer="discountPercentage">
+                                @error('discountPercentage')
+                                    <p class="error-msg">{{ $message }}</p>
+                                @enderror
                             </div>
                         </form>
                     </div>
