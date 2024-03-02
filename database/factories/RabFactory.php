@@ -21,6 +21,7 @@ class RabFactory extends Factory
             'project_id' => Project::inRandomOrder()->first()->project_id,
             'status' => fake()->randomNumber(1, true),
             'rab_discount' => fake()->randomNumber(2, false),
+            'total_buy_price' => fake()->randomNumber(8, false),
             'total_price' => fake()->randomNumber(8, false),
             'created_at' => now(),
             'updated_at' => now(),

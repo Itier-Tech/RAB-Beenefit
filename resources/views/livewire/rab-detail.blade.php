@@ -70,7 +70,7 @@
                                 <button class="quantity-modifier" onclick="incrementDiscount('{{ $item->item_id }}')">+</button>
                             </td>
                             {{-- <td>>Rp{{ number_format(calculateTotal($item->item_id, 1, 10, $item->sell_price), 0, ',', '.') }}</td> --}}
-                            <td wire:ignore>
+                            <td>
                                 @php
                                 $total = $this->calculateTotal($item->item_id);
                                 @endphp

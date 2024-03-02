@@ -14,6 +14,7 @@ return new class extends Migration
             $table->integer('status');
             $table->float('rab_discount')->nullable();
             $table->integer('total_price')->nullable();
+            $table->integer('total_buy_price')->nullable();
             $table->timestamps();
 
             $table->foreign('project_id')->references('project_id')->on('projects')->onDelete('cascade');

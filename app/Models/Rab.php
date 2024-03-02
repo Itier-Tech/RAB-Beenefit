@@ -14,6 +14,7 @@ class Rab extends Model
             'status',
             'rab_discount',
             'total_price',
+            'total_buy_price',
     ];
     
     public function project() 
