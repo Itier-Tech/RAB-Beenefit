@@ -113,11 +113,11 @@ class RabDetail extends Component
         Rab_item::where('rab_id', $this->rab_id)->where('item_id', $item_id)->update($data);
     }
 
-    public function updatedSelectedCategory()
+    public function updatedSelectedCategory($value)
     {
-        if (!empty($this->selectedCategory)) {
+        if (!empty($value)) {
             // Filter `availableItems` berdasarkan kategori yang dipilih
-            $this->availableItems = Item::where('category', $this->selectedCategory)->get();
+            $this->availableItems = Item::where('category', $value)->get();
         } else {
             // Reset atau ambil semua item jika tidak ada kategori yang dipilih
             $this->availableItems = Item::all();
@@ -126,8 +126,7 @@ class RabDetail extends Component
 
     public function updatedRabDiscount($value)
     {
-        Rab::where('id', $this->rab_id)->update(['rab_discount' => $value]);
-        $this->emitSelf('refreshComponent');
+        Rab::where('rab_id', $this->rab_id)->update(['rab_discount' => $value]);
     }
 
     public function calculateTotal($item_id)

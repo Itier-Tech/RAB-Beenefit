@@ -186,7 +186,7 @@
                 <div class="disc-desc">
                     <div style="display: flex; justify-content: space-between;  margin-right: 10px; flex-direction: column;">
                         <label for="additional-discount" style="font-weight: bold; margin-right: 5px;">Tambahkan Diskon (%)</label>
-                        <input type="number" wire:model="rab_discount" id="additional-discount" style="padding: 5px;">
+                        <input type="number" wire:model.change="rab_discount" id="additional-discount" style="padding: 5px;">
 
                     </div>
                     <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
