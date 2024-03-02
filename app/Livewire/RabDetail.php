@@ -115,9 +115,9 @@ class RabDetail extends Component
 
     public function updatedSelectedCategory()
     {
-        if (!empty($value)) {
+        if (!empty($this->selectedCategory)) {
             // Filter `availableItems` berdasarkan kategori yang dipilih
-            $this->availableItems = Item::where('category', $value)->get();
+            $this->availableItems = Item::where('category', $this->selectedCategory)->get();
         } else {
             // Reset atau ambil semua item jika tidak ada kategori yang dipilih
             $this->availableItems = Item::all();
