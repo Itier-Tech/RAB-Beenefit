@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rab;
-use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\Rab_item;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Carbon\Carbon;
 
@@ -15,14 +17,14 @@ class PDFController extends Controller
         $rab = Rab::findOrFail($rab_id);
 
         // Retrieve the project associated with this RAB
-        $project = $rab->project;
+        $project = Project::where('project_id', $rab->project_id)->first();
 
         // Check if the logged in user has access to the project
         if ($project->user_id != Auth::user()->user_id) {
             abort(403, 'Forbidden access');
         }
         
-        $items = $rab->rab_item()->get();
+        $items = Rab_item::where('rab_id', $rab_id)->get();
 
         $data = [
             'title' => 'domPDF in Laravel 10',
