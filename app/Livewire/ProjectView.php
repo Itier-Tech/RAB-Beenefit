@@ -56,7 +56,7 @@ class ProjectView extends Component
     public function render()
     {
         if ($this->project_name != '') {
-            $project_list = Project::where('user_id', Auth::user()->user_id)->where('project_name', 'LIKE', '%'. $this->project_name . '%');
+            $project_list = Project::where('user_id', Auth::user()->user_id)->where('project_name', 'ilike', '%'. $this->project_name . '%');
         } else {
             $project_list = Project::where('user_id', Auth::user()->user_id);
         }
