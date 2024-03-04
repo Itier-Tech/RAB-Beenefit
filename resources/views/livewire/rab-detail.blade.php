@@ -49,9 +49,9 @@
                     <!-- Item Row -->
                     @foreach($items as $item)
                         @php
-                        $rab_item = $rab_items[$item->item_id] ?? null;
-                        $volume = $rab_item ? $rab_item->item_count : 'N/A';
-                        $discount = $rab_item ? $rab_item->item_discount : 'N/A';
+                        $rab_item = $items_list[$item->item_id] ?? null;
+                        $volume = $rab_item ? $rab_item['item_count'] : 'N/A';
+                        $discount = $rab_item ? $rab_item['item_discount'] : 'N/A';
                         @endphp
                         <tr>
                             <td>{{ $item->item_name }}</td>
@@ -196,7 +196,7 @@
                 </div>
                 <div class="d-flex btns">
                     <button type="button" class="custom-btn2" wire:click="unduhRAB">Unduh RAB</button>
-                    <button type="submit" wire:click="backToRABList" class="btn custom-btn">Kembali ke daftar RAB</button>
+                    <button type="submit" wire:click="saveItems" class="btn custom-btn">Simpan</button>
                 </div>
             </div>
         </div>
