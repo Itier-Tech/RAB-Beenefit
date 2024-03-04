@@ -180,6 +180,12 @@
         </div>
     </div>
 
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
+
     <div class="discount-section">
         <div class="disc">
             <div method="post" class="form-disc">
@@ -218,8 +224,6 @@
                     = setTimeout(() => func.apply(context, args), delay);
             }
         }
-
-
 
         function updateVolume(itemId, vol) {
             @this.updateItemVolume(itemId, vol);

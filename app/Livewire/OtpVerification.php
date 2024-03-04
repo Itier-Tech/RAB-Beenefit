@@ -10,12 +10,12 @@ use App\Mail\OtpMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\RateLimiter;
 
 class OtpVerification extends Component
 {
     public $phone;
     public $otp = ['', '', '', ''];
-    public $timer = null;
     public $userEmail;
 
     protected $listeners = ['resendOtp' => 'resendOtp'];
@@ -35,10 +35,11 @@ class OtpVerification extends Component
 
     private function setOtp()
     {
-        $otpCode = rand(1000, 9999);
-        Cache::put('otp_'.$this->phone, strval($otpCode), 300); // Store the OTP in cache for 5 minutes
-        Mail::to($this->userEmail)->send(new OtpMail($otpCode));
-        $this->resetTimer();
+        RateLimiter::attempt('otp-verification', $perMinute = 1, function() {
+            $otpCode = rand(1000, 9999);
+            Cache::put('otp_'.$this->phone, strval($otpCode), 300); // Store the OTP in cache for 5 minutes
+            Mail::to($this->userEmail)->send(new OtpMail($otpCode));
+        });
     }
 
     public function verifyOtp()
@@ -49,28 +50,21 @@ class OtpVerification extends Component
 
         if ($inputOtp === $storedOtp) {
             // OTP valid
-            // Simpan data user
+            // Save user data
             $user = User::create(Crypt::decrypt(session('user_data')));
             session()->forget('user_data');
             Auth::login($user, false);
-            Redirect::to('/');
             Cache::forget('otp_'.$this->phone);
+            Redirect::to('/');
         } else {
-            // OTP tidak valid
+            // OTP not valid
             $this->addError('otp', 'The provided OTP is incorrect.');
         }
-
-
     }
 
     public function resendOtp()
     {
         $this->setOtp();
-    }
-
-    public function resetTimer()
-    {
-        $this->timer = 60;
     }
 
     public function render()

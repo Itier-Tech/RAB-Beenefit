@@ -148,7 +148,7 @@ class RabDetail extends Component
         Rab_item::where('rab_id', $this->rab_id)->whereNotIn('item_id', array_keys($this->items_list))->delete();
         // Save to RAB
         Rab::where('rab_id', $this->rab_id)->update(['rab_discount' => $this->rab_discount, 'total_price' => round($this->totalFinalRAB), 'total_buy_price' => round($this->totalBuyPrice)]);
-        return redirect(request()->header('Referer'));
+        session()->flash('message', 'Daftar barang berhasil disimpan');
     }
 
     public function unduhRAB()
@@ -205,19 +205,11 @@ class RabDetail extends Component
         }
 
         // Now, apply the RAB discount to the total RAB
-        $rabDiscount = $this->rab_discount; // Assume there is a rab_discount field in your rabs table
+        $rabDiscount = $this->rab_discount;
         $this->totalFinalRAB = $totalRAB * (100 - $rabDiscount) / 100;
 
         // Calculate Total Margin
         $totalMargin = $totalSellPrice - $this->totalBuyPrice;
-
-        // Log data
-        Log::info('Complete Items Data1: ', ['item_list' => $items->toArray()]);
-        Log::info('Subtotals: ', ['subtotals' => $subtotals]);
-        Log::info('Total Margin: ', ['totalMargin' => $totalMargin]);
-        Log::info('Total RAB: ', ['totalRAB' => $totalRAB]);
-        Log::info('Total Item: ', ['availableItems' => $this->availableItems]);
-
 
         return view('livewire.rab-detail', [
             'rab' => $rab,
@@ -228,7 +220,4 @@ class RabDetail extends Component
             'availableItems' => $this->availableItems,
         ])->extends('components.layouts.app')->section('content');
     }
-
-
-
 }

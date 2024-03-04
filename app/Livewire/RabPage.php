@@ -49,7 +49,7 @@ class RabPage extends Component
     public function deleteRab($rab_id)
     {
         $deletedRab = Rab::where('rab_id',$rab_id)->first();
-        // Cek apakah id rab masih ada dalam proyek yang sedang dibuka
+        // Check if rab belongs to the currently opened project
         if ($deletedRab->project_id != $this->project_id) {
             abort(403, 'Forbidden access');
         }

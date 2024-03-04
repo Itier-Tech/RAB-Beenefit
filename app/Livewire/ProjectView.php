@@ -29,11 +29,13 @@ class ProjectView extends Component
         return redirect('/project-create');
     }
 
-    public function updatingStatusSelect() {
+    public function updatingStatusSelect() 
+    {
         $this->resetPage();
     }
 
-    public function askPrevPage() {
+    public function askPrevPage() 
+    {
         $this->previousPage();
     }
 
@@ -55,12 +57,12 @@ class ProjectView extends Component
 
     public function render()
     {
-        if ($this->project_name != '') {
+        if ($this->project_name != '') { // Search by name
             $project_list = Project::where('user_id', Auth::user()->user_id)->where('project_name', 'ilike', '%'. $this->project_name . '%');
         } else {
             $project_list = Project::where('user_id', Auth::user()->user_id);
         }
-        if ($this->status_select != 2) {
+        if ($this->status_select != 2) { // Filter
             return view('livewire.project-view')->with(['project' => $project_list->where('status', $this->status_select)->latest()->paginate(3)
                         , 'status_select' => $this->status_select])->extends('components.layouts.app')->section('content');
         } else {

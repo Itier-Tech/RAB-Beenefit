@@ -36,8 +36,6 @@ use App\Http\Controllers\PDFController;
 |
 */
 
-
-
 Route::get('/login', function () {
     return view('login');
 })->name('login')->middleware('guest');
