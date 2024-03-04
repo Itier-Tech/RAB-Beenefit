@@ -1,4 +1,4 @@
-.rab-container {
+.detail-container {
     transition: margin-left 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -16,6 +16,11 @@
     justify-content: center;
     padding: 1.5rem;
     font-weight: bold;
+}
+
+.prg-bar {
+    display: flex;
+    align-items: center;
 }
 
 .prg {
@@ -183,6 +188,89 @@ h1 {
     background-color: #E7F2E6;
     padding: 10px;
     border-radius: 10px;
+}
+
+.harga-left {
+    width: 50%;
+    background-color: #FFFFFF;
+    padding: 15px;
+}
+
+.harga-right {
+    width: 50%;
+    background-color: #FFFFFF;
+    padding: 15px;
+}
+
+.input-diskon {
+    padding: 5px;
+}
+
+@media (max-width: 1360px) {
+    .progres-section {
+        width: 90%;
+        transition: 0.3s ease;
+    }
+
+    .prg {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .prg-bar {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .pr-dt {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    table {
+        transition: 0.3s ease;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .add-item {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .harga-container {
+        transition: 0.3s ease;
+        width: 100%;
+    }
+}
+
+@media (max-width: 918px) {
+    .harga-container {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .left-right {
+        transition: 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .harga-left {
+        width: 100%;
+        transition: 0.3s ease;
+    }
+
+    .harga-right {
+        width: 100%;
+        transition: 0.3s ease;
+    }
+
+    .input-diskon {
+        width: 90%;
+        transition: 0.3s ease;
+    }
 }
 
 @media (max-width:768px) {

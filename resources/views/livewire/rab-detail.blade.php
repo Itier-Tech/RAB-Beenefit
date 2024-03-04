@@ -2,14 +2,14 @@
     @once
         <link href="{{ asset('css/rabDetail.css') }}" rel="stylesheet">
     @endonce
-    <div class="rab-container justify-content-center p-5">
+    <div class="detail-container justify-content-center p-5">
         <div class="progres-section">
             <div class="progres-section" >
                 <div class="rab-info">
                     <div class="left">Input RAB</div>
                     <div class="right">Final RAB</div>
                 </div>
-                <div class="flex flex-col" style="display: flex; align-items: center;">
+                <div class="flex flex-col prg-bar">
                     <div style="background-color: #228B22; width: min-content; border-radius: 30px; padding: 4px;">
                         <img src="/images/input-rab.png" alt="Input RAB">
                     </div>
@@ -148,7 +148,7 @@
         <div class="harga-container">
             <div class="left-right">
                 <!-- Left Column for Harga Beli -->
-                <div style="width: 50%; background-color: #FFFFFF; padding: 15px">
+                <div class="harga-left">
                     <div style="font-weight: bold; text-align: center; color:#146013; margin-bottom: 15px;">Harga Beli</div>
                     @foreach($subtotals['buy'] as $category => $subtotal)
                     <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
@@ -159,7 +159,7 @@
 
 
                 <!-- Right Column for Harga Jual -->
-                <div style="width: 50%; background-color: #FFFFFF; padding: 15px">
+                <div class="harga-right">
                     <div style="font-weight: bold; text-align: center; color:#146013; margin-bottom: 15px;">Harga Jual</div>
                     @foreach($subtotals['sell'] as $category => $subtotal)
                     <div style="display: flex; justify-content: space-between; padding-top: 5px; padding-bottom: 5px;">
@@ -186,7 +186,7 @@
                 <div class="disc-desc">
                     <div style="display: flex; justify-content: space-between;  margin-right: 10px; flex-direction: column;">
                         <label for="additional-discount" style="font-weight: bold; margin-right: 5px;">Tambahkan Diskon (%)</label>
-                        <input type="number" wire:model.change="rab_discount" id="additional-discount" style="padding: 5px;">
+                        <input class="input-diskon" type="number" wire:model.change="rab_discount" id="additional-discount">
 
                     </div>
                     <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
