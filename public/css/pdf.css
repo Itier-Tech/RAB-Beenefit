@@ -63,10 +63,12 @@ body {
 
 .opening-date .left {
     margin-right: auto;
+    font-weight: bold;
 }
 
-.opening-date .right {
-    margin-left: auto;
+.right {
+    width: 100%;
+    text-align: right;
 }
 
 
@@ -107,4 +109,14 @@ th, td {
 
 .rekap-total {
     background-color: #92d050;
+}
+
+.st-price {
+    background-color: #b8d4ac;
+    text-align: right;
+}
+
+.rk-price {
+    background-color: #92d050;
+    text-align: right;
 }

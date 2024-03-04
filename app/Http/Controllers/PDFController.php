@@ -27,8 +27,9 @@ class PDFController extends Controller
         $items = Rab_item::where('rab_id', $rab_id)->get();
 
         $data = [
-            'title' => 'domPDF in Laravel 10',
-            'date' => Carbon::now()->locale('id_ID')->isoFormat('D, MMMM YYYY'),
+            'rab' => $rab,
+            'rab_name' => $project->project_name,
+            'date' => Carbon::now()->locale('id_ID')->isoFormat('dddd, D MMMM YYYY'),
             'items' => $items,
         ];
         Pdf::setOption(['isHtml5ParserEnabled' => true, 'debugCss' => true, 'isPhpEnabled' => true]);
