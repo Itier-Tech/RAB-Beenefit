@@ -162,11 +162,11 @@
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold rekap-total">PPN 11%</th>
-                    <th class="text-bold rekap-total rk-price">Rp{{ number_format((($total_tanaman + $total_material + $total_operasional + 100000) * $rab->rab_discount / 100 ) * 0.11, 1,',','.') }}</th>
+                    <th class="text-bold rekap-total rk-price">Rp{{ number_format((($total_tanaman + $total_material + $total_operasional + 100000) * ((100 - $rab->rab_discount) / 100) ) * 0.11, 1,',','.') }}</th>
                 </tr>
                 <tr>
                     <th colspan="5" class="text-bold rekap-total">Total Biaya</th>
-                    <th class="text-bold rekap-total rk-price">Rp{{ number_format((($total_tanaman + $total_material + $total_operasional + 100000) * $rab->rab_discount / 100 ) * 1.1,1,',','.') }}</th>
+                    <th class="text-bold rekap-total rk-price">Rp{{ number_format((($total_tanaman + $total_material + $total_operasional + 100000) * ((100 - $rab->rab_discount) / 100) ) * 1.1,1,',','.') }}</th>
                 </tr>
             </tbody>
         </table>
