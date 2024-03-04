@@ -13,17 +13,20 @@
         </div>
         <form wire:submit.prevent="verifyOtp" style="width:90%; margin:0 auto;">
             <div style="width:100%; display:flex; flex-direction:column; justify-content:center; gap:1rem;">
-                <div style="width:100%; display:flex; justify-content:space-around;">
+                <div style="width:100%; display:flex; justify-content:center; gap:1rem;">
                     @foreach ($otp as $digit)
                     <input type="text" style="width:2rem; text-align:center;" wire:model="otp.{{ $loop->index }}" maxlength="1" autofocus onkeyup="checkInput(this)">
                     @endforeach
                 </div>
+                @error('otp')
+                    <p style="margin-bottom:0; color:red;">{{ $message }}</p>
+                @enderror
                 <button type="submit">Verifikasi</button>
             </div>
         </form>
         <div>
             <p>Belum menerima kode?
-                <a href="" wire:click="resendOtp" style="color:green;">Kirim Ulang</a>
+                <a href="#" onclick="resetTimer()" wire:click="resendOtp" style="color:green;">Kirim Ulang</a>
                 <span id="timer"></span>
             </p>
         </div>
@@ -32,7 +35,27 @@
 
 <script>
     let timer = 60;
-    setInterval(countDown, 1000);
+    let timerInterval = setInterval(countDown, 1000);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let savedTime = sessionStorage.getItem("timer");
+        if (savedTime != null) {
+            timer = savedTime;
+        }
+    });
+
+    function resetTimer() {
+        if (timer === 0) {
+            timer = 60;
+            timerInterval = setInterval(countDown, 1000);
+        }
+    }
+
+    window.onbeforeunload = function(event)
+    {
+        sessionStorage.setItem("timer", timer);
+    };
+
     function checkInput(input) {
         if (input.value.length >= input.maxLength) {
             input.nextElementSibling.focus();
@@ -41,7 +64,10 @@
 
     function countDown() {
         timer--;
-        document.getElementById("timer").innerHTML = '0' + (Math.floor(timer/60)).toString() + ':' + 
-                                                    (timer > 10 ? '' : '0') + (timer%60).toString(); 
+        document.getElementById("timer").innerHTML = '(0' + (Math.floor(timer/60)).toString() + ':' + 
+                                                    (timer >= 10 ? '' : '0') + (timer%60).toString() +")"; 
+        if (timer <= 0) {
+            clearInterval(timerInterval);
+        }
     }
 </script>

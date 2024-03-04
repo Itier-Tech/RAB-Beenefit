@@ -35,7 +35,7 @@ class OtpVerification extends Component
 
     private function setOtp()
     {
-        RateLimiter::attempt('otp-verification', $perMinute = 1, function() {
+        RateLimiter::attempt('otp-verification'.$this->userEmail, $perMinute = 1, function() {
             $otpCode = rand(1000, 9999);
             Cache::put('otp_'.$this->phone, strval($otpCode), 300); // Store the OTP in cache for 5 minutes
             Mail::to($this->userEmail)->send(new OtpMail($otpCode));
