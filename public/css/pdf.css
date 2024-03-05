@@ -1,0 +1,122 @@
+body {
+    padding: 20px;
+    display: flex;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.company-logo {
+    width: 100px;
+}
+
+.company-name {
+    font-size: 25px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.company-address {
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.line {
+    width: 100%;
+    border-bottom: 3px solid #2E8B57;
+    margin-top: 5px;
+}
+
+.company-phone {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+
+/* Greeting Yth and Date */
+
+.opening-date {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+
+    font-size: 13px;
+}
+
+.opening-date div {
+    display: inline;
+}
+
+.opening-date div:first-child {
+    margin-right: auto;
+}
+
+.opening-date .left {
+    margin-right: auto;
+    font-weight: bold;
+}
+
+.right {
+    width: 100%;
+    text-align: right;
+}
+
+
+
+/* Greeting */
+.greeting {
+    font-size: 13px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+
+
+/* Table */
+table, td, th {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+thead {
+    font-weight: bold;
+}
+
+th, td {
+    padding: 8px;
+    font-size: 13px;
+}
+
+.table-section {
+    background-color: #e4e4e4;
+}
+
+.subtotal {
+    background-color: #b8d4ac;
+}
+
+.rekap-total {
+    background-color: #92d050;
+}
+
+.st-price {
+    background-color: #b8d4ac;
+    text-align: right;
+}
+
+.rk-price {
+    background-color: #92d050;
+    text-align: right;
+}

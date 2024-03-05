@@ -1,0 +1,118 @@
+.navbar {
+    background-color: #FFD700;
+    padding: 1rem 0;
+
+    display: flex;
+    flex-wrap: inherit;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.nav-elem-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 5%;
+}
+
+.navbar-nav {
+    width: fit-content;
+}
+
+.navbar-toggler {
+    display: none;
+    border: none;
+    background-color: transparent;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-text {
+    color: #343a40;
+}
+
+.form-inline {
+    display: flex;
+    gap: 2%;
+}
+
+.searchTerm {
+    width:20rem;
+    padding: 0.8rem;
+    height: 2rem;
+    border-radius: 8px 0px 0px 8px;
+    border: #BFBFBF;
+}
+
+.src-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.15);
+}
+
+.profile-picture {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+}
+
+.dropdown-menu {
+    position: absolute!important;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    min-width: 10rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        left: 0;
+    }
+    .navbar-toggler {
+        width: min-content;
+        display: block;
+        text-align: left;
+        grid-column: 1 / 1;
+        grid-row: 1 / 1;
+    }
+    .nav-elem-container {
+        display: grid;
+        grid-template-columns: 47.5% 47.5%;
+        grid-template-rows: 50% 50%;
+    }
+    .navbar-text {
+        display: none;
+    }
+    .form-inline {
+        grid-column: 1 / 3;
+        grid-row: 2 / 2;
+    }
+    .navbar-nav {
+        margin-left:auto;
+        grid-column: 2 / 2;
+        grid-row: 1 / 1;
+    }
+    .nav-item {
+        margin-left: auto;
+    }
+    .searchTerm {
+        width: 100%;
+    }
+}

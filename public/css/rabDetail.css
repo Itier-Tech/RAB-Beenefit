@@ -1,0 +1,381 @@
+.detail-container {
+    transition: margin-left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progres-section {
+    width: 65rem;
+    height: 10rem;
+    background-color: white;
+    border-radius: 20px;
+    align-items: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    font-weight: bold;
+}
+
+.prg-bar {
+    display: flex;
+    align-items: center;
+}
+
+.prg {
+    height: 15px;
+    width: 56.25rem;
+}
+
+.rab-info {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+}
+.rab-info .left {
+    text-align: left;
+}
+.rab-info .right {
+    text-align: right;
+}
+
+.progress-bar {
+    background-color: #228B22;
+}
+
+.pr-dt {
+    display: flex;
+    justify-content: space-between;
+    width: 65rem;
+    align-items: end;
+    padding-top: 15px;
+}
+
+.custom-btn {
+    background-color: #FFD700;
+    color: #000000;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.custom-btn:hover {
+    transform: scale(1.025);
+    background-color: #FFD700;
+    border-color: #FFD700;
+    color: black;
+}
+
+table {
+    width: 100%;
+    margin: 10px auto;
+    border-collapse: separate;
+    border-spacing: 0 1em;
+    width: 65rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr {
+    text-align: center;
+}
+button {
+    background-color: #FFD700;
+    padding: 10px;
+    border: none;
+}
+th, td {
+    padding: 0.5em;
+}
+td {
+    border-top: 1px solid #BFBFBF;
+    border-bottom: 1px solid #BFBFBF;
+}
+h1 {
+    margin: 20px 0 0 20px;
+}
+
+.add-item {
+    display: flex;
+    justify-content: flex-end;
+    width: 65rem;
+    align-items: end;
+}
+
+.quantity-modifier-group {
+    border: 2px solid #000;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.quantity-modifier {
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 16px;
+}
+
+.quantity-number {
+    padding: 5px 10px;
+    user-select: none;
+}
+
+.harga-container {
+    width: 65rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+}
+
+.discount-section {
+    width: 100%;
+    margin-top: 50px;
+    padding: 3rem;
+}
+
+.disc {
+    background-color: #FFFFFF;
+    padding: 2rem;
+}
+
+.disc-desc {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-disc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.btns {
+    width: -webkit-fill-available;
+    justify-content: space-between;
+}
+
+.custom-btn2 {
+    background-color: #228B22;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-right: 3rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 30%;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.custom-btn2:hover {
+    transform: scale(1.05);
+}
+
+.left-right {
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+    background-color: #E7F2E6;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.harga-left {
+    width: 50%;
+    background-color: #FFFFFF;
+    padding: 15px;
+}
+
+.harga-right {
+    width: 50%;
+    background-color: #FFFFFF;
+    padding: 15px;
+}
+
+.input-diskon {
+    padding: 5px;
+}
+
+@media (max-width: 1360px) {
+    .progres-section {
+        width: 90%;
+        transition: 0.3s ease;
+    }
+
+    .prg {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .prg-bar {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .pr-dt {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    table {
+        transition: 0.3s ease;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .add-item {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .harga-container {
+        transition: 0.3s ease;
+        width: 100%;
+    }
+}
+
+@media (max-width: 918px) {
+    .harga-container {
+        transition: 0.3s ease;
+        width: 90%;
+    }
+
+    .left-right {
+        transition: 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .harga-left {
+        width: 100%;
+        transition: 0.3s ease;
+    }
+
+    .harga-right {
+        width: 100%;
+        transition: 0.3s ease;
+    }
+
+    .input-diskon {
+        width: 90%;
+        transition: 0.3s ease;
+    }
+}
+
+@media (max-width:768px) {
+    .progres-section {
+        width: 40rem;
+        height: 7rem;
+    }
+
+    .prg {
+        width: 30rem;
+    }
+
+    .pr-dt {
+        width: 39rem;
+    }
+
+    table {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .add-item {
+        width: 100%;
+    }
+
+    .harga-container {
+        width: 100%;
+    }
+}
+
+@media (max-width:540px) {
+    .progres-section {
+        width: 17rem;
+        height: 7rem;
+    }
+
+    .prg {
+        width: 10rem;
+        height: 1rem;
+    }
+
+    .progress-bar {
+        height: 1rem;
+    }
+
+    .pr-dt {
+        width: 16rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table {
+        width: 100%;
+        margin-left: 4rem;
+        margin-right: auto;
+        font-size: 0.625rem;
+    }
+
+    .add-item {
+        width: 70%;
+    }
+
+    .harga-container {
+        width: 60%;
+    }
+
+    .left-right {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .discount-section {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .disc {
+        width: 100%;
+    }
+
+    .disc-desc {
+        width: auto;
+    }
+
+    .form-disc {
+        width: 100%;
+    }
+
+    .custom-btn {
+        font-size: 0.7rem;
+        width: 10rem;
+    }
+
+    .custom-btn2 {
+        font-size: 0.7rem;
+        width: 10rem;
+    }
+
+    input {
+        width: 6rem;
+        margin-top: 1rem;
+    }
+}
