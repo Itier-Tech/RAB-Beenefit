@@ -9,7 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/css/navbar.css',
                 'resources/css/sidebar.css',
-                'resources/css/addrab.css',
+                'resources/css/app.css',
             ],
             refresh: true,
         }),
