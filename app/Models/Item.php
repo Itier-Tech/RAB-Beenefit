@@ -19,6 +19,6 @@ class Item extends Model
 
     public function rab_item()
     {
-        return $this->hasMany(Rab_item::class);
+        return $this->hasMany(RabItem::class);
     }
 }

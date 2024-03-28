@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rab;
-use App\Models\Rab_item;
+use App\Models\RabItem;
 use App\Models\Item;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,7 +31,7 @@ class RabItemController extends Controller
         $totalItemPrice = $item->buy_price * $request->quantity;
 
         // Membuat Rab_item baru
-        $rabItem = new Rab_item([
+        $rabItem = new RabItem([
             'rab_id' => $rab_id,
             'item_id' => $request->item_id,
             'item_count' => $request->quantity,

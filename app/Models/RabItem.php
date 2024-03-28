@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rab_item extends Model
+class RabItem extends Model
 {
     use HasFactory;
     public $incrementing = false;

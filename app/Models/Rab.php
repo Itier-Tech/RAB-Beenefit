@@ -16,14 +16,14 @@ class Rab extends Model
             'total_price',
             'total_buy_price',
     ];
-    
-    public function project() 
+
+    public function project()
     {
         return $this->belongsTo(Project::class);
     }
 
     public function rab_item()
     {
-        return $this->hasMany(Rab_item::class);
+        return $this->hasMany(RabItem::class);
     }
 }

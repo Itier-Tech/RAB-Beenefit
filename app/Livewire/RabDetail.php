@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire;
-use App\Models\Rab_item;
+use App\Models\RabItem;
 use App\Models\Item;
 use App\Models\Rab;
 use App\Models\Project;
@@ -45,10 +45,10 @@ class RabDetail extends Component
         $this->rab_id = $rab_id;
         $this->loadRab();
         $this->loadAvailableItems();
-        $curr_items = Rab_item::where('rab_id', $rab_id)->get()->keyBy('item_id');
+        $curr_items = RabItem::where('rab_id', $rab_id)->get()->keyBy('item_id');
         foreach ($curr_items as $it) {
             $this->items_list[$it->item_id] = ["item_discount" => $it->item_discount, "item_count" => $it->item_count,
-                                                "item_total_price" => $it->item_total_price]; 
+                                                "item_total_price" => $it->item_total_price];
         }
     }
 
@@ -76,7 +76,7 @@ class RabDetail extends Component
             $this->updateItemVolume($this->selectedItem, $this->itemQuantity + $checkItem['item_count']);
             $this->updateItemDiscount($this->selectedItem, $this->discountPercentage + $checkItem['item_discount']);
         }
-        
+
         $this->reset(['selectedItem', 'discountPercentage', 'itemQuantity']);
     }
 
@@ -133,19 +133,19 @@ class RabDetail extends Component
     {
         // Simpan semua data yang ada ke database
         foreach ($this->items_list as $key=>$it) {
-            $checkItem = Rab_item::where('rab_id', $this->rab_id)->where('item_id', $key)->first();
+            $checkItem = RabItem::where('rab_id', $this->rab_id)->where('item_id', $key)->first();
             if ($checkItem != null) { // Perbaharui data
-                Rab_item::where('rab_id', $this->rab_id)->where('item_id', $key)->update($it);
+                RabItem::where('rab_id', $this->rab_id)->where('item_id', $key)->update($it);
             } else {
                 // Buat baru
                 $data = $it;
                 $data['rab_id'] = $this->rab_id;
                 $data['item_id'] = $key;
-                Rab_item::create($data);
+                RabItem::create($data);
             }
         }
         // Hapus item yang sudah dihapus
-        Rab_item::where('rab_id', $this->rab_id)->whereNotIn('item_id', array_keys($this->items_list))->delete();
+        RabItem::where('rab_id', $this->rab_id)->whereNotIn('item_id', array_keys($this->items_list))->delete();
         // Save to RAB
         Rab::where('rab_id', $this->rab_id)->update(['rab_discount' => $this->rab_discount, 'total_price' => round($this->totalFinalRAB), 'total_buy_price' => round($this->totalBuyPrice)]);
         session()->flash('message', 'Daftar barang berhasil disimpan');

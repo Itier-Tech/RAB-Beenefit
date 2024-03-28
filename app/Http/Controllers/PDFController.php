@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Rab;
 use App\Models\Project;
-use App\Models\Rab_item;
+use App\Models\RabItem;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -24,7 +24,7 @@ class PDFController extends Controller
             abort(403, 'Forbidden access');
         }
 
-        $items = Rab_item::where('rab_id', $rab_id)->get();
+        $items = RabItem::where('rab_id', $rab_id)->get();
 
         $data = [
             'rab' => $rab,
