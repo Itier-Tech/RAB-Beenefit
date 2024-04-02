@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .error-msg {
     color:red;
     margin-bottom: 0;
@@ -22,7 +26,7 @@
     margin: auto;
     overflow-x: scroll;
     -ms-overflow-style: none;
-    scrollbar-width: none; 
+    scrollbar-width: none;
 }
 
 .pagination-container::-webkit-scrollbar {

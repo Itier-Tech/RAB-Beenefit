@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <title>Login Beenefit</title>
+    @vite(['resources/css/app.css'])
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <div class="bg-container"></div>
+        <div class="bg-container flex items-center justify-center flex-col bg-dark-subtle">
+            <h1 class="text-4xl text-white drop-shadow-xl my-3">Don't Get Stung By Garden Management</h1>
+            <h2 class="text-3xl text-white">Let Us Help Your Business Bloom</h2>
+        </div>
         <div class="content-container">
             <div class="form-container">
                 <img src="/beenefit-logo.png" alt="Beenefit Logo" class="logo"></img>

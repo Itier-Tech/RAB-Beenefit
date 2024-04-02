@@ -10,9 +10,28 @@ body, html {
 
 .bg-container {
     flex: 1;
-    background-image: url('/bg-login.png');
+    background-image: url('/bg-login-darker.png');
     background-size: cover;
     background-position: center;
+}
+
+.title {
+    color: white;
+}
+
+.subtitle {
+    color: white;
+}
+
+.bg-overlay{
+    content: "";
+/*    overlay black color with opacity*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .content-container {
